@@ -2,11 +2,99 @@
 id: 10
 name: "workflow-11"
 description: null
-visible: false
+visible: true
 onSuccessWorkflow: null
 onFailureWorkflow: null
 schedules: []
 workflowSteps:
+- id: 6
+  step: 3
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 3
+    name: "execute-cmd"
+    description: ""
+    provider:
+      id: 1
+      name: "vsphere-provider"
+      description: ""
+      hostname: "localhost"
+      port: 9789
+      timeout: 5000
+      username: null
+      password: null
+      reachable: false
+      secured: true
+      enabled: null
+      providerVersion: null
+      tags: []
+    providerAction:
+      id: 3
+      name: "executeCommand"
+      displayName: "Execute Command"
+      description: "Executes an OS Command"
+      pipes: []
+      inputs:
+      - id: 4
+        index: 0
+        name: "commandInputs"
+        displayName: "Command Inputs"
+        description: "Command Inputs"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 8
+          index: 1
+          name: "ROLLBACK_CMD"
+          displayName: "Rollback Command"
+          description: "Rollback command executes upon command failure"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: null
+        - id: 9
+          index: 0
+          name: "CMD"
+          displayName: "OS Command"
+          description: "OS Command can contain Integra variables @{field} ${field}.\
+            \ Example: myscript --o1 @{id} --o2 ${name} --o3 @{uuid}. When executing\
+            \ OS commands use cmd.exe /c command. For example: cmd.exe /c echo hello.\
+            \ To treat strings with spaces as one unit enclose them in \""
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: null
+        workflowActionName: null
+      transaction: null
+      outputs:
+      - id: 5
+        name: "cmdOutput"
+        displayName: "Command output"
+        description: "Command output"
+        outputFields:
+        - id: 21
+          name: "stdoutMessage"
+          displayName: "Standard Output"
+          description: "The stdout returned by command"
+          dataType: null
+          value: null
+        - id: 22
+          name: "stderrMessage"
+          displayName: "Standard Error"
+          description: "The stderr returned by command"
+          dataType: null
+          value: null
+        outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "99e913b5-dbb4-4b85-8e9a-8e9a17810cae"
+  pipe: false
+  target: []
 - id: 5
   step: 1
   jumpToStep: 0
@@ -177,95 +265,7 @@ workflowSteps:
         outputs: []
     workflowTransaction: null
     tags: []
-  uuid: "28ab1919-4491-4653-ac21-4b33f8d50846"
-  pipe: false
-  target: []
-- id: 6
-  step: 3
-  jumpToStep: 0
-  failureStep: 0
-  timeout: 0
-  async: false
-  workflowAction:
-    id: 3
-    name: "execute-cmd"
-    description: ""
-    provider:
-      id: 1
-      name: "vsphere-provider"
-      description: ""
-      hostname: "localhost"
-      port: 9789
-      timeout: 5000
-      username: null
-      password: null
-      reachable: false
-      secured: true
-      enabled: null
-      providerVersion: null
-      tags: []
-    providerAction:
-      id: 3
-      name: "executeCommand"
-      displayName: "Execute Command"
-      description: "Executes an OS Command"
-      pipes: []
-      inputs:
-      - id: 4
-        index: 0
-        name: "commandInputs"
-        displayName: "Command Inputs"
-        description: "Command Inputs"
-        visible: true
-        inputs: []
-        inputFields:
-        - id: 8
-          index: 1
-          name: "ROLLBACK_CMD"
-          displayName: "Rollback Command"
-          description: "Rollback command executes upon command failure"
-          required: false
-          visible: true
-          editable: true
-          dataType: "String"
-          value: null
-        - id: 9
-          index: 0
-          name: "CMD"
-          displayName: "OS Command"
-          description: "OS Command can contain Integra variables @{field} ${field}.\
-            \ Example: myscript --o1 @{id} --o2 ${name} --o3 @{uuid}. When executing\
-            \ OS commands use cmd.exe /c command. For example: cmd.exe /c echo hello.\
-            \ To treat strings with spaces as one unit enclose them in \""
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: null
-        workflowActionName: null
-      transaction: null
-      outputs:
-      - id: 5
-        name: "cmdOutput"
-        displayName: "Command output"
-        description: "Command output"
-        outputFields:
-        - id: 21
-          name: "stdoutMessage"
-          displayName: "Standard Output"
-          description: "The stdout returned by command"
-          dataType: null
-          value: null
-        - id: 22
-          name: "stderrMessage"
-          displayName: "Standard Error"
-          description: "The stderr returned by command"
-          dataType: null
-          value: null
-        outputs: []
-    workflowTransaction: null
-    tags: []
-  uuid: "b457e95c-f812-4665-832b-4be5b7e2f7a9"
+  uuid: "98ee246a-7e87-48c6-b500-91dd0ae0ab9c"
   pipe: false
   target: []
 - id: 4
@@ -410,7 +410,7 @@ workflowSteps:
         outputs: []
     workflowTransaction: null
     tags: []
-  uuid: "267f6586-1a85-4d95-b63d-930f48304baa"
+  uuid: "ab65ac40-2046-49cd-92a8-cc39939b0f21"
   pipe: false
   target: []
 tags: []
