@@ -1,0 +1,905 @@
+---
+id: 10
+name: "SVT-Protect-Oracle"
+description: null
+visible: true
+onSuccessWorkflow: null
+onFailureWorkflow: null
+schedules: []
+workflowSteps:
+- id: 36
+  step: 200
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 83
+    name: "Oracle Quiesce"
+    description: ""
+    provider:
+      id: 7
+      name: "Oracle"
+      description: ""
+      hostname: "localhost"
+      port: 9783
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: false
+      secured: true
+      enabled: null
+      providerVersion: null
+      tags: []
+    providerAction:
+      id: 83
+      name: "quiesce"
+      displayName: "Quiesce"
+      description: "quiesces the db"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 106
+        index: 0
+        name: "PROVIDER_INPUT"
+        displayName: "Quiesce Details"
+        description: "The parameters needed to connect to a Oracle provider"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 301
+          index: 4
+          name: "ORACLE_SID"
+          displayName: "Oracle SID"
+          description: "Oracle SID for the DB"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        - id: 302
+          index: 0
+          name: "ORACLE_HOSTNAME"
+          displayName: "Host"
+          description: "The hostname IP or DNS"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        - id: 303
+          index: 6
+          name: "ORACLE_PASSWORD"
+          displayName: "Password"
+          description: "Database password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: ""
+        - id: 305
+          index: 2
+          name: "ORACLE_USERNAME"
+          displayName: "Username"
+          description: "Username for the DB"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        - id: 304
+          index: 7
+          name: "ORACLE_CMD"
+          displayName: "SQL*Plus Command"
+          description: "SQL*Plus command path"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        - id: 306
+          index: 8
+          name: "TCP_ENABLE"
+          displayName: "TCP Enable"
+          description: "Use TCP instead of CLI."
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: ""
+        - id: 307
+          index: 1
+          name: "ORACLE_PORT"
+          displayName: "Port"
+          description: "Port"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: ""
+        - id: 308
+          index: 5
+          name: "ORACLE_HOME"
+          displayName: "Oracle Home"
+          description: "Oracle Home for the DB"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "6db9ab7b-a0e0-438d-9144-b22f0aaeebb4"
+  pipe: false
+  target: []
+- id: 34
+  step: 100
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 85
+    name: "SVT Start Session"
+    description: ""
+    provider:
+      id: 6
+      name: "SimpliVity"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "replace_version"
+      tags: []
+    providerAction:
+      id: 85
+      name: "ssh"
+      displayName: "SSH Command"
+      description: "SSH Command"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 108
+        index: 0
+        name: "connection"
+        displayName: "Connection"
+        description: "The parameters needed to connect to an SSH Daemon"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 321
+          index: 2
+          name: "username"
+          displayName: "Username"
+          description: "Username"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "svtcli"
+        - id: 320
+          index: 1
+          name: "port"
+          displayName: "Port"
+          description: "Port. Defaults to 22"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "22"
+        - id: 319
+          index: 5
+          name: "timeout"
+          displayName: "Timeout (ms)"
+          description: "SSH Timeout (ms)"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "30000"
+        - id: 318
+          index: 3
+          name: "password"
+          displayName: "Password"
+          description: "Password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "password"
+        - id: 317
+          index: 0
+          name: "host"
+          displayName: "Host"
+          description: "The hostname IP or DNS"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "fed-virtual-controller"
+        workflowActionName: null
+      - id: 109
+        index: 1
+        name: "command"
+        displayName: "Command"
+        description: "The command to invoke"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 322
+          index: 0
+          name: "command"
+          displayName: "Command"
+          description: "Command to invoke"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "svt-session-start --username root --password password"
+        workflowActionName: null
+      outputs:
+      - id: 205
+        name: "SSH Response"
+        displayName: ""
+        description: "SSH Command Response"
+        outputFields:
+        - id: 1209
+          name: "line#"
+          displayName: ""
+          description: "The SSH Command Responses split by new line"
+          dataType: null
+          value: null
+        outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "dcb89e57-2642-4753-a58f-0267a026b8e7"
+  pipe: false
+  target: []
+- id: 37
+  step: 700
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 88
+    name: "SVT Stop Session"
+    description: ""
+    provider:
+      id: 6
+      name: "SimpliVity"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "replace_version"
+      tags: []
+    providerAction:
+      id: 88
+      name: "ssh"
+      displayName: "SSH Command"
+      description: "SSH Command"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 113
+        index: 0
+        name: "connection"
+        displayName: "Connection"
+        description: "The parameters needed to connect to an SSH Daemon"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 331
+          index: 2
+          name: "username"
+          displayName: "Username"
+          description: "Username"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "svtcli"
+        - id: 333
+          index: 1
+          name: "port"
+          displayName: "Port"
+          description: "Port. Defaults to 22"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "22"
+        - id: 332
+          index: 5
+          name: "timeout"
+          displayName: "Timeout (ms)"
+          description: "SSH Timeout (ms)"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "30000"
+        - id: 334
+          index: 3
+          name: "password"
+          displayName: "Password"
+          description: "Password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "password"
+        - id: 335
+          index: 0
+          name: "host"
+          displayName: "Host"
+          description: "The hostname IP or DNS"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "fed-virtual-controller"
+        workflowActionName: null
+      - id: 114
+        index: 1
+        name: "command"
+        displayName: "Command"
+        description: "The command to invoke"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 336
+          index: 0
+          name: "command"
+          displayName: "Command"
+          description: "Command to invoke"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "svt-session-stop"
+        workflowActionName: null
+      outputs:
+      - id: 208
+        name: "SSH Response"
+        displayName: ""
+        description: "SSH Command Response"
+        outputFields:
+        - id: 1213
+          name: "line#"
+          displayName: ""
+          description: "The SSH Command Responses split by new line"
+          dataType: null
+          value: null
+        outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "3e26af13-ccdd-40c9-b550-a1acfd45e5c3"
+  pipe: false
+  target: []
+- id: 32
+  step: 400
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 84
+    name: "Oracle Unquiesce"
+    description: ""
+    provider:
+      id: 7
+      name: "Oracle"
+      description: ""
+      hostname: "localhost"
+      port: 9783
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: false
+      secured: true
+      enabled: null
+      providerVersion: null
+      tags: []
+    providerAction:
+      id: 84
+      name: "unquiesce"
+      displayName: "Unquiesce"
+      description: "unquiesces the db"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 107
+        index: 0
+        name: "PROVIDER_INPUT"
+        displayName: "Unquiesce Details"
+        description: "The parameters needed to connect to a Oracle provider"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 309
+          index: 4
+          name: "ORACLE_SID"
+          displayName: "Oracle SID"
+          description: "Oracle SID for the DB"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        - id: 310
+          index: 0
+          name: "ORACLE_HOSTNAME"
+          displayName: "Host"
+          description: "The hostname IP or DNS"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        - id: 311
+          index: 6
+          name: "ORACLE_PASSWORD"
+          displayName: "Password"
+          description: "Database password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: ""
+        - id: 313
+          index: 2
+          name: "ORACLE_USERNAME"
+          displayName: "Username"
+          description: "Username for the DB"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        - id: 312
+          index: 7
+          name: "ORACLE_CMD"
+          displayName: "SQL*Plus Command"
+          description: "SQL*Plus command path"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        - id: 314
+          index: 8
+          name: "TCP_ENABLE"
+          displayName: "TCP Enable"
+          description: "Use TCP instead of CLI."
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: ""
+        - id: 315
+          index: 1
+          name: "ORACLE_PORT"
+          displayName: "Port"
+          description: "Port"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: ""
+        - id: 316
+          index: 5
+          name: "ORACLE_HOME"
+          displayName: "Oracle Home"
+          description: "Oracle Home for the DB"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "1be43368-5c66-4651-bbef-b8380b9ecc84"
+  pipe: false
+  target: []
+- id: 33
+  step: 500
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 89
+    name: "Oracle Archive Redo Logs"
+    description: ""
+    provider:
+      id: 7
+      name: "Oracle"
+      description: ""
+      hostname: "localhost"
+      port: 9783
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: false
+      secured: true
+      enabled: null
+      providerVersion: null
+      tags: []
+    providerAction:
+      id: 89
+      name: "archive"
+      displayName: "Archive"
+      description: "Archive log switch of db"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 115
+        index: 0
+        name: "PROVIDER_INPUT"
+        displayName: "Archive Log Details"
+        description: "The parameters needed to connect to a Oracle provider"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 337
+          index: 4
+          name: "ORACLE_SID"
+          displayName: "Oracle SID"
+          description: "Oracle SID for the DB"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        - id: 338
+          index: 0
+          name: "ORACLE_HOSTNAME"
+          displayName: "Host"
+          description: "The hostname IP or DNS"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        - id: 339
+          index: 6
+          name: "ORACLE_PASSWORD"
+          displayName: "Password"
+          description: "Database password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: ""
+        - id: 340
+          index: 2
+          name: "ORACLE_USERNAME"
+          displayName: "Username"
+          description: "Username for the DB"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        - id: 342
+          index: 7
+          name: "ORACLE_CMD"
+          displayName: "SQL*Plus Command"
+          description: "SQL*Plus Command path"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        - id: 341
+          index: 8
+          name: "TCP_ENABLE"
+          displayName: "TCP Enable"
+          description: "Use TCP instead of CLI."
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: ""
+        - id: 343
+          index: 1
+          name: "ORACLE_PORT"
+          displayName: "Port"
+          description: "Port"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: ""
+        - id: 344
+          index: 5
+          name: "ORACLE_HOME"
+          displayName: "Oracle Home"
+          description: "Oracle Home for the DB"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "1bd338b7-b411-4fa3-aca3-febcd881c3a2"
+  pipe: false
+  target: []
+- id: 38
+  step: 600
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 90
+    name: "SVT Snapshot Logs"
+    description: ""
+    provider:
+      id: 6
+      name: "SimpliVity"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "replace_version"
+      tags: []
+    providerAction:
+      id: 90
+      name: "ssh"
+      displayName: "SSH Command"
+      description: "SSH Command"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 116
+        index: 0
+        name: "connection"
+        displayName: "Connection"
+        description: "The parameters needed to connect to an SSH Daemon"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 345
+          index: 2
+          name: "username"
+          displayName: "Username"
+          description: "Username"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "svtcli"
+        - id: 347
+          index: 1
+          name: "port"
+          displayName: "Port"
+          description: "Port. Defaults to 22"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "22"
+        - id: 346
+          index: 5
+          name: "timeout"
+          displayName: "Timeout (ms)"
+          description: "SSH Timeout (ms)"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "30000"
+        - id: 348
+          index: 3
+          name: "password"
+          displayName: "Password"
+          description: "Password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "password"
+        - id: 349
+          index: 0
+          name: "host"
+          displayName: "Host"
+          description: "The hostname IP or DNS"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "fed-virtual-controller"
+        workflowActionName: null
+      - id: 117
+        index: 1
+        name: "command"
+        displayName: "Command"
+        description: "The command to invoke"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 350
+          index: 0
+          name: "command"
+          displayName: "Command"
+          description: "Command to invoke"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "svt-vm-backup --datastore ds --vm oracle-vm --name ora-logs-snap\
+            \ --output XML"
+        workflowActionName: null
+      outputs:
+      - id: 209
+        name: "SSH Response"
+        displayName: ""
+        description: "SSH Command Response"
+        outputFields:
+        - id: 1214
+          name: "line#"
+          displayName: ""
+          description: "The SSH Command Responses split by new line"
+          dataType: null
+          value: null
+        outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "95abecd4-365a-4e78-8481-7ab0bf5c59c3"
+  pipe: false
+  target: []
+- id: 35
+  step: 300
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 87
+    name: "SVT Snapshot Data"
+    description: ""
+    provider:
+      id: 6
+      name: "SimpliVity"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "replace_version"
+      tags: []
+    providerAction:
+      id: 87
+      name: "ssh"
+      displayName: "SSH Command"
+      description: "SSH Command"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 111
+        index: 0
+        name: "connection"
+        displayName: "Connection"
+        description: "The parameters needed to connect to an SSH Daemon"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 325
+          index: 2
+          name: "username"
+          displayName: "Username"
+          description: "Username"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "svtcli"
+        - id: 327
+          index: 1
+          name: "port"
+          displayName: "Port"
+          description: "Port. Defaults to 22"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "22"
+        - id: 326
+          index: 5
+          name: "timeout"
+          displayName: "Timeout (ms)"
+          description: "SSH Timeout (ms)"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "30000"
+        - id: 328
+          index: 3
+          name: "password"
+          displayName: "Password"
+          description: "Password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "password"
+        - id: 329
+          index: 0
+          name: "host"
+          displayName: "Host"
+          description: "The hostname IP or DNS"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "fed-virtual-controller"
+        workflowActionName: null
+      - id: 112
+        index: 1
+        name: "command"
+        displayName: "Command"
+        description: "The command to invoke"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 330
+          index: 0
+          name: "command"
+          displayName: "Command"
+          description: "Command to invoke"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "svt-vm-backup --datastore ds --vm oracle-vm --name ora-data-snap\
+            \ --output XML"
+        workflowActionName: null
+      outputs:
+      - id: 207
+        name: "SSH Response"
+        displayName: ""
+        description: "SSH Command Response"
+        outputFields:
+        - id: 1212
+          name: "line#"
+          displayName: ""
+          description: "The SSH Command Responses split by new line"
+          dataType: null
+          value: null
+        outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "74317f2f-4b48-42a5-ae2e-372888900514"
+  pipe: false
+  target: []
+tags: []
