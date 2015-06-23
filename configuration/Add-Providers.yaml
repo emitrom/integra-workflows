@@ -1,0 +1,1386 @@
+---
+id: 1
+name: "Add-Providers"
+description: null
+visible: true
+onSuccessWorkflow: null
+onFailureWorkflow: null
+schedules: []
+workflowSteps:
+- id: 9
+  step: 1
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 1
+    name: "Add Archive Provider"
+    description: ""
+    provider:
+      id: 1
+      name: "SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.0.0"
+      tags: []
+    providerAction:
+      id: 1
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 1
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 2
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 1
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "import groovyx.net.http.*\r\rrest = new HTTPBuilder('https://localhost:8443')\r\
+            rest.auth.basic('admin', 'integra')\rrest.ignoreSSLIssues()\r\rprovider\
+            \ = '{\"name\":\"Archive\",' +\r                 '\"hostname\":\"localhost\"\
+            ,' +\r                 '\"port\":9770, ' +\r                 '\"secured\"\
+            :\"true\", ' +\r                 '\"timeout\":3600000}'\r\rrest.request(Method.POST)\
+            \ {\r    uri.path = '/rest/providers'\r    requestContentType = ContentType.JSON\r\
+            \    body = provider\r}"
+        - id: 3
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 1
+      name: "Add Provider"
+  uuid: "b7981d21-70cd-4199-8c3c-a07917f42b59"
+  pipe: false
+  target: []
+- id: 3
+  step: 11
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 11
+    name: "Add Oracle Provider"
+    description: ""
+    provider:
+      id: 1
+      name: "SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.0.0"
+      tags: []
+    providerAction:
+      id: 11
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 11
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 31
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 32
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "import groovyx.net.http.*\r\rrest = new HTTPBuilder('https://localhost:8443')\r\
+            rest.auth.basic('admin', 'integra')\rrest.ignoreSSLIssues()\r\rprovider\
+            \ = '{\"name\":\"Oracle\",' +\r                 '\"hostname\":\"localhost\"\
+            ,' +\r                 '\"port\":9783, ' +\r                 '\"secured\"\
+            :\"true\", ' +\r                 '\"timeout\":3600000}'\r\rrest.request(Method.POST)\
+            \ {\r    uri.path = '/rest/providers'\r    requestContentType = ContentType.JSON\r\
+            \    body = provider\r}"
+        - id: 33
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 1
+      name: "Add Provider"
+  uuid: "dd851f3b-fe5b-487e-9a69-4d53711924c1"
+  pipe: false
+  target: []
+- id: 14
+  step: 5
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 5
+    name: "Add Charts Provider"
+    description: ""
+    provider:
+      id: 1
+      name: "SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.0.0"
+      tags: []
+    providerAction:
+      id: 5
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 5
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 13
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 14
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "import groovyx.net.http.*\r\rrest = new HTTPBuilder('https://localhost:8443')\r\
+            rest.auth.basic('admin', 'integra')\rrest.ignoreSSLIssues()\r\rprovider\
+            \ = '{\"name\":\"Charts\",' +\r                 '\"hostname\":\"localhost\"\
+            ,' +\r                 '\"port\":9793, ' +\r                 '\"secured\"\
+            :\"true\", ' +\r                 '\"timeout\":3600000}'\r\rrest.request(Method.POST)\
+            \ {\r    uri.path = '/rest/providers'\r    requestContentType = ContentType.JSON\r\
+            \    body = provider\r}"
+        - id: 15
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 1
+      name: "Add Provider"
+  uuid: "08a7cc98-b86c-4f5e-a911-05a272684415"
+  pipe: false
+  target: []
+- id: 5
+  step: 9
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 9
+    name: "Add MySQL Provider"
+    description: ""
+    provider:
+      id: 1
+      name: "SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.0.0"
+      tags: []
+    providerAction:
+      id: 9
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 9
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 26
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "import groovyx.net.http.*\r\rrest = new HTTPBuilder('https://localhost:8443')\r\
+            rest.auth.basic('admin', 'integra')\rrest.ignoreSSLIssues()\r\rprovider\
+            \ = '{\"name\":\"MySQL\",' +\r                 '\"hostname\":\"localhost\"\
+            ,' +\r                 '\"port\":9777, ' +\r                 '\"secured\"\
+            :\"true\", ' +\r                 '\"timeout\":3600000}'\r\rrest.request(Method.POST)\
+            \ {\r    uri.path = '/rest/providers'\r    requestContentType = ContentType.JSON\r\
+            \    body = provider\r}"
+        - id: 25
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 27
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 1
+      name: "Add Provider"
+  uuid: "4a8511a2-2343-4a4b-9a0e-fe6a8e49ecc2"
+  pipe: false
+  target: []
+- id: 8
+  step: 3
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 3
+    name: "Add Azure Provider"
+    description: ""
+    provider:
+      id: 1
+      name: "SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.0.0"
+      tags: []
+    providerAction:
+      id: 3
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 3
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 7
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 8
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "import groovyx.net.http.*\r\rrest = new HTTPBuilder('https://localhost:8443')\r\
+            rest.auth.basic('admin', 'integra')\rrest.ignoreSSLIssues()\r\rprovider\
+            \ = '{\"name\":\"Azure\",' +\r                 '\"hostname\":\"localhost\"\
+            ,' +\r                 '\"port\":9772, ' +\r                 '\"secured\"\
+            :\"true\", ' +\r                 '\"timeout\":3600000}'\r\rrest.request(Method.POST)\
+            \ {\r    uri.path = '/rest/providers'\r    requestContentType = ContentType.JSON\r\
+            \    body = provider\r}"
+        - id: 9
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 1
+      name: "Add Provider"
+  uuid: "578ffff3-a941-4e02-b859-917227d2d771"
+  pipe: false
+  target: []
+- id: 1
+  step: 12
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 12
+    name: "Add Postgres Provider"
+    description: ""
+    provider:
+      id: 1
+      name: "SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.0.0"
+      tags: []
+    providerAction:
+      id: 12
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 12
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 34
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 35
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "import groovyx.net.http.*\r\rrest = new HTTPBuilder('https://localhost:8443')\r\
+            rest.auth.basic('admin', 'integra')\rrest.ignoreSSLIssues()\r\rprovider\
+            \ = '{\"name\":\"Postgres\",' +\r                 '\"hostname\":\"localhost\"\
+            ,' +\r                 '\"port\":9785, ' +\r                 '\"secured\"\
+            :\"true\", ' +\r                 '\"timeout\":3600000}'\r\rrest.request(Method.POST)\
+            \ {\r    uri.path = '/rest/providers'\r    requestContentType = ContentType.JSON\r\
+            \    body = provider\r}"
+        - id: 36
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 1
+      name: "Add Provider"
+  uuid: "c9b78ae7-9d5a-430e-aa33-12d243f875f5"
+  pipe: false
+  target: []
+- id: 12
+  step: 4
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 4
+    name: "Add DB2 Provider"
+    description: ""
+    provider:
+      id: 1
+      name: "SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.0.0"
+      tags: []
+    providerAction:
+      id: 4
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 4
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 10
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 11
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "import groovyx.net.http.*\r\rrest = new HTTPBuilder('https://localhost:8443')\r\
+            rest.auth.basic('admin', 'integra')\rrest.ignoreSSLIssues()\r\rprovider\
+            \ = '{\"name\":\"DB2\",' +\r                 '\"hostname\":\"localhost\"\
+            ,' +\r                 '\"port\":9773, ' +\r                 '\"secured\"\
+            :\"true\", ' +\r                 '\"timeout\":3600000}'\r\rrest.request(Method.POST)\
+            \ {\r    uri.path = '/rest/providers'\r    requestContentType = ContentType.JSON\r\
+            \    body = provider\r}"
+        - id: 12
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 1
+      name: "Add Provider"
+  uuid: "bb886663-8341-4962-be54-5744cbda6a40"
+  pipe: false
+  target: []
+- id: 13
+  step: 6
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 6
+    name: "Add Kubernetes Provider"
+    description: ""
+    provider:
+      id: 1
+      name: "SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.0.0"
+      tags: []
+    providerAction:
+      id: 6
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 6
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 16
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 17
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "import groovyx.net.http.*\r\rrest = new HTTPBuilder('https://localhost:8443')\r\
+            rest.auth.basic('admin', 'integra')\rrest.ignoreSSLIssues()\r\rprovider\
+            \ = '{\"name\":\"Kubernetes\",' +\r                 '\"hostname\":\"localhost\"\
+            ,' +\r                 '\"port\":9798, ' +\r                 '\"secured\"\
+            :\"true\", ' +\r                 '\"timeout\":3600000}'\r\rrest.request(Method.POST)\
+            \ {\r    uri.path = '/rest/providers'\r    requestContentType = ContentType.JSON\r\
+            \    body = provider\r}"
+        - id: 18
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 1
+      name: "Add Provider"
+  uuid: "1634cb72-8ac5-44d1-b9e7-c69a5d7c8c4e"
+  pipe: false
+  target: []
+- id: 11
+  step: 14
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 14
+    name: "Add Sybase Provider"
+    description: ""
+    provider:
+      id: 1
+      name: "SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.0.0"
+      tags: []
+    providerAction:
+      id: 14
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 14
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 41
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "import groovyx.net.http.*\r\rrest = new HTTPBuilder('https://localhost:8443')\r\
+            rest.auth.basic('admin', 'integra')\rrest.ignoreSSLIssues()\r\rprovider\
+            \ = '{\"name\":\"Sybase\",' +\r                 '\"hostname\":\"localhost\"\
+            ,' +\r                 '\"port\":9788, ' +\r                 '\"secured\"\
+            :\"true\", ' +\r                 '\"timeout\":3600000}'\r\rrest.request(Method.POST)\
+            \ {\r    uri.path = '/rest/providers'\r    requestContentType = ContentType.JSON\r\
+            \    body = provider\r}"
+        - id: 40
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 42
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 1
+      name: "Add Provider"
+  uuid: "044f0702-2d84-42b1-8a12-58e2a64903ca"
+  pipe: false
+  target: []
+- id: 4
+  step: 13
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 13
+    name: "Add RHEV Provider"
+    description: ""
+    provider:
+      id: 1
+      name: "SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.0.0"
+      tags: []
+    providerAction:
+      id: 13
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 13
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 37
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 38
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "import groovyx.net.http.*\r\rrest = new HTTPBuilder('https://localhost:8443')\r\
+            rest.auth.basic('admin', 'integra')\rrest.ignoreSSLIssues()\r\rprovider\
+            \ = '{\"name\":\"RHEV\",' +\r                 '\"hostname\":\"localhost\"\
+            ,' +\r                 '\"port\":9795, ' +\r                 '\"secured\"\
+            :\"true\", ' +\r                 '\"timeout\":3600000}'\r\rrest.request(Method.POST)\
+            \ {\r    uri.path = '/rest/providers'\r    requestContentType = ContentType.JSON\r\
+            \    body = provider\r}"
+        - id: 39
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 1
+      name: "Add Provider"
+  uuid: "1220fde1-c267-4398-b3ce-c81585c7fef4"
+  pipe: false
+  target: []
+- id: 10
+  step: 2
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 2
+    name: "Add AWS Provider"
+    description: ""
+    provider:
+      id: 1
+      name: "SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.0.0"
+      tags: []
+    providerAction:
+      id: 2
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 2
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 4
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 5
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "import groovyx.net.http.*\r\rrest = new HTTPBuilder('https://localhost:8443')\r\
+            rest.auth.basic('admin', 'integra')\rrest.ignoreSSLIssues()\r\rprovider\
+            \ = '{\"name\":\"AWS\",' +\r                 '\"hostname\":\"localhost\"\
+            ,' +\r                 '\"port\":9771, ' +\r                 '\"secured\"\
+            :\"true\", ' +\r                 '\"timeout\":3600000}'\r\rrest.request(Method.POST)\
+            \ {\r    uri.path = '/rest/providers'\r    requestContentType = ContentType.JSON\r\
+            \    body = provider\r}"
+        - id: 6
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 1
+      name: "Add Provider"
+  uuid: "b98c6a12-aa81-497d-899d-1163b1ca75a2"
+  pipe: false
+  target: []
+- id: 6
+  step: 10
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 10
+    name: "Add Notification Provider"
+    description: ""
+    provider:
+      id: 1
+      name: "SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.0.0"
+      tags: []
+    providerAction:
+      id: 10
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 10
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 28
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 29
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "import groovyx.net.http.*\r\rrest = new HTTPBuilder('https://localhost:8443')\r\
+            rest.auth.basic('admin', 'integra')\rrest.ignoreSSLIssues()\r\rprovider\
+            \ = '{\"name\":\"Notification\",' +\r                 '\"hostname\":\"\
+            localhost\",' +\r                 '\"port\":9781, ' +\r              \
+            \   '\"secured\":\"true\", ' +\r                 '\"timeout\":3600000}'\r\
+            \rrest.request(Method.POST) {\r    uri.path = '/rest/providers'\r    requestContentType\
+            \ = ContentType.JSON\r    body = provider\r}"
+        - id: 30
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 1
+      name: "Add Provider"
+  uuid: "9f9db833-e141-497c-9992-36642cec11cc"
+  pipe: false
+  target: []
+- id: 15
+  step: 7
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 7
+    name: "Add KVM Provider"
+    description: ""
+    provider:
+      id: 1
+      name: "SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.0.0"
+      tags: []
+    providerAction:
+      id: 7
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 7
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 19
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 20
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "import groovyx.net.http.*\r\rrest = new HTTPBuilder('https://localhost:8443')\r\
+            rest.auth.basic('admin', 'integra')\rrest.ignoreSSLIssues()\r\rprovider\
+            \ = '{\"name\":\"KVM\",' +\r                 '\"hostname\":\"localhost\"\
+            ,' +\r                 '\"port\":9794, ' +\r                 '\"secured\"\
+            :\"true\", ' +\r                 '\"timeout\":3600000}'\r\rrest.request(Method.POST)\
+            \ {\r    uri.path = '/rest/providers'\r    requestContentType = ContentType.JSON\r\
+            \    body = provider\r}"
+        - id: 21
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 1
+      name: "Add Provider"
+  uuid: "8e0a4338-8b73-4ccd-a20b-2dbf6154004b"
+  pipe: false
+  target: []
+- id: 7
+  step: 16
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 16
+    name: "Add XenServer Provider"
+    description: ""
+    provider:
+      id: 1
+      name: "SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.0.0"
+      tags: []
+    providerAction:
+      id: 16
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 16
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 46
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 47
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "import groovyx.net.http.*\r\rrest = new HTTPBuilder('https://localhost:8443')\r\
+            rest.auth.basic('admin', 'integra')\rrest.ignoreSSLIssues()\r\rprovider\
+            \ = '{\"name\":\"XenServer\",' +\r                 '\"hostname\":\"localhost\"\
+            ,' +\r                 '\"port\":9790, ' +\r                 '\"secured\"\
+            :\"true\", ' +\r                 '\"timeout\":3600000}'\r\rrest.request(Method.POST)\
+            \ {\r    uri.path = '/rest/providers'\r    requestContentType = ContentType.JSON\r\
+            \    body = provider\r}"
+        - id: 48
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 1
+      name: "Add Provider"
+  uuid: "6a363393-618c-49f2-9fd6-e3ac47402ed0"
+  pipe: false
+  target: []
+- id: 2
+  step: 8
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 8
+    name: "Add MaxDB Provider"
+    description: ""
+    provider:
+      id: 1
+      name: "SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.0.0"
+      tags: []
+    providerAction:
+      id: 8
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 8
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 22
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 23
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "import groovyx.net.http.*\r\rrest = new HTTPBuilder('https://localhost:8443')\r\
+            rest.auth.basic('admin', 'integra')\rrest.ignoreSSLIssues()\r\rprovider\
+            \ = '{\"name\":\"MaxDB\",' +\r                 '\"hostname\":\"localhost\"\
+            ,' +\r                 '\"port\":9776, ' +\r                 '\"secured\"\
+            :\"true\", ' +\r                 '\"timeout\":3600000}'\r\rrest.request(Method.POST)\
+            \ {\r    uri.path = '/rest/providers'\r    requestContentType = ContentType.JSON\r\
+            \    body = provider\r}"
+        - id: 24
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 1
+      name: "Add Provider"
+  uuid: "60f25042-3df7-4b33-978c-4f8b588921fb"
+  pipe: false
+  target: []
+- id: 16
+  step: 15
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 15
+    name: "Add vSphere Provider"
+    description: ""
+    provider:
+      id: 1
+      name: "SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.0.0"
+      tags: []
+    providerAction:
+      id: 15
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 15
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 43
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 44
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "import groovyx.net.http.*\r\rrest = new HTTPBuilder('https://localhost:8443')\r\
+            rest.auth.basic('admin', 'integra')\rrest.ignoreSSLIssues()\r\rprovider\
+            \ = '{\"name\":\"vSphere\",' +\r                 '\"hostname\":\"localhost\"\
+            ,' +\r                 '\"port\":9789, ' +\r                 '\"secured\"\
+            :\"true\", ' +\r                 '\"timeout\":3600000}'\r\rrest.request(Method.POST)\
+            \ {\r    uri.path = '/rest/providers'\r    requestContentType = ContentType.JSON\r\
+            \    body = provider\r}"
+        - id: 45
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 1
+      name: "Add Provider"
+  uuid: "a7d8a88e-f719-429e-b32b-7e0d4e79b7ea"
+  pipe: false
+  target: []
+tags: []
