@@ -1,0 +1,182 @@
+---
+id: 5
+name: "Inventory-Kubernetes"
+description: null
+visible: true
+onSuccessWorkflow: null
+onFailureWorkflow: null
+schedules: []
+workflowSteps:
+- id: 25
+  step: 200
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 27
+    name: "Inventory Services"
+    description: ""
+    provider:
+      id: 24
+      name: "Integra Cloud"
+      description: ""
+      hostname: "integra-kube-m1.cloudapp.net"
+      port: 9798
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.0"
+      tags: []
+    providerAction:
+      id: 30
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 32
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 91
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 92
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "def output = 'kubectl get services'.execute().text\rservices = [:]\r\
+            \routput.eachLine { line, count ->\r    if (count > 0) {\r        tokens\
+            \ = line.trim().split('\\\\s+')\r\r        if (tokens.length == 5) {\r\
+            \            service = tokens[0]\r            ip = tokens[3]\r       \
+            \     port = tokens[4].replace('/TCP', '')\r\r            services[service]\
+            \ = ip + ':' + port\r        }\r        // IP and port only\r        else\
+            \ if (tokens.length >= 1) {\r            ip = tokens[0]\r            port\
+            \ = ''\r\r            if (tokens.length == 2) {\r                // means\
+            \ we have a port as well\r                port = ':' + tokens[1].replace('/TCP',\
+            \ '')\r            }\r\r            services[service] = services[service]\
+            \ + ', ' + ip + port\r        }\r    }\r}\r\rreturn services"
+        - id: 93
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 32768
+      name: "Integra Cloud"
+  uuid: "122ed6fe-921e-4ea6-bd8d-49aa0cc939df"
+  pipe: false
+  target: []
+- id: 26
+  step: 100
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 23
+    name: "Inventory Pods"
+    description: ""
+    provider:
+      id: 24
+      name: "Integra Cloud"
+      description: ""
+      hostname: "integra-kube-m1.cloudapp.net"
+      port: 9798
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.0"
+      tags: []
+    providerAction:
+      id: 26
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 28
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 80
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 81
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        - id: 79
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "output = 'kubectl get pods'.execute().text\rpods = [:]\r\routput.eachLine\
+            \ { line, count ->\r    if (count > 0) {\r        tokens = line.split('\\\
+            \\s+')\r        pods[tokens[0]] = tokens[1]\r    }\r}\r\rreturn pods"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 32768
+      name: "Integra Cloud"
+  uuid: "3568726e-1b9a-4a3d-90a0-a0f4bf205220"
+  pipe: false
+  target: []
+tags: []
