@@ -1,0 +1,337 @@
+---
+id: 4
+name: "Undo-Last-Reactor"
+description: null
+visible: true
+onSuccessWorkflow: null
+onFailureWorkflow: null
+schedules: []
+workflowSteps:
+- id: 24
+  step: 400
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 33
+    name: "Decrement Last ID"
+    description: ""
+    provider:
+      id: 24
+      name: "Integra Cloud"
+      description: ""
+      hostname: "integra-kube-m1.cloudapp.net"
+      port: 9798
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.0"
+      tags: []
+    providerAction:
+      id: 36
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 39
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 116
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 115
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "File file = new File('/root/lastCust.txt')\rcust = String.format('%07d',\
+            \ file.text.toInteger() - 1)\rPrintWriter writer = new PrintWriter(file)\r\
+            writer.print(cust)\rwriter.close()\r\rreturn cust"
+        - id: 117
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 32768
+      name: "Integra Cloud"
+  uuid: "00b13f0c-a999-44d0-8d80-926a570ec4ff"
+  pipe: false
+  target: []
+- id: 22
+  step: 200
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 28
+    name: "Delete Service"
+    description: ""
+    provider:
+      id: 24
+      name: "Integra Cloud"
+      description: ""
+      hostname: "integra-kube-m1.cloudapp.net"
+      port: 9798
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.0"
+      tags: []
+    providerAction:
+      id: 31
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 33
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 94
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 95
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "serviceName = 'integra-${Expression.customer}-svc'\rproc = 'kubectl\
+            \ delete service ' + serviceName\r\rproc.execute().text"
+        - id: 96
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 32768
+      name: "Integra Cloud"
+  uuid: "e3d97a65-dfe7-4441-8cb4-10d612ceffe2"
+  pipe: false
+  target: []
+- id: 21
+  step: 100
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 32
+    name: "Get Last Customer"
+    description: ""
+    provider:
+      id: 24
+      name: "Integra Cloud"
+      description: ""
+      hostname: "integra-kube-m1.cloudapp.net"
+      port: 9798
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.0"
+      tags: []
+    providerAction:
+      id: 35
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 38
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 113
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 112
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "File file = new File('/root/lastCust.txt')\rlastCust = file.text\r\
+            \rresult = [:]\rresult['customer'] = lastCust.trim()\r\rreturn result"
+        - id: 114
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 32768
+      name: "Integra Cloud"
+  uuid: "c770120f-1e02-4a7e-a210-198e2b801dde"
+  pipe: true
+  target:
+  - 200
+  - 300
+- id: 23
+  step: 300
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 25
+    name: "Delete Pod"
+    description: ""
+    provider:
+      id: 24
+      name: "Integra Cloud"
+      description: ""
+      hostname: "integra-kube-m1.cloudapp.net"
+      port: 9798
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.0"
+      tags: []
+    providerAction:
+      id: 28
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 30
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 86
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 85
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "podName = 'integra-${Expression.customer}'\rproc = 'kubectl delete\
+            \ pod ' + podName\rproc.execute().text"
+        - id: 87
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags:
+    - id: 32768
+      name: "Integra Cloud"
+  uuid: "d3c2b41d-1ce6-4317-b2e9-47f089de7af3"
+  pipe: false
+  target: []
+tags: []
