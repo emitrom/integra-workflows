@@ -70,14 +70,15 @@ workflowSteps:
           value: "def output = 'kubectl get services'.execute().text\rservices = [:]\r\
             \routput.eachLine { line, count ->\r    if (count > 0) {\r        tokens\
             \ = line.trim().split('\\\\s+')\r\r        if (tokens.length == 5) {\r\
-            \            service = tokens[0]\r            ip = tokens[3]\r       \
-            \     port = tokens[4].replace('/TCP', '')\r\r            services[service]\
-            \ = ip + ':' + port\r        }\r        // IP and port only\r        else\
-            \ if (tokens.length >= 1) {\r            ip = tokens[0]\r            port\
-            \ = ''\r\r            if (tokens.length == 2) {\r                // means\
-            \ we have a port as well\r                port = ':' + tokens[1].replace('/TCP',\
+            \            labels = tokens[1]\r            service = tokens[0]\r   \
+            \         ip = tokens[3]\r            port = tokens[4].replace('/TCP',\
+            \ '')\r\r            services[service] = labels + ',ip=' + ip + ':' +\
+            \ port\r        }\r        // IP and port only\r        else if (tokens.length\
+            \ >= 1) {\r            ip = tokens[0]\r            port = ''\r\r     \
+            \       if (tokens.length == 2) {\r                // means we have a\
+            \ port as well\r                port = ':' + tokens[1].replace('/TCP',\
             \ '')\r            }\r\r            services[service] = services[service]\
-            \ + ', ' + ip + port\r        }\r    }\r}\r\rreturn services"
+            \ + ',' + ip + port\r        }\r    }\r}\r\rreturn services"
         - id: 93
           index: 1
           name: "logicOperation"
@@ -147,16 +148,6 @@ workflowSteps:
           editable: true
           dataType: "List"
           value: "Groovy"
-        - id: 81
-          index: 1
-          name: "logicOperation"
-          displayName: "Operation"
-          description: "Type of operation to perform on the incoming values."
-          required: true
-          visible: true
-          editable: true
-          dataType: "List"
-          value: "Advanced"
         - id: 79
           index: 2
           name: "logicExpression"
@@ -169,7 +160,18 @@ workflowSteps:
           dataType: "TextArea"
           value: "output = 'kubectl get pods'.execute().text\rpods = [:]\r\routput.eachLine\
             \ { line, count ->\r    if (count > 0) {\r        tokens = line.split('\\\
-            \\s+')\r        pods[tokens[0]] = tokens[1]\r    }\r}\r\rreturn pods"
+            \\s+')\r        pods[tokens[0]] = 'ip=' + tokens[1] + ',' + tokens[5]\r\
+            \    }\r}\r\rreturn pods"
+        - id: 81
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
         workflowActionName: null
       outputs: []
     workflowTransaction: null
