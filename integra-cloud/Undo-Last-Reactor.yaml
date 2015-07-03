@@ -1,5 +1,5 @@
 ---
-id: 11
+id: 4
 name: "Undo-Last-Reactor"
 description: null
 visible: true
@@ -7,18 +7,18 @@ onSuccessWorkflow: null
 onFailureWorkflow: null
 schedules: []
 workflowSteps:
-- id: 39
+- id: 34
   step: 100
   jumpToStep: 0
   failureStep: 0
   timeout: 0
   async: false
   workflowAction:
-    id: 91
+    id: 28
     name: "Delete Service"
     description: ""
     provider:
-      id: 8
+      id: 24
       name: "Integra Cloud"
       description: ""
       hostname: "integra-kube-m1.cloudapp.net"
@@ -32,15 +32,14 @@ workflowSteps:
       providerVersion: "1.1.0"
       tags: []
     providerAction:
-      id: 91
+      id: 44
       name: "logicAction"
       displayName: "Apply Logic"
       description: "Gives you the ability to insert code dynamically."
       pipes: []
       transaction: null
-      outputs: []
       inputs:
-      - id: 118
+      - id: 48
         index: 0
         name: "logicInputs"
         displayName: "Logic"
@@ -48,7 +47,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 351
+        - id: 145
           index: 0
           name: "logicLanguague"
           displayName: "Language"
@@ -58,7 +57,7 @@ workflowSteps:
           editable: true
           dataType: "List"
           value: "Groovy"
-        - id: 352
+        - id: 146
           index: 2
           name: "logicExpression"
           displayName: "Expression"
@@ -71,7 +70,7 @@ workflowSteps:
           value: "lastId = new File('/root/lastCust.txt').text.trim()\rserviceName\
             \ = 'integra-' + lastId + '-svc'\rproc = 'kubectl delete service ' + serviceName\r\
             \rproc.execute().text"
-        - id: 353
+        - id: 147
           index: 1
           name: "logicOperation"
           displayName: "Operation"
@@ -82,6 +81,7 @@ workflowSteps:
           dataType: "List"
           value: "Advanced"
         workflowActionName: null
+      outputs: []
     workflowTransaction: null
     tags:
     - id: 32768
@@ -89,18 +89,18 @@ workflowSteps:
   uuid: "aeefc715-e8d7-4bc6-bd73-187c6441521a"
   pipe: false
   target: []
-- id: 42
+- id: 35
   step: 200
   jumpToStep: 0
   failureStep: 0
   timeout: 0
   async: false
   workflowAction:
-    id: 94
+    id: 25
     name: "Delete Pod"
     description: ""
     provider:
-      id: 8
+      id: 24
       name: "Integra Cloud"
       description: ""
       hostname: "integra-kube-m1.cloudapp.net"
@@ -114,15 +114,14 @@ workflowSteps:
       providerVersion: "1.1.0"
       tags: []
     providerAction:
-      id: 94
+      id: 45
       name: "logicAction"
       displayName: "Apply Logic"
       description: "Gives you the ability to insert code dynamically."
       pipes: []
       transaction: null
-      outputs: []
       inputs:
-      - id: 121
+      - id: 49
         index: 0
         name: "logicInputs"
         displayName: "Logic"
@@ -130,7 +129,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 360
+        - id: 148
           index: 0
           name: "logicLanguague"
           displayName: "Language"
@@ -140,7 +139,7 @@ workflowSteps:
           editable: true
           dataType: "List"
           value: "Groovy"
-        - id: 361
+        - id: 149
           index: 2
           name: "logicExpression"
           displayName: "Expression"
@@ -152,7 +151,7 @@ workflowSteps:
           dataType: "TextArea"
           value: "lastId = new File('/root/lastCust.txt').text.trim()\rpodName = 'integra-'\
             \ + lastId\rproc = 'kubectl delete pod ' + podName\rproc.execute().text"
-        - id: 362
+        - id: 150
           index: 1
           name: "logicOperation"
           displayName: "Operation"
@@ -163,6 +162,7 @@ workflowSteps:
           dataType: "List"
           value: "Advanced"
         workflowActionName: null
+      outputs: []
     workflowTransaction: null
     tags:
     - id: 32768
@@ -170,18 +170,18 @@ workflowSteps:
   uuid: "ff8e6b49-4947-4df8-9def-4f7d2ee72c67"
   pipe: false
   target: []
-- id: 40
+- id: 36
   step: 300
   jumpToStep: 0
   failureStep: 0
   timeout: 0
   async: false
   workflowAction:
-    id: 92
+    id: 33
     name: "Decrement Last ID"
     description: ""
     provider:
-      id: 8
+      id: 24
       name: "Integra Cloud"
       description: ""
       hostname: "integra-kube-m1.cloudapp.net"
@@ -195,15 +195,14 @@ workflowSteps:
       providerVersion: "1.1.0"
       tags: []
     providerAction:
-      id: 92
+      id: 46
       name: "logicAction"
       displayName: "Apply Logic"
       description: "Gives you the ability to insert code dynamically."
       pipes: []
       transaction: null
-      outputs: []
       inputs:
-      - id: 119
+      - id: 50
         index: 0
         name: "logicInputs"
         displayName: "Logic"
@@ -211,7 +210,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 354
+        - id: 151
           index: 0
           name: "logicLanguague"
           displayName: "Language"
@@ -221,7 +220,7 @@ workflowSteps:
           editable: true
           dataType: "List"
           value: "Groovy"
-        - id: 355
+        - id: 152
           index: 2
           name: "logicExpression"
           displayName: "Expression"
@@ -234,7 +233,7 @@ workflowSteps:
           value: "File file = new File('/root/lastCust.txt')\rcust = String.format('%07d',\
             \ file.text.toInteger() - 1)\rPrintWriter writer = new PrintWriter(file)\r\
             writer.print(cust)\rwriter.close()\r\rreturn cust"
-        - id: 356
+        - id: 153
           index: 1
           name: "logicOperation"
           displayName: "Operation"
@@ -245,6 +244,7 @@ workflowSteps:
           dataType: "List"
           value: "Advanced"
         workflowActionName: null
+      outputs: []
     workflowTransaction: null
     tags:
     - id: 32768
