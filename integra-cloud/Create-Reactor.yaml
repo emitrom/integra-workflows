@@ -1,5 +1,5 @@
 ---
-id: 2
+id: 13
 name: "Create-Reactor"
 description: null
 visible: true
@@ -7,176 +7,18 @@ onSuccessWorkflow: null
 onFailureWorkflow: null
 schedules: []
 workflowSteps:
-- id: 19
-  step: 400
-  jumpToStep: 0
-  failureStep: 0
-  timeout: 0
-  async: false
-  workflowAction:
-    id: 30
-    name: "Confirmation Email"
-    description: ""
-    provider:
-      id: 16
-      name: "Notification"
-      description: null
-      hostname: "localhost"
-      port: 9781
-      timeout: 3600000
-      username: null
-      password: null
-      reachable: false
-      secured: true
-      enabled: null
-      providerVersion: null
-      tags: []
-    providerAction:
-      id: 33
-      name: "email"
-      displayName: "Email"
-      description: "Sends an email to the specified parties"
-      pipes: []
-      transaction: null
-      inputs:
-      - id: 36
-        index: 0
-        name: "Settings"
-        displayName: "Settings"
-        description: "Mail host settings"
-        visible: true
-        inputs: []
-        inputFields:
-        - id: 104
-          index: 3
-          name: "Password"
-          displayName: "Password"
-          description: "Password"
-          required: true
-          visible: true
-          editable: true
-          dataType: "Password"
-          value: "3m1tr0m2014"
-        - id: 105
-          index: 0
-          name: "Host"
-          displayName: "SMTP Server"
-          description: "SMTP Mail host"
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "smtp.gmail.com"
-        - id: 106
-          index: 4
-          name: "Enable SSL"
-          displayName: "Enable SSL"
-          description: "SSL"
-          required: false
-          visible: true
-          editable: true
-          dataType: "Boolean"
-          value: "true"
-        - id: 108
-          index: 2
-          name: "User"
-          displayName: "Username"
-          description: "Username"
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "noreply@emitrom.com"
-        - id: 107
-          index: 1
-          name: "Port"
-          displayName: "Port"
-          description: "Mail host email port"
-          required: false
-          visible: true
-          editable: true
-          dataType: "Integer"
-          value: "465"
-        workflowActionName: null
-      - id: 35
-        index: 1
-        name: "Message Details"
-        displayName: "Message Details"
-        description: "Email message details"
-        visible: true
-        inputs: []
-        inputFields:
-        - id: 102
-          index: 3
-          name: "Message"
-          displayName: "Message"
-          description: "Message body"
-          required: true
-          visible: true
-          editable: true
-          dataType: "TextArea"
-          value: "A new Kubernetes pod and service have been created for customer\
-            \ ID ${Expression.customer}.\r\rThe Integra license generated expires\
-            \ on ${Expression.expiration}.  Please record the following details in\
-            \ the Integra tracking database.  \r\rCustomer ID: ${customer}\rProviders:\
-            \ ${providers}\rWorkflows: ${workflows}\rExpiration: ${expiration}\rLicense:\
-            \ ${license}\r\rYou will need to manually create an endpoint on integra-kube-m1\
-            \ -- ${port}:${port}\r\rUpon expiration of the trial, the pod and service\
-            \ will be automatically deleted.  At that moment you will receive a notification\
-            \ email indicating to close the aforementioned endpoint.\r\rThis is an\
-            \ automated email coming from an unmonitored email address.  Please do\
-            \ not reply.\r\rEmitrom Support\rsupport@emitrom.com"
-        - id: 103
-          index: 0
-          name: "To"
-          displayName: "To"
-          description: "Comma-separated recipient list"
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "support@emitrom.com"
-        - id: 101
-          index: 1
-          name: "Subject"
-          displayName: "Subject"
-          description: "Message subject"
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "New Reactor Provisioned - ${Expression.customer}"
-        - id: 100
-          index: 2
-          name: "AutoPipeAttach"
-          displayName: "Attach Pipes"
-          description: "Attaches any input piped into this action as a .json attachment"
-          required: false
-          visible: true
-          editable: true
-          dataType: "Boolean"
-          value: "false"
-        workflowActionName: null
-      outputs: []
-    workflowTransaction: null
-    tags:
-    - id: 32768
-      name: "Integra Cloud"
-  uuid: "d7429e4a-c0a6-419f-ae4e-cddedbfd4ecc"
-  pipe: false
-  target: []
-- id: 18
+- id: 46
   step: 100
   jumpToStep: 0
   failureStep: 0
   timeout: 0
   async: false
   workflowAction:
-    id: 26
+    id: 98
     name: "Generate License"
     description: ""
     provider:
-      id: 24
+      id: 8
       name: "Integra Cloud"
       description: ""
       hostname: "integra-kube-m1.cloudapp.net"
@@ -190,14 +32,15 @@ workflowSteps:
       providerVersion: "1.1.0"
       tags: []
     providerAction:
-      id: 29
+      id: 98
       name: "logicAction"
       displayName: "Apply Logic"
       description: "Gives you the ability to insert code dynamically."
       pipes: []
       transaction: null
+      outputs: []
       inputs:
-      - id: 31
+      - id: 126
         index: 0
         name: "logicInputs"
         displayName: "Logic"
@@ -205,7 +48,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 89
+        - id: 378
           index: 0
           name: "logicLanguague"
           displayName: "Language"
@@ -215,7 +58,7 @@ workflowSteps:
           editable: true
           dataType: "List"
           value: "Groovy"
-        - id: 88
+        - id: 379
           index: 2
           name: "logicExpression"
           displayName: "Expression"
@@ -237,7 +80,7 @@ workflowSteps:
             \ + '\\t' + prov + '\\t' + wf + '\\t' + exp)\r\rdetails = [:]\rdetails['customer']\
             \ = cust\rdetails['providers'] = prov\rdetails['workflows'] = wf\rdetails['expiration']\
             \ = exp\rdetails['license'] = license\r\rreturn details"
-        - id: 90
+        - id: 380
           index: 1
           name: "logicOperation"
           displayName: "Operation"
@@ -248,29 +91,184 @@ workflowSteps:
           dataType: "List"
           value: "Advanced"
         workflowActionName: null
-      outputs: []
     workflowTransaction: null
     tags:
     - id: 32768
       name: "Integra Cloud"
-  uuid: "ea9d8d96-c683-47d7-a53b-ea71e5c62247"
+  uuid: "4bdb7dd4-c829-46a3-98c1-d838d370aa8b"
   pipe: true
   target:
-  - 200
   - 400
-  - 300
-- id: 17
+- id: 45
+  step: 400
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 97
+    name: "Confirmation Email"
+    description: ""
+    provider:
+      id: 9
+      name: "Notification"
+      description: null
+      hostname: "integra-home.cloudapp.net"
+      port: 9781
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: false
+      secured: true
+      enabled: null
+      providerVersion: null
+      tags: []
+    providerAction:
+      id: 97
+      name: "email"
+      displayName: "Email"
+      description: "Sends an email to the specified parties"
+      pipes: []
+      transaction: null
+      outputs: []
+      inputs:
+      - id: 124
+        index: 0
+        name: "Settings"
+        displayName: "Settings"
+        description: "Mail host settings"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 369
+          index: 3
+          name: "Password"
+          displayName: "Password"
+          description: "Password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "3m1tr0m2014"
+        - id: 370
+          index: 0
+          name: "Host"
+          displayName: "SMTP Server"
+          description: "SMTP Mail host"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "smtp.gmail.com"
+        - id: 371
+          index: 4
+          name: "Enable SSL"
+          displayName: "Enable SSL"
+          description: "SSL"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "true"
+        - id: 372
+          index: 2
+          name: "User"
+          displayName: "Username"
+          description: "Username"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "noreply@emitrom.com"
+        - id: 373
+          index: 1
+          name: "Port"
+          displayName: "Port"
+          description: "Mail host email port"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "465"
+        workflowActionName: null
+      - id: 125
+        index: 1
+        name: "Message Details"
+        displayName: "Message Details"
+        description: "Email message details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 375
+          index: 0
+          name: "To"
+          displayName: "To"
+          description: "Comma-separated recipient list"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "support@emitrom.com"
+        - id: 374
+          index: 3
+          name: "Message"
+          displayName: "Message"
+          description: "Message body"
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "A new Kubernetes pod and service have been created for customer\
+            \ ID ${Expression.customer}.\r\rThe Integra license generated expires\
+            \ on ${Expression.expiration}.  Please record the following details in\
+            \ the Integra tracking database.  \r\rCustomer ID: ${customer}\rProviders:\
+            \ ${providers}\rWorkflows: ${workflows}\rExpiration: ${expiration}\rLicense:\
+            \ ${license}\r\rYou will need to manually create an endpoint on integra-kube-m1,\
+            \ port ${port}\r\rUpon expiration of the trial, the pod and service will\
+            \ be automatically deleted.  At that moment you will receive a notification\
+            \ email indicating to close the aforementioned endpoint.\r\rThis is an\
+            \ automated email coming from an unmonitored email address.  Please do\
+            \ not reply.\r\rEmitrom Support\rsupport@emitrom.com"
+        - id: 376
+          index: 1
+          name: "Subject"
+          displayName: "Subject"
+          description: "Message subject"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "New Reactor Provisioned - ${Expression.customer}"
+        - id: 377
+          index: 2
+          name: "AutoPipeAttach"
+          displayName: "Attach Pipes"
+          description: "Attaches any input piped into this action as a .json attachment"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "false"
+        workflowActionName: null
+    workflowTransaction: null
+    tags:
+    - id: 32768
+      name: "Integra Cloud"
+  uuid: "885a0775-88d0-42b1-9216-fafab6ac7890"
+  pipe: false
+  target: []
+- id: 47
   step: 300
   jumpToStep: 0
   failureStep: 0
   timeout: 0
   async: false
   workflowAction:
-    id: 29
+    id: 99
     name: "Create Service"
     description: ""
     provider:
-      id: 24
+      id: 8
       name: "Integra Cloud"
       description: ""
       hostname: "integra-kube-m1.cloudapp.net"
@@ -284,14 +282,15 @@ workflowSteps:
       providerVersion: "1.1.0"
       tags: []
     providerAction:
-      id: 32
+      id: 99
       name: "logicAction"
       displayName: "Apply Logic"
       description: "Gives you the ability to insert code dynamically."
       pipes: []
       transaction: null
+      outputs: []
       inputs:
-      - id: 34
+      - id: 127
         index: 0
         name: "logicInputs"
         displayName: "Logic"
@@ -299,7 +298,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 98
+        - id: 381
           index: 0
           name: "logicLanguague"
           displayName: "Language"
@@ -309,7 +308,7 @@ workflowSteps:
           editable: true
           dataType: "List"
           value: "Groovy"
-        - id: 97
+        - id: 382
           index: 2
           name: "logicExpression"
           displayName: "Expression"
@@ -320,17 +319,17 @@ workflowSteps:
           editable: true
           dataType: "TextArea"
           value: "import groovy.json.JsonOutput\rimport groovy.json.JsonSlurper\r\r\
-            File service = new File('/root/integra-reactor-svc.json')\rJsonSlurper\
-            \ json = new JsonSlurper()\rsvc = json.parseText(service.text)\r\rcustomer\
-            \ = 'integra-${Expression.customer}-svc'\rsvc.id = customer\rsvc.labels.name\
-            \ = customer\rsvc.port = new Random().nextInt(65535 - 49152) + 49152\r\
-            svc.selector.name = customer\r\rFile svcSpec =\r    File.createTempFile(customer\
-            \ + '-', '.json', service.getParentFile())\r\rPrintWriter writer = new\
-            \ PrintWriter(svcSpec)\rwriter.print(JsonOutput.prettyPrint(JsonOutput.toJson(svc)))\r\
+            lastId = new File('/root/lastCust.txt').text.trim()\r\rFile service =\
+            \ new File('/root/integra-reactor-svc.json')\rJsonSlurper json = new JsonSlurper()\r\
+            svc = json.parseText(service.text)\r\rcustomer = 'integra-' + lastId +\
+            \ '-svc'\rsvc.id = customer\rsvc.labels.name = customer\rsvc.port = new\
+            \ Random().nextInt(65535 - 49152) + 49152\rsvc.selector.name = customer\r\
+            \rFile svcSpec =\r    File.createTempFile(customer + '-', '.json', service.getParentFile())\r\
+            \rPrintWriter writer = new PrintWriter(svcSpec)\rwriter.print(JsonOutput.prettyPrint(JsonOutput.toJson(svc)))\r\
             writer.close()\r\rproc = 'kubectl create -f ' + svcSpec.getAbsolutePath()\r\
             output = proc.execute().text\rsvcSpec.delete()\r\rresult = [:]\rresult['output']\
             \ = output\rresult['port'] = svc.port\r\rreturn result\r"
-        - id: 99
+        - id: 383
           index: 1
           name: "logicOperation"
           displayName: "Operation"
@@ -341,27 +340,26 @@ workflowSteps:
           dataType: "List"
           value: "Advanced"
         workflowActionName: null
-      outputs: []
     workflowTransaction: null
     tags:
     - id: 32768
       name: "Integra Cloud"
-  uuid: "f3effa80-7fd9-4a9f-add4-9cd4d9f25bff"
+  uuid: "f7d41ed8-f0ea-4d05-89d8-d22a41bd1e82"
   pipe: true
   target:
   - 400
-- id: 20
+- id: 48
   step: 200
   jumpToStep: 0
   failureStep: 0
   timeout: 0
   async: false
   workflowAction:
-    id: 24
+    id: 100
     name: "Create Pod"
     description: ""
     provider:
-      id: 24
+      id: 8
       name: "Integra Cloud"
       description: ""
       hostname: "integra-kube-m1.cloudapp.net"
@@ -375,14 +373,15 @@ workflowSteps:
       providerVersion: "1.1.0"
       tags: []
     providerAction:
-      id: 27
+      id: 100
       name: "logicAction"
       displayName: "Apply Logic"
       description: "Gives you the ability to insert code dynamically."
       pipes: []
       transaction: null
+      outputs: []
       inputs:
-      - id: 29
+      - id: 128
         index: 0
         name: "logicInputs"
         displayName: "Logic"
@@ -390,7 +389,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 83
+        - id: 384
           index: 0
           name: "logicLanguague"
           displayName: "Language"
@@ -400,7 +399,7 @@ workflowSteps:
           editable: true
           dataType: "List"
           value: "Groovy"
-        - id: 82
+        - id: 385
           index: 2
           name: "logicExpression"
           displayName: "Expression"
@@ -411,15 +410,16 @@ workflowSteps:
           editable: true
           dataType: "TextArea"
           value: "import groovy.json.JsonOutput\rimport groovy.json.JsonSlurper\r\r\
-            File reactor = new File('/root/integra-reactor.json')\rJsonSlurper json\
-            \ = new JsonSlurper()\rpod = json.parseText(reactor.text)\r\rcustomer\
-            \ = 'integra-${Expression.customer}'\rpod.id = customer\rpod.labels.name\
-            \ = customer\rpod.desiredState.manifest.id = customer\r\rFile podSpec\
-            \ = \r    File.createTempFile(customer + '-', '.json', reactor.getParentFile())\r\
-            \rPrintWriter writer = new PrintWriter(podSpec)\rwriter.print(JsonOutput.prettyPrint(JsonOutput.toJson(pod)))\r\
-            writer.close()\r\rdef proc = 'kubectl create -f ' + podSpec.getAbsolutePath()\r\
-            result = proc.execute().text\rpodSpec.delete()\r\rreturn result\r"
-        - id: 84
+            lastId = new File('/root/lastCust.txt').text.trim()\r\rFile reactor =\
+            \ new File('/root/integra-reactor.json')\rJsonSlurper json = new JsonSlurper()\r\
+            pod = json.parseText(reactor.text)\r\rcustomer = 'integra-' + lastId\r\
+            pod.id = customer\rpod.labels.name = customer\rpod.desiredState.manifest.id\
+            \ = customer\r\rFile podSpec = \r    File.createTempFile(customer + '-',\
+            \ '.json', reactor.getParentFile())\r\rPrintWriter writer = new PrintWriter(podSpec)\r\
+            writer.print(JsonOutput.prettyPrint(JsonOutput.toJson(pod)))\rwriter.close()\r\
+            \rdef proc = 'kubectl create -f ' + podSpec.getAbsolutePath()\rresult\
+            \ = proc.execute().text\rpodSpec.delete()\r\rreturn result\r"
+        - id: 386
           index: 1
           name: "logicOperation"
           displayName: "Operation"
@@ -430,12 +430,11 @@ workflowSteps:
           dataType: "List"
           value: "Advanced"
         workflowActionName: null
-      outputs: []
     workflowTransaction: null
     tags:
     - id: 32768
       name: "Integra Cloud"
-  uuid: "7e6b9064-5e81-4c7e-86c8-dbd31340a55a"
+  uuid: "0171b2e4-bf05-44b0-9bb0-f6ed1f54dfe4"
   pipe: false
   target: []
 tags: []
