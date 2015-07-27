@@ -1,5 +1,5 @@
 ---
-id: 10
+id: 8
 name: "SVT-Protect-Oracle"
 description: null
 visible: true
@@ -7,20 +7,20 @@ onSuccessWorkflow: null
 onFailureWorkflow: null
 schedules: []
 workflowSteps:
-- id: 36
+- id: 46
   step: 200
   jumpToStep: 0
   failureStep: 0
   timeout: 0
   async: false
   workflowAction:
-    id: 83
+    id: 38
     name: "Oracle Quiesce"
     description: ""
     provider:
-      id: 7
+      id: 17
       name: "Oracle"
-      description: ""
+      description: null
       hostname: "localhost"
       port: 9783
       timeout: 3600000
@@ -32,14 +32,15 @@ workflowSteps:
       providerVersion: null
       tags: []
     providerAction:
-      id: 83
+      id: 51
       name: "quiesce"
       displayName: "Quiesce"
       description: "quiesces the db"
       pipes: []
+      outputs: []
       transaction: null
       inputs:
-      - id: 106
+      - id: 57
         index: 0
         name: "PROVIDER_INPUT"
         displayName: "Quiesce Details"
@@ -47,7 +48,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 301
+        - id: 181
           index: 4
           name: "ORACLE_SID"
           displayName: "Oracle SID"
@@ -57,7 +58,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: ""
-        - id: 302
+        - id: 182
           index: 0
           name: "ORACLE_HOSTNAME"
           displayName: "Host"
@@ -67,7 +68,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: ""
-        - id: 303
+        - id: 183
           index: 6
           name: "ORACLE_PASSWORD"
           displayName: "Password"
@@ -77,7 +78,17 @@ workflowSteps:
           editable: true
           dataType: "Password"
           value: ""
-        - id: 305
+        - id: 186
+          index: 8
+          name: "TCP_ENABLE"
+          displayName: "TCP Enable"
+          description: "Use TCP instead of CLI."
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "false"
+        - id: 185
           index: 2
           name: "ORACLE_USERNAME"
           displayName: "Username"
@@ -87,7 +98,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: ""
-        - id: 304
+        - id: 184
           index: 7
           name: "ORACLE_CMD"
           displayName: "SQL*Plus Command"
@@ -97,17 +108,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: ""
-        - id: 306
-          index: 8
-          name: "TCP_ENABLE"
-          displayName: "TCP Enable"
-          description: "Use TCP instead of CLI."
-          required: false
-          visible: true
-          editable: true
-          dataType: "Boolean"
-          value: ""
-        - id: 307
+        - id: 187
           index: 1
           name: "ORACLE_PORT"
           displayName: "Port"
@@ -117,7 +118,7 @@ workflowSteps:
           editable: true
           dataType: "Integer"
           value: ""
-        - id: 308
+        - id: 188
           index: 5
           name: "ORACLE_HOME"
           displayName: "Oracle Home"
@@ -128,24 +129,25 @@ workflowSteps:
           dataType: "String"
           value: ""
         workflowActionName: null
-      outputs: []
     workflowTransaction: null
-    tags: []
+    tags:
+    - id: 65537
+      name: "SimpliVity"
   uuid: "6db9ab7b-a0e0-438d-9144-b22f0aaeebb4"
   pipe: false
   target: []
-- id: 34
+- id: 47
   step: 100
   jumpToStep: 0
   failureStep: 0
   timeout: 0
   async: false
   workflowAction:
-    id: 85
+    id: 39
     name: "SVT Start Session"
     description: ""
     provider:
-      id: 6
+      id: 26
       name: "SimpliVity"
       description: ""
       hostname: "localhost"
@@ -159,14 +161,27 @@ workflowSteps:
       providerVersion: "replace_version"
       tags: []
     providerAction:
-      id: 85
+      id: 52
       name: "ssh"
       displayName: "SSH Command"
       description: "SSH Command"
       pipes: []
+      outputs:
+      - id: 54
+        name: "SSH Response"
+        displayName: ""
+        description: "SSH Command Response"
+        outputFields:
+        - id: 134
+          name: "line#"
+          displayName: ""
+          description: "The SSH Command Responses split by new line"
+          dataType: null
+          value: null
+        outputs: []
       transaction: null
       inputs:
-      - id: 108
+      - id: 58
         index: 0
         name: "connection"
         displayName: "Connection"
@@ -174,7 +189,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 321
+        - id: 189
           index: 2
           name: "username"
           displayName: "Username"
@@ -184,7 +199,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: "svtcli"
-        - id: 320
+        - id: 191
           index: 1
           name: "port"
           displayName: "Port"
@@ -194,7 +209,7 @@ workflowSteps:
           editable: true
           dataType: "Integer"
           value: "22"
-        - id: 319
+        - id: 190
           index: 5
           name: "timeout"
           displayName: "Timeout (ms)"
@@ -204,7 +219,7 @@ workflowSteps:
           editable: true
           dataType: "Integer"
           value: "30000"
-        - id: 318
+        - id: 192
           index: 3
           name: "password"
           displayName: "Password"
@@ -214,7 +229,7 @@ workflowSteps:
           editable: true
           dataType: "Password"
           value: "password"
-        - id: 317
+        - id: 193
           index: 0
           name: "host"
           displayName: "Host"
@@ -225,7 +240,7 @@ workflowSteps:
           dataType: "String"
           value: "fed-virtual-controller"
         workflowActionName: null
-      - id: 109
+      - id: 59
         index: 1
         name: "command"
         displayName: "Command"
@@ -233,7 +248,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 322
+        - id: 194
           index: 0
           name: "command"
           displayName: "Command"
@@ -244,36 +259,25 @@ workflowSteps:
           dataType: "String"
           value: "svt-session-start --username root --password password"
         workflowActionName: null
-      outputs:
-      - id: 205
-        name: "SSH Response"
-        displayName: ""
-        description: "SSH Command Response"
-        outputFields:
-        - id: 1209
-          name: "line#"
-          displayName: ""
-          description: "The SSH Command Responses split by new line"
-          dataType: null
-          value: null
-        outputs: []
     workflowTransaction: null
-    tags: []
+    tags:
+    - id: 65537
+      name: "SimpliVity"
   uuid: "dcb89e57-2642-4753-a58f-0267a026b8e7"
   pipe: false
   target: []
-- id: 37
+- id: 48
   step: 700
   jumpToStep: 0
   failureStep: 0
   timeout: 0
   async: false
   workflowAction:
-    id: 88
+    id: 40
     name: "SVT Stop Session"
     description: ""
     provider:
-      id: 6
+      id: 26
       name: "SimpliVity"
       description: ""
       hostname: "localhost"
@@ -287,14 +291,27 @@ workflowSteps:
       providerVersion: "replace_version"
       tags: []
     providerAction:
-      id: 88
+      id: 53
       name: "ssh"
       displayName: "SSH Command"
       description: "SSH Command"
       pipes: []
+      outputs:
+      - id: 55
+        name: "SSH Response"
+        displayName: ""
+        description: "SSH Command Response"
+        outputFields:
+        - id: 135
+          name: "line#"
+          displayName: ""
+          description: "The SSH Command Responses split by new line"
+          dataType: null
+          value: null
+        outputs: []
       transaction: null
       inputs:
-      - id: 113
+      - id: 60
         index: 0
         name: "connection"
         displayName: "Connection"
@@ -302,7 +319,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 331
+        - id: 195
           index: 2
           name: "username"
           displayName: "Username"
@@ -312,7 +329,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: "svtcli"
-        - id: 333
+        - id: 197
           index: 1
           name: "port"
           displayName: "Port"
@@ -322,7 +339,7 @@ workflowSteps:
           editable: true
           dataType: "Integer"
           value: "22"
-        - id: 332
+        - id: 196
           index: 5
           name: "timeout"
           displayName: "Timeout (ms)"
@@ -332,7 +349,7 @@ workflowSteps:
           editable: true
           dataType: "Integer"
           value: "30000"
-        - id: 334
+        - id: 198
           index: 3
           name: "password"
           displayName: "Password"
@@ -342,7 +359,7 @@ workflowSteps:
           editable: true
           dataType: "Password"
           value: "password"
-        - id: 335
+        - id: 199
           index: 0
           name: "host"
           displayName: "Host"
@@ -353,7 +370,7 @@ workflowSteps:
           dataType: "String"
           value: "fed-virtual-controller"
         workflowActionName: null
-      - id: 114
+      - id: 61
         index: 1
         name: "command"
         displayName: "Command"
@@ -361,7 +378,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 336
+        - id: 200
           index: 0
           name: "command"
           displayName: "Command"
@@ -372,38 +389,27 @@ workflowSteps:
           dataType: "String"
           value: "svt-session-stop"
         workflowActionName: null
-      outputs:
-      - id: 208
-        name: "SSH Response"
-        displayName: ""
-        description: "SSH Command Response"
-        outputFields:
-        - id: 1213
-          name: "line#"
-          displayName: ""
-          description: "The SSH Command Responses split by new line"
-          dataType: null
-          value: null
-        outputs: []
     workflowTransaction: null
-    tags: []
+    tags:
+    - id: 65537
+      name: "SimpliVity"
   uuid: "3e26af13-ccdd-40c9-b550-a1acfd45e5c3"
   pipe: false
   target: []
-- id: 32
+- id: 49
   step: 400
   jumpToStep: 0
   failureStep: 0
   timeout: 0
   async: false
   workflowAction:
-    id: 84
+    id: 41
     name: "Oracle Unquiesce"
     description: ""
     provider:
-      id: 7
+      id: 17
       name: "Oracle"
-      description: ""
+      description: null
       hostname: "localhost"
       port: 9783
       timeout: 3600000
@@ -415,14 +421,15 @@ workflowSteps:
       providerVersion: null
       tags: []
     providerAction:
-      id: 84
+      id: 54
       name: "unquiesce"
       displayName: "Unquiesce"
       description: "unquiesces the db"
       pipes: []
+      outputs: []
       transaction: null
       inputs:
-      - id: 107
+      - id: 62
         index: 0
         name: "PROVIDER_INPUT"
         displayName: "Unquiesce Details"
@@ -430,7 +437,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 309
+        - id: 201
           index: 4
           name: "ORACLE_SID"
           displayName: "Oracle SID"
@@ -440,7 +447,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: ""
-        - id: 310
+        - id: 202
           index: 0
           name: "ORACLE_HOSTNAME"
           displayName: "Host"
@@ -450,7 +457,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: ""
-        - id: 311
+        - id: 203
           index: 6
           name: "ORACLE_PASSWORD"
           displayName: "Password"
@@ -460,7 +467,17 @@ workflowSteps:
           editable: true
           dataType: "Password"
           value: ""
-        - id: 313
+        - id: 206
+          index: 8
+          name: "TCP_ENABLE"
+          displayName: "TCP Enable"
+          description: "Use TCP instead of CLI."
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "false"
+        - id: 205
           index: 2
           name: "ORACLE_USERNAME"
           displayName: "Username"
@@ -470,7 +487,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: ""
-        - id: 312
+        - id: 204
           index: 7
           name: "ORACLE_CMD"
           displayName: "SQL*Plus Command"
@@ -480,17 +497,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: ""
-        - id: 314
-          index: 8
-          name: "TCP_ENABLE"
-          displayName: "TCP Enable"
-          description: "Use TCP instead of CLI."
-          required: false
-          visible: true
-          editable: true
-          dataType: "Boolean"
-          value: ""
-        - id: 315
+        - id: 207
           index: 1
           name: "ORACLE_PORT"
           displayName: "Port"
@@ -500,7 +507,7 @@ workflowSteps:
           editable: true
           dataType: "Integer"
           value: ""
-        - id: 316
+        - id: 208
           index: 5
           name: "ORACLE_HOME"
           displayName: "Oracle Home"
@@ -511,26 +518,27 @@ workflowSteps:
           dataType: "String"
           value: ""
         workflowActionName: null
-      outputs: []
     workflowTransaction: null
-    tags: []
+    tags:
+    - id: 65537
+      name: "SimpliVity"
   uuid: "1be43368-5c66-4651-bbef-b8380b9ecc84"
   pipe: false
   target: []
-- id: 33
+- id: 50
   step: 500
   jumpToStep: 0
   failureStep: 0
   timeout: 0
   async: false
   workflowAction:
-    id: 89
+    id: 42
     name: "Oracle Archive Redo Logs"
     description: ""
     provider:
-      id: 7
+      id: 17
       name: "Oracle"
-      description: ""
+      description: null
       hostname: "localhost"
       port: 9783
       timeout: 3600000
@@ -542,14 +550,15 @@ workflowSteps:
       providerVersion: null
       tags: []
     providerAction:
-      id: 89
+      id: 55
       name: "archive"
       displayName: "Archive"
       description: "Archive log switch of db"
       pipes: []
+      outputs: []
       transaction: null
       inputs:
-      - id: 115
+      - id: 63
         index: 0
         name: "PROVIDER_INPUT"
         displayName: "Archive Log Details"
@@ -557,7 +566,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 337
+        - id: 209
           index: 4
           name: "ORACLE_SID"
           displayName: "Oracle SID"
@@ -567,7 +576,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: ""
-        - id: 338
+        - id: 210
           index: 0
           name: "ORACLE_HOSTNAME"
           displayName: "Host"
@@ -577,7 +586,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: ""
-        - id: 339
+        - id: 211
           index: 6
           name: "ORACLE_PASSWORD"
           displayName: "Password"
@@ -587,7 +596,17 @@ workflowSteps:
           editable: true
           dataType: "Password"
           value: ""
-        - id: 340
+        - id: 213
+          index: 8
+          name: "TCP_ENABLE"
+          displayName: "TCP Enable"
+          description: "Use TCP instead of CLI."
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "false"
+        - id: 212
           index: 2
           name: "ORACLE_USERNAME"
           displayName: "Username"
@@ -597,7 +616,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: ""
-        - id: 342
+        - id: 214
           index: 7
           name: "ORACLE_CMD"
           displayName: "SQL*Plus Command"
@@ -607,17 +626,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: ""
-        - id: 341
-          index: 8
-          name: "TCP_ENABLE"
-          displayName: "TCP Enable"
-          description: "Use TCP instead of CLI."
-          required: false
-          visible: true
-          editable: true
-          dataType: "Boolean"
-          value: ""
-        - id: 343
+        - id: 215
           index: 1
           name: "ORACLE_PORT"
           displayName: "Port"
@@ -627,7 +636,7 @@ workflowSteps:
           editable: true
           dataType: "Integer"
           value: ""
-        - id: 344
+        - id: 216
           index: 5
           name: "ORACLE_HOME"
           displayName: "Oracle Home"
@@ -638,24 +647,25 @@ workflowSteps:
           dataType: "String"
           value: ""
         workflowActionName: null
-      outputs: []
     workflowTransaction: null
-    tags: []
+    tags:
+    - id: 65537
+      name: "SimpliVity"
   uuid: "1bd338b7-b411-4fa3-aca3-febcd881c3a2"
   pipe: false
   target: []
-- id: 38
+- id: 51
   step: 600
   jumpToStep: 0
   failureStep: 0
   timeout: 0
   async: false
   workflowAction:
-    id: 90
+    id: 43
     name: "SVT Snapshot Logs"
     description: ""
     provider:
-      id: 6
+      id: 26
       name: "SimpliVity"
       description: ""
       hostname: "localhost"
@@ -669,14 +679,27 @@ workflowSteps:
       providerVersion: "replace_version"
       tags: []
     providerAction:
-      id: 90
+      id: 56
       name: "ssh"
       displayName: "SSH Command"
       description: "SSH Command"
       pipes: []
+      outputs:
+      - id: 56
+        name: "SSH Response"
+        displayName: ""
+        description: "SSH Command Response"
+        outputFields:
+        - id: 136
+          name: "line#"
+          displayName: ""
+          description: "The SSH Command Responses split by new line"
+          dataType: null
+          value: null
+        outputs: []
       transaction: null
       inputs:
-      - id: 116
+      - id: 64
         index: 0
         name: "connection"
         displayName: "Connection"
@@ -684,7 +707,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 345
+        - id: 217
           index: 2
           name: "username"
           displayName: "Username"
@@ -694,7 +717,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: "svtcli"
-        - id: 347
+        - id: 219
           index: 1
           name: "port"
           displayName: "Port"
@@ -704,7 +727,7 @@ workflowSteps:
           editable: true
           dataType: "Integer"
           value: "22"
-        - id: 346
+        - id: 218
           index: 5
           name: "timeout"
           displayName: "Timeout (ms)"
@@ -714,7 +737,7 @@ workflowSteps:
           editable: true
           dataType: "Integer"
           value: "30000"
-        - id: 348
+        - id: 220
           index: 3
           name: "password"
           displayName: "Password"
@@ -724,7 +747,7 @@ workflowSteps:
           editable: true
           dataType: "Password"
           value: "password"
-        - id: 349
+        - id: 221
           index: 0
           name: "host"
           displayName: "Host"
@@ -735,7 +758,7 @@ workflowSteps:
           dataType: "String"
           value: "fed-virtual-controller"
         workflowActionName: null
-      - id: 117
+      - id: 65
         index: 1
         name: "command"
         displayName: "Command"
@@ -743,7 +766,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 350
+        - id: 222
           index: 0
           name: "command"
           displayName: "Command"
@@ -755,36 +778,25 @@ workflowSteps:
           value: "svt-vm-backup --datastore ds --vm oracle-vm --name ora-logs-snap\
             \ --output XML"
         workflowActionName: null
-      outputs:
-      - id: 209
-        name: "SSH Response"
-        displayName: ""
-        description: "SSH Command Response"
-        outputFields:
-        - id: 1214
-          name: "line#"
-          displayName: ""
-          description: "The SSH Command Responses split by new line"
-          dataType: null
-          value: null
-        outputs: []
     workflowTransaction: null
-    tags: []
+    tags:
+    - id: 65537
+      name: "SimpliVity"
   uuid: "95abecd4-365a-4e78-8481-7ab0bf5c59c3"
   pipe: false
   target: []
-- id: 35
+- id: 52
   step: 300
   jumpToStep: 0
   failureStep: 0
   timeout: 0
   async: false
   workflowAction:
-    id: 87
+    id: 44
     name: "SVT Snapshot Data"
     description: ""
     provider:
-      id: 6
+      id: 26
       name: "SimpliVity"
       description: ""
       hostname: "localhost"
@@ -798,14 +810,27 @@ workflowSteps:
       providerVersion: "replace_version"
       tags: []
     providerAction:
-      id: 87
+      id: 57
       name: "ssh"
       displayName: "SSH Command"
       description: "SSH Command"
       pipes: []
+      outputs:
+      - id: 57
+        name: "SSH Response"
+        displayName: ""
+        description: "SSH Command Response"
+        outputFields:
+        - id: 137
+          name: "line#"
+          displayName: ""
+          description: "The SSH Command Responses split by new line"
+          dataType: null
+          value: null
+        outputs: []
       transaction: null
       inputs:
-      - id: 111
+      - id: 66
         index: 0
         name: "connection"
         displayName: "Connection"
@@ -813,7 +838,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 325
+        - id: 223
           index: 2
           name: "username"
           displayName: "Username"
@@ -823,7 +848,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: "svtcli"
-        - id: 327
+        - id: 225
           index: 1
           name: "port"
           displayName: "Port"
@@ -833,7 +858,7 @@ workflowSteps:
           editable: true
           dataType: "Integer"
           value: "22"
-        - id: 326
+        - id: 224
           index: 5
           name: "timeout"
           displayName: "Timeout (ms)"
@@ -843,7 +868,7 @@ workflowSteps:
           editable: true
           dataType: "Integer"
           value: "30000"
-        - id: 328
+        - id: 226
           index: 3
           name: "password"
           displayName: "Password"
@@ -853,7 +878,7 @@ workflowSteps:
           editable: true
           dataType: "Password"
           value: "password"
-        - id: 329
+        - id: 227
           index: 0
           name: "host"
           displayName: "Host"
@@ -864,7 +889,7 @@ workflowSteps:
           dataType: "String"
           value: "fed-virtual-controller"
         workflowActionName: null
-      - id: 112
+      - id: 67
         index: 1
         name: "command"
         displayName: "Command"
@@ -872,7 +897,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 330
+        - id: 228
           index: 0
           name: "command"
           displayName: "Command"
@@ -884,21 +909,10 @@ workflowSteps:
           value: "svt-vm-backup --datastore ds --vm oracle-vm --name ora-data-snap\
             \ --output XML"
         workflowActionName: null
-      outputs:
-      - id: 207
-        name: "SSH Response"
-        displayName: ""
-        description: "SSH Command Response"
-        outputFields:
-        - id: 1212
-          name: "line#"
-          displayName: ""
-          description: "The SSH Command Responses split by new line"
-          dataType: null
-          value: null
-        outputs: []
     workflowTransaction: null
-    tags: []
+    tags:
+    - id: 65537
+      name: "SimpliVity"
   uuid: "74317f2f-4b48-42a5-ae2e-372888900514"
   pipe: false
   target: []
