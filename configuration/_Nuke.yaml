@@ -1,0 +1,114 @@
+---
+id: 14
+name: "_Nuke"
+description: null
+visible: true
+onSuccessWorkflow: null
+onFailureWorkflow: null
+schedules: []
+workflowSteps:
+- id: 84
+  step: 100
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 64
+    name: "_Nuke"
+    description: ""
+    provider:
+      id: 1
+      name: "_SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.0"
+      tags: []
+    providerAction:
+      id: 77
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      outputs: []
+      transaction: null
+      inputs:
+      - id: 95
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 350
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 351
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "@Grab('org.codehaus.groovy.modules.http-builder:http-builder:0.7.1')\r\
+            \rimport groovyx.net.http.RESTClient\rimport static groovyx.net.http.ContentType.*\r\
+            \rreactor = new RESTClient('https://integra-home.cloudapp.net:8443/rest/')\r\
+            reactor.auth.basic('admin', '')\rreactor.ignoreSSLIssues()\r\rstraightFace\
+            \ = '_'\rpostMortem = [:]\r\r// nuke schedule results\rresp = reactor.get(path:\
+            \ 'schedules_results.json')\rcount = 0\rresp.data.scheduleResults.each\
+            \ { result ->\r    reactor.delete(path: 'schedules_results/' + result.id\
+            \ + '.json')\r    count++\r}\rpostMortem['Schedule Results'] = count\r\
+            \r// nuke schedules\rresp = reactor.get(path: 'schedules.json')\rcount\
+            \ = 0\rresp.data.schedules.each { schedule ->\r    if (!schedule.name.startsWith(straightFace))\
+            \ {\r        reactor.delete(path: 'schedules/' + schedule.id + '.json')\r\
+            \        count++\r    }\r}\rpostMortem['Schedules'] = count\r\r// nuke\
+            \ workflows\rresp = reactor.get(path: 'workflows.json')\rcount = 0\rresp.data.workflows.each\
+            \ { workflow ->\r    if (!workflow.name.startsWith(straightFace)) {\r\
+            \        reactor.delete(path: 'workflows/' + workflow.id + '.json')\r\
+            \        count++\r    }\r}\rpostMortem['Workflows'] = count\r\r// nuke\
+            \ workflow actions\rresp = reactor.get(path: 'workflow_actions.json')\r\
+            count = 0\rresp.data.workflowActions.each { action ->\r    if (!action.name.startsWith(straightFace))\
+            \ {\r        reactor.delete(path: 'workflow_actions/' + action.id + '.json')\r\
+            \        count++\r    }\r}\rpostMortem['Actions'] = count\r\r// nuke providers\r\
+            resp = reactor.get(path: 'providers.json')\rcount = 0\rresp.data.providers.each\
+            \ { provider ->\r    if (!provider.name.startsWith(straightFace)) {\r\
+            \        reactor.delete(path: 'providers/' + provider.id + '.json')\r\
+            \        count++\r    }\r}\rpostMortem['Providers'] = count\r\rreturn\
+            \ postMortem"
+        - id: 352
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+    workflowTransaction: null
+    tags:
+    - id: 65536
+      name: "Clean"
+  uuid: "a04f8bf8-e24f-4abf-934f-b57aac874664"
+  pipe: false
+  target: []
+tags: []
