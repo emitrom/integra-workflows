@@ -1,0 +1,440 @@
+---
+id: 13
+name: "_Purge-Integra"
+description: null
+visible: true
+onSuccessWorkflow: null
+onFailureWorkflow: null
+schedules: []
+workflowSteps:
+- id: 80
+  step: 500
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 64
+    name: "_Purge Providers"
+    description: ""
+    provider:
+      id: 1
+      name: "_SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.0"
+      tags: []
+    providerAction:
+      id: 77
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      outputs: []
+      transaction: null
+      inputs:
+      - id: 95
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 350
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 351
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "@Grab('org.codehaus.groovy.modules.http-builder:http-builder:0.7.1')\r\
+            \rimport groovyx.net.http.RESTClient\rimport static groovyx.net.http.ContentType.*\r\
+            \rreactor = new RESTClient('https://integra-home.cloudapp.net:8443/rest/')\r\
+            reactor.auth.basic('admin', 'Emitrom123!')\rreactor.ignoreSSLIssues()\r\
+            \rresp = reactor.get(path: 'providers.json')\r\rresp.data.providers.each\
+            \ { provider ->\r    if (!provider.name.startsWith('_')) {\r        reactor.delete(path:\
+            \ 'providers/' + provider.id + '.json')\r    }\r}\r"
+        - id: 352
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+    workflowTransaction: null
+    tags:
+    - id: 65536
+      name: "Clean"
+  uuid: "8e662184-c3be-4de9-8728-faf5999d1095"
+  pipe: false
+  target: []
+- id: 79
+  step: 200
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 61
+    name: "_Purge Schedules"
+    description: ""
+    provider:
+      id: 1
+      name: "_SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.0"
+      tags: []
+    providerAction:
+      id: 74
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      outputs: []
+      transaction: null
+      inputs:
+      - id: 92
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 341
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 342
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "@Grab('org.codehaus.groovy.modules.http-builder:http-builder:0.7.1')\r\
+            \rimport groovyx.net.http.RESTClient\rimport static groovyx.net.http.ContentType.*\r\
+            \rreactor = new RESTClient('https://integra-home.cloudapp.net:8443/rest/')\r\
+            reactor.auth.basic('admin', 'Emitrom123!')\rreactor.ignoreSSLIssues()\r\
+            \rresp = reactor.get(path: 'schedules.json')\r\rresp.data.schedules.each\
+            \ { schedule ->\r    if (!schedule.name.startsWith('_')) {\r        reactor.delete(path:\
+            \ 'schedules/' + schedule.id + '.json')\r    }\r}\r"
+        - id: 343
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+    workflowTransaction: null
+    tags:
+    - id: 65536
+      name: "Clean"
+  uuid: "b99f925f-de41-4fd5-aff0-ca524b0ded0f"
+  pipe: false
+  target: []
+- id: 82
+  step: 400
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 63
+    name: "_Purge Actions"
+    description: ""
+    provider:
+      id: 1
+      name: "_SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.0"
+      tags: []
+    providerAction:
+      id: 76
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      outputs: []
+      transaction: null
+      inputs:
+      - id: 94
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 347
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 348
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "@Grab('org.codehaus.groovy.modules.http-builder:http-builder:0.7.1')\r\
+            \rimport groovyx.net.http.RESTClient\rimport static groovyx.net.http.ContentType.*\r\
+            \rreactor = new RESTClient('https://integra-home.cloudapp.net:8443/rest/')\r\
+            reactor.auth.basic('admin', 'Emitrom123!')\rreactor.ignoreSSLIssues()\r\
+            \rresp = reactor.get(path: 'workflow_actions.json')\r\rresp.data.workflowActions.each\
+            \ { action ->\r    if (!action.name.startsWith('_')) {\r        reactor.delete(path:\
+            \ 'workflow_actions/' + action.id + '.json')\r    }\r}\r"
+        - id: 349
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+    workflowTransaction: null
+    tags:
+    - id: 65536
+      name: "Clean"
+  uuid: "87cde0d3-2715-4eb0-9884-418434e54e60"
+  pipe: false
+  target: []
+- id: 81
+  step: 100
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 37
+    name: "_Purge Schedule Results"
+    description: ""
+    provider:
+      id: 1
+      name: "_SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.0"
+      tags: []
+    providerAction:
+      id: 50
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      outputs: []
+      transaction: null
+      inputs:
+      - id: 56
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 179
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 178
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "@Grab('org.codehaus.groovy.modules.http-builder:http-builder:0.7.1')\r\
+            \rimport groovyx.net.http.RESTClient\rimport static groovyx.net.http.ContentType.*\r\
+            \rdef reactor = new RESTClient('https://integra-home.cloudapp.net:8443/rest/')\r\
+            reactor.auth.basic('admin', 'Emitrom123!')\rreactor.ignoreSSLIssues()\r\
+            \rresp = reactor.get(path: 'schedules_results.json')\r\rresp.data.scheduleResults.each\
+            \ { result ->\r    reactor.delete(path: 'schedules_results/' + result.id\
+            \ + '.json')\r}"
+        - id: 180
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+    workflowTransaction: null
+    tags:
+    - id: 65536
+      name: "Clean"
+  uuid: "7db9df4a-30b4-4593-b17a-6be19329b63e"
+  pipe: false
+  target: []
+- id: 83
+  step: 300
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 62
+    name: "_Purge Workflows"
+    description: ""
+    provider:
+      id: 1
+      name: "_SSH"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.0"
+      tags: []
+    providerAction:
+      id: 75
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      outputs: []
+      transaction: null
+      inputs:
+      - id: 93
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 344
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 345
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "@Grab('org.codehaus.groovy.modules.http-builder:http-builder:0.7.1')\r\
+            \rimport groovyx.net.http.RESTClient\rimport static groovyx.net.http.ContentType.*\r\
+            \rreactor = new RESTClient('https://integra-home.cloudapp.net:8443/rest/')\r\
+            reactor.auth.basic('admin', 'Emitrom123!')\rreactor.ignoreSSLIssues()\r\
+            \rresp = reactor.get(path: 'workflows.json')\r\rresp.data.workflows.each\
+            \ { workflow ->\r    if (!workflow.name.startsWith('_')) {\r        reactor.delete(path:\
+            \ 'workflows/' + workflow.id + '.json')\r    }\r}\r"
+        - id: 346
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+    workflowTransaction: null
+    tags:
+    - id: 65536
+      name: "Clean"
+  uuid: "09e6c9d9-5c6c-4686-ad31-9abf6ba061f9"
+  pipe: false
+  target: []
+tags: []
