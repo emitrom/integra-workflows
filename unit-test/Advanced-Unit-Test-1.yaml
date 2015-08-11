@@ -1,0 +1,359 @@
+---
+id: 20
+name: "Advanced-Unit-Test-1"
+description: null
+visible: true
+onSuccessWorkflow: null
+onFailureWorkflow: null
+schedules: []
+workflowSteps:
+- id: 66
+  step: 400
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 119
+    name: "Advanced-Input-Manipulation"
+    description: ""
+    provider:
+      id: 12
+      name: "Unit-Test"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "replace_version"
+      tags: []
+    providerAction:
+      id: 119
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      inputs:
+      - id: 147
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 439
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 438
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "def names = []\r\r// the variable inputs is defined in the data\
+            \ binding \r// coming from the reactor.  it contains all inputs\r// that\
+            \ were piped into this action, and nothing else.\rinputs.each { input\
+            \ ->\r   names.push(input.getName())\r}\r\rnames.push(inputs.size)\r\r\
+            return names   "
+        - id: 440
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      transaction: null
+      outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "a6902879-681d-424d-b097-e2c882d87b3d"
+  pipe: false
+  target: []
+- id: 67
+  step: 200
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 112
+    name: "Echo2"
+    description: ""
+    provider:
+      id: 12
+      name: "Unit-Test"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "replace_version"
+      tags: []
+    providerAction:
+      id: 112
+      name: "executeCommand"
+      displayName: "Execute Command"
+      description: "Executes an OS Command"
+      pipes: []
+      inputs:
+      - id: 140
+        index: 0
+        name: "commandInputs"
+        displayName: "Command Inputs"
+        description: "Command Inputs"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 419
+          index: 1
+          name: "ROLLBACK_CMD"
+          displayName: "Rollback Command"
+          description: "Rollback command executes upon command failure"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        - id: 420
+          index: 0
+          name: "CMD"
+          displayName: "OS Command"
+          description: "OS Command can contain Integra variables @{field} ${field}.\
+            \ Example: myscript --o1 @{id} --o2 ${name} --o3 @{uuid}. When executing\
+            \ OS commands use cmd.exe /c command. For example: cmd.exe /c echo hello.\
+            \ To treat strings with spaces as one unit enclose them in \""
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "echo Hello World 2"
+        workflowActionName: null
+      transaction: null
+      outputs:
+      - id: 265
+        name: "cmdOutput"
+        displayName: "Command output"
+        description: "Command output"
+        outputFields:
+        - id: 1353
+          name: "stdoutMessage"
+          displayName: "Standard Output"
+          description: "The stdout returned by command"
+          dataType: null
+          value: null
+        - id: 1354
+          name: "stderrMessage"
+          displayName: "Standard Error"
+          description: "The stderr returned by command"
+          dataType: null
+          value: null
+        outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "29caa3bd-8bb0-4e42-904a-65ef9cfbfb01"
+  pipe: true
+  target:
+  - 400
+- id: 68
+  step: 100
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 111
+    name: "Echo1"
+    description: ""
+    provider:
+      id: 12
+      name: "Unit-Test"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "replace_version"
+      tags: []
+    providerAction:
+      id: 111
+      name: "executeCommand"
+      displayName: "Execute Command"
+      description: "Executes an OS Command"
+      pipes: []
+      inputs:
+      - id: 139
+        index: 0
+        name: "commandInputs"
+        displayName: "Command Inputs"
+        description: "Command Inputs"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 417
+          index: 1
+          name: "ROLLBACK_CMD"
+          displayName: "Rollback Command"
+          description: "Rollback command executes upon command failure"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        - id: 418
+          index: 0
+          name: "CMD"
+          displayName: "OS Command"
+          description: "OS Command can contain Integra variables @{field} ${field}.\
+            \ Example: myscript --o1 @{id} --o2 ${name} --o3 @{uuid}. When executing\
+            \ OS commands use cmd.exe /c command. For example: cmd.exe /c echo hello.\
+            \ To treat strings with spaces as one unit enclose them in \""
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "echo Hello World"
+        workflowActionName: null
+      transaction: null
+      outputs:
+      - id: 264
+        name: "cmdOutput"
+        displayName: "Command output"
+        description: "Command output"
+        outputFields:
+        - id: 1351
+          name: "stdoutMessage"
+          displayName: "Standard Output"
+          description: "The stdout returned by command"
+          dataType: null
+          value: null
+        - id: 1352
+          name: "stderrMessage"
+          displayName: "Standard Error"
+          description: "The stderr returned by command"
+          dataType: null
+          value: null
+        outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "900ef1d0-a331-44be-9d8c-2109d52fa360"
+  pipe: true
+  target:
+  - 400
+- id: 65
+  step: 300
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 113
+    name: "Echo3"
+    description: ""
+    provider:
+      id: 12
+      name: "Unit-Test"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "replace_version"
+      tags: []
+    providerAction:
+      id: 113
+      name: "executeCommand"
+      displayName: "Execute Command"
+      description: "Executes an OS Command"
+      pipes: []
+      inputs:
+      - id: 141
+        index: 0
+        name: "commandInputs"
+        displayName: "Command Inputs"
+        description: "Command Inputs"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 421
+          index: 1
+          name: "ROLLBACK_CMD"
+          displayName: "Rollback Command"
+          description: "Rollback command executes upon command failure"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        - id: 422
+          index: 0
+          name: "CMD"
+          displayName: "OS Command"
+          description: "OS Command can contain Integra variables @{field} ${field}.\
+            \ Example: myscript --o1 @{id} --o2 ${name} --o3 @{uuid}. When executing\
+            \ OS commands use cmd.exe /c command. For example: cmd.exe /c echo hello.\
+            \ To treat strings with spaces as one unit enclose them in \""
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "echo Hello World 3"
+        workflowActionName: null
+      transaction: null
+      outputs:
+      - id: 266
+        name: "cmdOutput"
+        displayName: "Command output"
+        description: "Command output"
+        outputFields:
+        - id: 1355
+          name: "stdoutMessage"
+          displayName: "Standard Output"
+          description: "The stdout returned by command"
+          dataType: null
+          value: null
+        - id: 1356
+          name: "stderrMessage"
+          displayName: "Standard Error"
+          description: "The stderr returned by command"
+          dataType: null
+          value: null
+        outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "83facb96-c39d-4f03-b08f-7ed11b996505"
+  pipe: true
+  target:
+  - 400
+tags: []
