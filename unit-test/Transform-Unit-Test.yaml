@@ -1,0 +1,178 @@
+---
+id: 18
+name: "Transform-Unit-Test"
+description: null
+visible: true
+onSuccessWorkflow: null
+onFailureWorkflow: null
+schedules: []
+workflowSteps:
+- id: 59
+  step: 200
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 114
+    name: "Transform"
+    description: ""
+    provider:
+      id: 12
+      name: "Unit-Test"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "replace_version"
+      tags: []
+    providerAction:
+      id: 114
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 142
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 425
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 423
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "input = [:]\r\rif ('{stdoutMessage.00001}' == 'Hello World 3') {\r\
+            \   input['stdoutMessage.00001'] = 'World War 3'\r}"
+        - id: 424
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Transform"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "77d2234d-fe5d-4f73-ba30-3bac71d29d87"
+  pipe: false
+  target: []
+- id: 60
+  step: 100
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 113
+    name: "Echo3"
+    description: ""
+    provider:
+      id: 12
+      name: "Unit-Test"
+      description: ""
+      hostname: "localhost"
+      port: 9796
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "replace_version"
+      tags: []
+    providerAction:
+      id: 113
+      name: "executeCommand"
+      displayName: "Execute Command"
+      description: "Executes an OS Command"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 141
+        index: 0
+        name: "commandInputs"
+        displayName: "Command Inputs"
+        description: "Command Inputs"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 421
+          index: 1
+          name: "ROLLBACK_CMD"
+          displayName: "Rollback Command"
+          description: "Rollback command executes upon command failure"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        - id: 422
+          index: 0
+          name: "CMD"
+          displayName: "OS Command"
+          description: "OS Command can contain Integra variables @{field} ${field}.\
+            \ Example: myscript --o1 @{id} --o2 ${name} --o3 @{uuid}. When executing\
+            \ OS commands use cmd.exe /c command. For example: cmd.exe /c echo hello.\
+            \ To treat strings with spaces as one unit enclose them in \""
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "echo Hello World 3"
+        workflowActionName: null
+      outputs:
+      - id: 266
+        name: "cmdOutput"
+        displayName: "Command output"
+        description: "Command output"
+        outputFields:
+        - id: 1355
+          name: "stdoutMessage"
+          displayName: "Standard Output"
+          description: "The stdout returned by command"
+          dataType: null
+          value: null
+        - id: 1356
+          name: "stderrMessage"
+          displayName: "Standard Error"
+          description: "The stderr returned by command"
+          dataType: null
+          value: null
+        outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "550cc53b-18ce-4e74-8f79-eb9f94968d9d"
+  pipe: true
+  target:
+  - 200
+tags: []
