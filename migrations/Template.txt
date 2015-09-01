@@ -1,0 +1,71 @@
+#
+# Guest information
+#
+guestHostname = 
+guestUsername = 
+guestPassword = 
+
+#
+# vCenter Converter Server
+#
+converterHostname = 
+converterUsername = 
+converterPassword = 
+
+#
+# Network destination
+#
+shareRoot = 
+shareUsername = 
+sharePassword = 
+
+#
+# Migrated VM Details.  You may leave CPU
+# and memory blank to keep the original values.
+# Memory is specified in GB.
+#
+vmName = 
+vmCPU = 
+vmMemory = 
+
+#
+# vCloud Director
+#
+vcdServer = 
+vcdOrg = 
+vcdUsername = 
+vcdPassword = 
+vcdCatalog = 
+vcdVdc = 
+
+#
+# Email server settings
+# 
+smtpServer = 
+smtpPort = 
+smtpUsername = 
+smtpPassword = 
+smtpSsl = 
+
+#
+# Kickoff email message recipients (comma-separated list)
+#
+kickoffMessageTo = 
+
+#
+# Success email message recipients (comma-separated list)
+# 
+successMessageTo = 
+
+#
+# Failure email message recipients (comma-separated list)
+#
+failureMessageTo = 
+
+#
+# Failure SMs message
+#
+smsSid = 
+smsToken = 
+smsTo = 
+smsFrom = 
