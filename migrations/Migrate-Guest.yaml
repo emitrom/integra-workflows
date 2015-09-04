@@ -7,15 +7,308 @@ onSuccessWorkflow: null
 onFailureWorkflow: null
 schedules: []
 workflowSteps:
-- id: 32
-  step: 600
+- id: 15
+  step: 400
   jumpToStep: 0
   failureStep: 0
   timeout: 0
   async: false
   workflowAction:
-    id: 51
-    name: "Conversion Checkpoint Email"
+    id: 31
+    name: "Convert Guest"
+    description: ""
+    provider:
+      id: 8
+      name: "Migrations"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9797
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "replace_version"
+      tags: []
+    providerAction:
+      id: 31
+      name: "ConvertWindowsSource"
+      displayName: "Convert Windows Machine"
+      description: "Converts a Windows machine to a VMX-based virtual machine"
+      pipes: []
+      outputs:
+      - id: 16
+        name: "Conversion Info"
+        displayName: ""
+        description: "Conversion job information"
+        outputFields:
+        - id: 56
+          name: "Job ID"
+          displayName: ""
+          description: "Conversion job ID"
+          dataType: null
+          value: null
+        - id: 55
+          name: "Task ID"
+          displayName: ""
+          description: "Conversion task ID"
+          dataType: null
+          value: null
+        outputs: []
+      transaction: null
+      inputs:
+      - id: 52
+        index: 1
+        name: "sourceMachine"
+        displayName: "Source Details"
+        description: "Source machine details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 187
+          index: 1
+          name: "username"
+          displayName: "Username"
+          description: "Administrator-level user"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${guestUsername}"
+        - id: 185
+          index: 2
+          name: "password"
+          displayName: "Password"
+          description: "Administrator password"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "${guestPassword}"
+        - id: 186
+          index: 0
+          name: "host"
+          displayName: "IP or hostname"
+          description: "IP or hostname of the source machine"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${guestHostname}"
+        workflowActionName: null
+      - id: 50
+        index: 2
+        name: "destinationDetails"
+        displayName: "Destination Details"
+        description: "Destination details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 176
+          index: 5
+          name: "memory"
+          displayName: "Memory (GB)"
+          description: "Virtual machine memory (GB)"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: ""
+        - id: 178
+          index: 4
+          name: "vCPU"
+          displayName: "vCPU"
+          description: "Number of virtual CPUs"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: ""
+        - id: 177
+          index: 3
+          name: "name"
+          displayName: "Name"
+          description: "Virtual machine name"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${vmName}"
+        - id: 181
+          index: 1
+          name: "networkShareUsername"
+          displayName: "Network Username"
+          description: "Network share username"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "GRN-CONVERTER\\emitrom"
+        - id: 180
+          index: 0
+          name: "networkShare"
+          displayName: "Network Share"
+          description: "Network share (UNC path) to store the converted virtual machine"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "\\\\GRN-CONVERTER\\share"
+        - id: 179
+          index: 2
+          name: "networkSharePassword"
+          displayName: "Network Password"
+          description: "Network share password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "${sharePassword}"
+        workflowActionName: null
+      - id: 51
+        index: 0
+        name: "converter"
+        displayName: "Converter Details"
+        description: "Converter machine details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 182
+          index: 2
+          name: "password"
+          displayName: "Password"
+          description: "Password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "${converterPassword}"
+        - id: 183
+          index: 1
+          name: "username"
+          displayName: "Username"
+          description: "Converter user"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${converterUsername}"
+        - id: 184
+          index: 0
+          name: "host"
+          displayName: "IP or hostname"
+          description: "IP or hostname of the converter. Leaving blank assumes 'localhost'"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${converterHostname}"
+        workflowActionName: null
+    workflowTransaction: null
+    tags: []
+  uuid: "48b5d172-263c-4761-9a92-3935c6618edc"
+  pipe: true
+  target:
+  - 500
+- id: 7
+  step: 700
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 34
+    name: "Create OVA"
+    description: ""
+    provider:
+      id: 8
+      name: "Migrations"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9797
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "replace_version"
+      tags: []
+    providerAction:
+      id: 34
+      name: "executeCommand"
+      displayName: "Execute Command"
+      description: "Executes an OS Command"
+      pipes: []
+      outputs:
+      - id: 18
+        name: "cmdOutput"
+        displayName: "Command output"
+        description: "Command output"
+        outputFields:
+        - id: 63
+          name: "stdoutMessage"
+          displayName: "Standard Output"
+          description: "The stdout returned by command"
+          dataType: null
+          value: null
+        - id: 64
+          name: "stderrMessage"
+          displayName: "Standard Error"
+          description: "The stderr returned by command"
+          dataType: null
+          value: null
+        outputs: []
+      transaction: null
+      inputs:
+      - id: 57
+        index: 0
+        name: "commandInputs"
+        displayName: "Command Inputs"
+        description: "Command Inputs"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 204
+          index: 0
+          name: "CMD"
+          displayName: "OS Command"
+          description: "OS Command can contain Integra variables @{field} ${field}.\
+            \ Example: myscript --o1 @{id} --o2 ${name} --o3 @{uuid}. When executing\
+            \ OS commands use cmd.exe /c command. For example: cmd.exe /c echo hello.\
+            \ To treat strings with spaces as one unit enclose them in \""
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "ovftool.exe -tt=ova -o \\\\GRN-CONVERTER\\share\\${vmName}\\${vmName}.vmx\
+            \ \\\\GRN-CONVERTER\\share\\${vmName}.ova"
+        - id: 203
+          index: 1
+          name: "ROLLBACK_CMD"
+          displayName: "Rollback Command"
+          description: "Rollback command executes upon command failure"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        workflowActionName: null
+    workflowTransaction: null
+    tags: []
+  uuid: "b4f1e8c4-57be-4d90-9e6c-9e83bc5848ed"
+  pipe: false
+  target: []
+- id: 6
+  step: 300
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 33
+    name: "Kickoff Email"
     description: ""
     provider:
       id: 9
@@ -32,7 +325,7 @@ workflowSteps:
       providerVersion: "1.1"
       tags: []
     providerAction:
-      id: 51
+      id: 33
       name: "email"
       displayName: "Email"
       description: "Sends an email to the specified parties"
@@ -40,58 +333,7 @@ workflowSteps:
       outputs: []
       transaction: null
       inputs:
-      - id: 86
-        index: 1
-        name: "Message Details"
-        displayName: "Message Details"
-        description: "Email message details"
-        visible: true
-        inputs: []
-        inputFields:
-        - id: 298
-          index: 3
-          name: "Message"
-          displayName: "Message"
-          description: "Message body"
-          required: true
-          visible: true
-          editable: true
-          dataType: "TextArea"
-          value: "${guestHostname} conversion was successful.  Details are attached\r\
-            \rOVA creation started.\r\r\rEmitrom Support\rtel: (919) 741.4194\remail:\
-            \ support@emitrom.com."
-        - id: 297
-          index: 1
-          name: "Subject"
-          displayName: "Subject"
-          description: "Message subject"
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "${guestHostname} conversion completed successfully."
-        - id: 300
-          index: 0
-          name: "To"
-          displayName: "To"
-          description: "Comma-separated recipient list"
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "${successMessageTo}"
-        - id: 299
-          index: 2
-          name: "AutoPipeAttach"
-          displayName: "Attach Pipes"
-          description: "Attaches any input piped into this action as a .json attachment"
-          required: false
-          visible: true
-          editable: true
-          dataType: "Boolean"
-          value: "true"
-        workflowActionName: null
-      - id: 85
+      - id: 56
         index: 0
         name: "Settings"
         displayName: "Settings"
@@ -99,7 +341,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 292
+        - id: 198
           index: 1
           name: "Port"
           displayName: "Port"
@@ -109,7 +351,7 @@ workflowSteps:
           editable: true
           dataType: "Integer"
           value: "${smtpPort}"
-        - id: 293
+        - id: 199
           index: 0
           name: "Host"
           displayName: "SMTP Server"
@@ -119,7 +361,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: "${smtpServer}"
-        - id: 294
+        - id: 200
           index: 4
           name: "Enable SSL"
           displayName: "Enable SSL"
@@ -129,7 +371,7 @@ workflowSteps:
           editable: true
           dataType: "Boolean"
           value: "true"
-        - id: 295
+        - id: 201
           index: 3
           name: "Password"
           displayName: "Password"
@@ -139,7 +381,7 @@ workflowSteps:
           editable: true
           dataType: "Password"
           value: "${smtpPassword}"
-        - id: 296
+        - id: 202
           index: 2
           name: "User"
           displayName: "Username"
@@ -150,11 +392,158 @@ workflowSteps:
           dataType: "String"
           value: "${smtpUsername}"
         workflowActionName: null
+      - id: 55
+        index: 1
+        name: "Message Details"
+        displayName: "Message Details"
+        description: "Email message details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 195
+          index: 3
+          name: "Message"
+          displayName: "Message"
+          description: "Message body"
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "The migration job on ${guestHostname} has started.  You may monitor\
+            \ its progress in the vCenter Converter Client.\r\rA virtual machine conversion\
+            \ can be a lengthy operation depending on the size of the machine and\
+            \ bandwidth.  You will receive several emails as different stages of the\
+            \ migration finish. If an error occurs, you will be notified by email\
+            \ and SMS.\r\r\rEmitrom Support\rtel: (919) 741.4194\remail: support@emitrom.com"
+        - id: 196
+          index: 0
+          name: "To"
+          displayName: "To"
+          description: "Comma-separated recipient list"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${kickoffMessageTo}"
+        - id: 194
+          index: 1
+          name: "Subject"
+          displayName: "Subject"
+          description: "Message subject"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${guestHostname} migration started"
+        - id: 197
+          index: 2
+          name: "AutoPipeAttach"
+          displayName: "Attach Pipes"
+          description: "Attaches any input piped into this action as a .json attachment"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "false"
+        workflowActionName: null
     workflowTransaction: null
     tags: []
-  uuid: "a0950698-fd7b-4875-986b-2b8a219979c1"
+  uuid: "907dd9ac-56e2-46d0-9acf-7c2f1153ed4f"
   pipe: false
   target: []
+- id: 16
+  step: 100
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 37
+    name: "Set Global Values"
+    description: ""
+    provider:
+      id: 8
+      name: "Migrations"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9797
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "replace_version"
+      tags: []
+    providerAction:
+      id: 37
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      outputs: []
+      transaction: null
+      inputs:
+      - id: 61
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 213
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 214
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "// --------------------------------------------------------------------------------------------------\r\
+            // Path is local to the host where the provider is running (see Providers\
+            \ tab)\r// --------------------------------------------------------------------------------------------------\r\
+            file = 'C:/Integra/Migrations/Test1.txt'\r\r\r\r\r// --------------------------------------------------------------------------------------------------\r\
+            // Do not modify anything beyond this point\r// --------------------------------------------------------------------------------------------------\r\
+            props = new Properties()\rFile config = new File(file)\rconfig.withInputStream\
+            \ {\r    props.load(it)\r}\r\rreturn props"
+        - id: 215
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+    workflowTransaction: null
+    tags: []
+  uuid: "d6b7ae9b-06cb-4877-ac10-a0156fce0a01"
+  pipe: true
+  target:
+  - 1000
+  - 700
+  - 800
+  - 200
+  - 500
+  - 600
+  - 400
+  - 900
+  - 300
 - id: 9
   step: 900
   jumpToStep: 0
@@ -214,16 +603,6 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 212
-          index: 1
-          name: "ROLLBACK_CMD"
-          displayName: "Rollback Command"
-          description: "Rollback command executes upon command failure"
-          required: false
-          visible: true
-          editable: true
-          dataType: "String"
-          value: ""
         - id: 211
           index: 0
           name: "CMD"
@@ -237,11 +616,21 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: "ovftool --allowExtraConfig --acceptAllEulas \\\\GRN-CONVERTER\\\
-            share\\${guestHostname}.ova \"vcloud://${vcdUsername}:${vcdPassword}@v${vcdServer}:443?org=${vcdOrg}&vappTemplate=${guestHostname}&catalog=${vcdCatalog}&vdc=${vcdVdc}\""
+            share\\${vmName}.ova \"vcloud://${vcdUsername}:${vcdPassword}@${vcdServer}:443?org=${vcdOrg}&vappTemplate=${vmName}&catalog=${vcdCatalog}&vdc=${vcdVdc}\""
+        - id: 212
+          index: 1
+          name: "ROLLBACK_CMD"
+          displayName: "Rollback Command"
+          description: "Rollback command executes upon command failure"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
         workflowActionName: null
     workflowTransaction: null
     tags: []
-  uuid: "82f1de22-6b0c-43a4-a3d4-5760ab2dca12"
+  uuid: "0a29889c-0618-452b-bd9f-4ea9f545f271"
   pipe: false
   target: []
 - id: 3
@@ -252,7 +641,7 @@ workflowSteps:
   async: false
   workflowAction:
     id: 30
-    name: "Success Email"
+    name: "OVA Upload Checkpoint Email"
     description: ""
     provider:
       id: 9
@@ -285,6 +674,16 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
+        - id: 172
+          index: 1
+          name: "Subject"
+          displayName: "Subject"
+          description: "Message subject"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${vmName}.ova upload finished successfully"
         - id: 173
           index: 3
           name: "Message"
@@ -294,9 +693,9 @@ workflowSteps:
           visible: true
           editable: true
           dataType: "TextArea"
-          value: "${guestHostname} OVA was uploaded successfully to vCloud Director.\r\
-            \rThis concludes the migration workflow for ${guestHostname}.\r\rThank\
-            \ you for using Integra for your migration needs.\r\r\rEmitrom Support\r\
+          value: "${vmName}.ova was uploaded successfully to vCloud Director.\r\r\
+            This concludes the migration workflow for ${guestHostname} to ${vmName}.ova\r\
+            \rThank you for using Integra for your migration needs!\r\r\rEmitrom Support\r\
             tel: (919) 741.4194\remail: support@emitrom.com."
         - id: 175
           index: 0
@@ -318,16 +717,6 @@ workflowSteps:
           editable: true
           dataType: "Boolean"
           value: "true"
-        - id: 172
-          index: 1
-          name: "Subject"
-          displayName: "Subject"
-          description: "Message subject"
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "${guestHostname} OVA upload finished successfully"
         workflowActionName: null
       - id: 48
         index: 0
@@ -390,7 +779,234 @@ workflowSteps:
         workflowActionName: null
     workflowTransaction: null
     tags: []
-  uuid: "df19c054-aa9e-40f0-8e4a-9b2c4b489226"
+  uuid: "54566c45-19a9-489b-a320-d07deed5bdf0"
+  pipe: false
+  target: []
+- id: 33
+  step: 800
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 52
+    name: "OVA Checkpoint Email"
+    description: ""
+    provider:
+      id: 9
+      name: "Notifications"
+      description: ""
+      hostname: "172.16.156.29"
+      port: 9781
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1"
+      tags: []
+    providerAction:
+      id: 52
+      name: "email"
+      displayName: "Email"
+      description: "Sends an email to the specified parties"
+      pipes: []
+      outputs: []
+      transaction: null
+      inputs:
+      - id: 88
+        index: 0
+        name: "Settings"
+        displayName: "Settings"
+        description: "Mail host settings"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 305
+          index: 1
+          name: "Port"
+          displayName: "Port"
+          description: "Mail host email port"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "${smtpPort}"
+        - id: 306
+          index: 0
+          name: "Host"
+          displayName: "SMTP Server"
+          description: "SMTP Mail host"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${smtpServer}"
+        - id: 307
+          index: 4
+          name: "Enable SSL"
+          displayName: "Enable SSL"
+          description: "SSL"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "true"
+        - id: 308
+          index: 3
+          name: "Password"
+          displayName: "Password"
+          description: "Password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "${smtpPassword}"
+        - id: 309
+          index: 2
+          name: "User"
+          displayName: "Username"
+          description: "Username"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${smtpUsername}"
+        workflowActionName: null
+      - id: 87
+        index: 1
+        name: "Message Details"
+        displayName: "Message Details"
+        description: "Email message details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 302
+          index: 1
+          name: "Subject"
+          displayName: "Subject"
+          description: "Message subject"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${vmName}.ova creation finished uccessfully."
+        - id: 304
+          index: 0
+          name: "To"
+          displayName: "To"
+          description: "Comma-separated recipient list"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${successMessageTo}"
+        - id: 303
+          index: 2
+          name: "AutoPipeAttach"
+          displayName: "Attach Pipes"
+          description: "Attaches any input piped into this action as a .json attachment"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "true"
+        - id: 301
+          index: 3
+          name: "Message"
+          displayName: "Message"
+          description: "Message body"
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "${vmName}.ova creation was successful.  An upload to vCloud Director\
+            \ has started.\r\r\rEmitrom Support\rtel: (919) 741.4194\remail: support@emitrom.com."
+        workflowActionName: null
+    workflowTransaction: null
+    tags: []
+  uuid: "5e61f153-886b-4af4-9f57-e8f80c1a4870"
+  pipe: false
+  target: []
+- id: 29
+  step: 200
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 50
+    name: "File Check"
+    description: ""
+    provider:
+      id: 8
+      name: "Migrations"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9797
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "replace_version"
+      tags: []
+    providerAction:
+      id: 50
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      outputs: []
+      transaction: null
+      inputs:
+      - id: 84
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 290
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 289
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "path = \"\\\\\\\\GRN-CONVERTER\\\\share\\\\${vmName}\"\r\rif (new\
+            \ File(path).exists()) {\r    throw new RuntimeException(path + \" already\
+            \ exists.  Please delete the directory/.ova and try again.\")\r}"
+        - id: 291
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+    workflowTransaction: null
+    tags: []
+  uuid: "d110c0bb-2821-4e20-9817-33c5b0ed6ea2"
   pipe: false
   target: []
 - id: 17
@@ -548,19 +1164,19 @@ workflowSteps:
         workflowActionName: null
     workflowTransaction: null
     tags: []
-  uuid: "6dc15769-6c94-4233-b32b-e93b3c15c55b"
+  uuid: "34396fc8-f476-4b52-ab03-7f4a2b09ea5c"
   pipe: true
   target:
   - 600
-- id: 6
-  step: 300
+- id: 32
+  step: 600
   jumpToStep: 0
   failureStep: 0
   timeout: 0
   async: false
   workflowAction:
-    id: 33
-    name: "Kickoff Email"
+    id: 51
+    name: "VMX Checkpoint Email"
     description: ""
     provider:
       id: 9
@@ -577,7 +1193,7 @@ workflowSteps:
       providerVersion: "1.1"
       tags: []
     providerAction:
-      id: 33
+      id: 51
       name: "email"
       displayName: "Email"
       description: "Sends an email to the specified parties"
@@ -585,62 +1201,7 @@ workflowSteps:
       outputs: []
       transaction: null
       inputs:
-      - id: 55
-        index: 1
-        name: "Message Details"
-        displayName: "Message Details"
-        description: "Email message details"
-        visible: true
-        inputs: []
-        inputFields:
-        - id: 194
-          index: 1
-          name: "Subject"
-          displayName: "Subject"
-          description: "Message subject"
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "${guestHostname} conversion started"
-        - id: 195
-          index: 3
-          name: "Message"
-          displayName: "Message"
-          description: "Message body"
-          required: true
-          visible: true
-          editable: true
-          dataType: "TextArea"
-          value: "The conversion job on ${guestHostname} has started.  You may monitor\
-            \ its progress in the vCenter Converter Client.\r\rA virtual machine conversion\
-            \ can be a lengthy operation depending on the size of the machine and\
-            \ bandwidth.  You will receive an email when the conversion completes\
-            \ successfully; on the other hand, if an error occurs, you will be notified\
-            \ by email and SMS.\r\r\rEmitrom Support\rtel: (919) 741.4194\remail:\
-            \ support@emitrom.com"
-        - id: 196
-          index: 0
-          name: "To"
-          displayName: "To"
-          description: "Comma-separated recipient list"
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "${kickoffMessageTo}"
-        - id: 197
-          index: 2
-          name: "AutoPipeAttach"
-          displayName: "Attach Pipes"
-          description: "Attaches any input piped into this action as a .json attachment"
-          required: false
-          visible: true
-          editable: true
-          dataType: "Boolean"
-          value: "false"
-        workflowActionName: null
-      - id: 56
+      - id: 85
         index: 0
         name: "Settings"
         displayName: "Settings"
@@ -648,7 +1209,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 198
+        - id: 292
           index: 1
           name: "Port"
           displayName: "Port"
@@ -658,7 +1219,7 @@ workflowSteps:
           editable: true
           dataType: "Integer"
           value: "${smtpPort}"
-        - id: 199
+        - id: 293
           index: 0
           name: "Host"
           displayName: "SMTP Server"
@@ -668,7 +1229,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: "${smtpServer}"
-        - id: 200
+        - id: 294
           index: 4
           name: "Enable SSL"
           displayName: "Enable SSL"
@@ -678,7 +1239,7 @@ workflowSteps:
           editable: true
           dataType: "Boolean"
           value: "true"
-        - id: 201
+        - id: 295
           index: 3
           name: "Password"
           displayName: "Password"
@@ -688,7 +1249,7 @@ workflowSteps:
           editable: true
           dataType: "Password"
           value: "${smtpPassword}"
-        - id: 202
+        - id: 296
           index: 2
           name: "User"
           displayName: "Username"
@@ -699,431 +1260,7 @@ workflowSteps:
           dataType: "String"
           value: "${smtpUsername}"
         workflowActionName: null
-    workflowTransaction: null
-    tags: []
-  uuid: "f0ba3da7-3691-46be-84d7-e678bc3e9164"
-  pipe: false
-  target: []
-- id: 7
-  step: 700
-  jumpToStep: 0
-  failureStep: 0
-  timeout: 0
-  async: false
-  workflowAction:
-    id: 34
-    name: "Create OVA"
-    description: ""
-    provider:
-      id: 8
-      name: "Migrations"
-      description: ""
-      hostname: "172.16.156.30"
-      port: 9797
-      timeout: 3600000
-      username: null
-      password: null
-      reachable: true
-      secured: true
-      enabled: null
-      providerVersion: "replace_version"
-      tags: []
-    providerAction:
-      id: 34
-      name: "executeCommand"
-      displayName: "Execute Command"
-      description: "Executes an OS Command"
-      pipes: []
-      outputs:
-      - id: 18
-        name: "cmdOutput"
-        displayName: "Command output"
-        description: "Command output"
-        outputFields:
-        - id: 63
-          name: "stdoutMessage"
-          displayName: "Standard Output"
-          description: "The stdout returned by command"
-          dataType: null
-          value: null
-        - id: 64
-          name: "stderrMessage"
-          displayName: "Standard Error"
-          description: "The stderr returned by command"
-          dataType: null
-          value: null
-        outputs: []
-      transaction: null
-      inputs:
-      - id: 57
-        index: 0
-        name: "commandInputs"
-        displayName: "Command Inputs"
-        description: "Command Inputs"
-        visible: true
-        inputs: []
-        inputFields:
-        - id: 203
-          index: 1
-          name: "ROLLBACK_CMD"
-          displayName: "Rollback Command"
-          description: "Rollback command executes upon command failure"
-          required: false
-          visible: true
-          editable: true
-          dataType: "String"
-          value: ""
-        - id: 204
-          index: 0
-          name: "CMD"
-          displayName: "OS Command"
-          description: "OS Command can contain Integra variables @{field} ${field}.\
-            \ Example: myscript --o1 @{id} --o2 ${name} --o3 @{uuid}. When executing\
-            \ OS commands use cmd.exe /c command. For example: cmd.exe /c echo hello.\
-            \ To treat strings with spaces as one unit enclose them in \""
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "ovftool.exe -tt=ova -o \\\\GRN-CONVERTER\\share\\${guestHostname}\\\
-            ${guestHostname}.vmx \\\\GRN-CONVERTER\\share\\${guestHostname}.ova"
-        workflowActionName: null
-    workflowTransaction: null
-    tags: []
-  uuid: "787b00b5-0a77-4023-89d9-182496fa6d57"
-  pipe: false
-  target: []
-- id: 15
-  step: 400
-  jumpToStep: 0
-  failureStep: 0
-  timeout: 0
-  async: false
-  workflowAction:
-    id: 31
-    name: "Convert Guest"
-    description: ""
-    provider:
-      id: 8
-      name: "Migrations"
-      description: ""
-      hostname: "172.16.156.30"
-      port: 9797
-      timeout: 3600000
-      username: null
-      password: null
-      reachable: true
-      secured: true
-      enabled: null
-      providerVersion: "replace_version"
-      tags: []
-    providerAction:
-      id: 31
-      name: "ConvertWindowsSource"
-      displayName: "Convert Windows Machine"
-      description: "Converts a Windows machine to a VMX-based virtual machine"
-      pipes: []
-      outputs:
-      - id: 16
-        name: "Conversion Info"
-        displayName: ""
-        description: "Conversion job information"
-        outputFields:
-        - id: 56
-          name: "Job ID"
-          displayName: ""
-          description: "Conversion job ID"
-          dataType: null
-          value: null
-        - id: 55
-          name: "Task ID"
-          displayName: ""
-          description: "Conversion task ID"
-          dataType: null
-          value: null
-        outputs: []
-      transaction: null
-      inputs:
-      - id: 52
-        index: 1
-        name: "sourceMachine"
-        displayName: "Source Details"
-        description: "Source machine details"
-        visible: true
-        inputs: []
-        inputFields:
-        - id: 187
-          index: 1
-          name: "username"
-          displayName: "Username"
-          description: "Administrator-level user"
-          required: false
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "${guestUsername}"
-        - id: 185
-          index: 2
-          name: "password"
-          displayName: "Password"
-          description: "Administrator password"
-          required: false
-          visible: true
-          editable: true
-          dataType: "Password"
-          value: "${guestPassword}"
-        - id: 186
-          index: 0
-          name: "host"
-          displayName: "IP or hostname"
-          description: "IP or hostname of the source machine"
-          required: false
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "${guestHostname}"
-        workflowActionName: null
-      - id: 50
-        index: 2
-        name: "destinationDetails"
-        displayName: "Destination Details"
-        description: "Destination details"
-        visible: true
-        inputs: []
-        inputFields:
-        - id: 176
-          index: 5
-          name: "memory"
-          displayName: "Memory (GB)"
-          description: "Virtual machine memory (GB)"
-          required: false
-          visible: true
-          editable: true
-          dataType: "Integer"
-          value: ""
-        - id: 178
-          index: 4
-          name: "vCPU"
-          displayName: "vCPU"
-          description: "Number of virtual CPUs"
-          required: false
-          visible: true
-          editable: true
-          dataType: "Integer"
-          value: ""
-        - id: 177
-          index: 3
-          name: "name"
-          displayName: "Name"
-          description: "Virtual machine name"
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "${guestHostname}"
-        - id: 181
-          index: 1
-          name: "networkShareUsername"
-          displayName: "Network Username"
-          description: "Network share username"
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "GRN-CONVERTER\\emitrom"
-        - id: 180
-          index: 0
-          name: "networkShare"
-          displayName: "Network Share"
-          description: "Network share (UNC path) to store the converted virtual machine"
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "\\\\GRN-CONVERTER\\share"
-        - id: 179
-          index: 2
-          name: "networkSharePassword"
-          displayName: "Network Password"
-          description: "Network share password"
-          required: true
-          visible: true
-          editable: true
-          dataType: "Password"
-          value: "${sharePassword}"
-        workflowActionName: null
-      - id: 51
-        index: 0
-        name: "converter"
-        displayName: "Converter Details"
-        description: "Converter machine details"
-        visible: true
-        inputs: []
-        inputFields:
-        - id: 182
-          index: 2
-          name: "password"
-          displayName: "Password"
-          description: "Password"
-          required: true
-          visible: true
-          editable: true
-          dataType: "Password"
-          value: "${converterPassword}"
-        - id: 183
-          index: 1
-          name: "username"
-          displayName: "Username"
-          description: "Converter user"
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "${converterUsername}"
-        - id: 184
-          index: 0
-          name: "host"
-          displayName: "IP or hostname"
-          description: "IP or hostname of the converter. Leaving blank assumes 'localhost'"
-          required: false
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "${converterHostname}"
-        workflowActionName: null
-    workflowTransaction: null
-    tags: []
-  uuid: "684cd6d2-9dcc-409c-a26c-1a6f275c6c30"
-  pipe: true
-  target:
-  - 500
-- id: 16
-  step: 100
-  jumpToStep: 0
-  failureStep: 0
-  timeout: 0
-  async: false
-  workflowAction:
-    id: 37
-    name: "Set Global Values"
-    description: ""
-    provider:
-      id: 8
-      name: "Migrations"
-      description: ""
-      hostname: "172.16.156.30"
-      port: 9797
-      timeout: 3600000
-      username: null
-      password: null
-      reachable: true
-      secured: true
-      enabled: null
-      providerVersion: "replace_version"
-      tags: []
-    providerAction:
-      id: 37
-      name: "logicAction"
-      displayName: "Apply Logic"
-      description: "Gives you the ability to insert code dynamically."
-      pipes: []
-      outputs: []
-      transaction: null
-      inputs:
-      - id: 61
-        index: 0
-        name: "logicInputs"
-        displayName: "Logic"
-        description: ""
-        visible: true
-        inputs: []
-        inputFields:
-        - id: 213
-          index: 0
-          name: "logicLanguague"
-          displayName: "Language"
-          description: "Programming language the expression is written in."
-          required: true
-          visible: true
-          editable: true
-          dataType: "List"
-          value: "Groovy"
-        - id: 214
-          index: 2
-          name: "logicExpression"
-          displayName: "Expression"
-          description: "This field holds programmatic expressions that will be evaluated\
-            \ at runtime."
-          required: true
-          visible: true
-          editable: true
-          dataType: "TextArea"
-          value: "// --------------------------------------------------------------------------------------------------\r\
-            // Path is local to the host where the provider is running (see Providers\
-            \ tab)\r// --------------------------------------------------------------------------------------------------\r\
-            file = 'C:/Integra/Migrations/Test1.txt'\r\r\r\r\r// --------------------------------------------------------------------------------------------------\r\
-            // Do not modify anything beyond this point\r// --------------------------------------------------------------------------------------------------\r\
-            props = new Properties()\rFile config = new File(file)\rconfig.withInputStream\
-            \ {\r    props.load(it)\r}\r\rreturn props"
-        - id: 215
-          index: 1
-          name: "logicOperation"
-          displayName: "Operation"
-          description: "Type of operation to perform on the incoming values."
-          required: true
-          visible: true
-          editable: true
-          dataType: "List"
-          value: "Advanced"
-        workflowActionName: null
-    workflowTransaction: null
-    tags: []
-  uuid: "b6a090b2-91da-49c6-b4bb-d9af4ce82989"
-  pipe: true
-  target:
-  - 1000
-  - 700
-  - 800
-  - 200
-  - 500
-  - 600
-  - 400
-  - 900
-  - 300
-- id: 33
-  step: 800
-  jumpToStep: 0
-  failureStep: 0
-  timeout: 0
-  async: false
-  workflowAction:
-    id: 52
-    name: "OVA Checkpoint Email"
-    description: ""
-    provider:
-      id: 9
-      name: "Notifications"
-      description: ""
-      hostname: "172.16.156.29"
-      port: 9781
-      timeout: 3600000
-      username: null
-      password: null
-      reachable: true
-      secured: true
-      enabled: null
-      providerVersion: "1.1"
-      tags: []
-    providerAction:
-      id: 52
-      name: "email"
-      displayName: "Email"
-      description: "Sends an email to the specified parties"
-      pipes: []
-      outputs: []
-      transaction: null
-      inputs:
-      - id: 87
+      - id: 86
         index: 1
         name: "Message Details"
         displayName: "Message Details"
@@ -1131,7 +1268,7 @@ workflowSteps:
         visible: true
         inputs: []
         inputFields:
-        - id: 301
+        - id: 298
           index: 3
           name: "Message"
           displayName: "Message"
@@ -1140,10 +1277,20 @@ workflowSteps:
           visible: true
           editable: true
           dataType: "TextArea"
-          value: "${guestHostname} OVA creation was successful.\r\rOVA upload to vCloud\
-            \ Director started.\r\r\rEmitrom Support\rtel: (919) 741.4194\remail:\
-            \ support@emitrom.com."
-        - id: 304
+          value: "${guestHostname} conversion was successful to ${vmName}.vmx.  Details\
+            \ are attached\r\r${vmName}.ova creation will begin shortly.\r\r\rEmitrom\
+            \ Support\rtel: (919) 741.4194\remail: support@emitrom.com."
+        - id: 297
+          index: 1
+          name: "Subject"
+          displayName: "Subject"
+          description: "Message subject"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${guestHostname} to ${vmName}.vmx completed successfully."
+        - id: 300
           index: 0
           name: "To"
           displayName: "To"
@@ -1153,7 +1300,7 @@ workflowSteps:
           editable: true
           dataType: "String"
           value: "${successMessageTo}"
-        - id: 303
+        - id: 299
           index: 2
           name: "AutoPipeAttach"
           displayName: "Attach Pipes"
@@ -1163,160 +1310,10 @@ workflowSteps:
           editable: true
           dataType: "Boolean"
           value: "true"
-        - id: 302
-          index: 1
-          name: "Subject"
-          displayName: "Subject"
-          description: "Message subject"
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "${guestHostname} OVA creation finished uccessfully."
-        workflowActionName: null
-      - id: 88
-        index: 0
-        name: "Settings"
-        displayName: "Settings"
-        description: "Mail host settings"
-        visible: true
-        inputs: []
-        inputFields:
-        - id: 305
-          index: 1
-          name: "Port"
-          displayName: "Port"
-          description: "Mail host email port"
-          required: false
-          visible: true
-          editable: true
-          dataType: "Integer"
-          value: "${smtpPort}"
-        - id: 306
-          index: 0
-          name: "Host"
-          displayName: "SMTP Server"
-          description: "SMTP Mail host"
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "${smtpServer}"
-        - id: 307
-          index: 4
-          name: "Enable SSL"
-          displayName: "Enable SSL"
-          description: "SSL"
-          required: false
-          visible: true
-          editable: true
-          dataType: "Boolean"
-          value: "true"
-        - id: 308
-          index: 3
-          name: "Password"
-          displayName: "Password"
-          description: "Password"
-          required: true
-          visible: true
-          editable: true
-          dataType: "Password"
-          value: "${smtpPassword}"
-        - id: 309
-          index: 2
-          name: "User"
-          displayName: "Username"
-          description: "Username"
-          required: true
-          visible: true
-          editable: true
-          dataType: "String"
-          value: "${smtpUsername}"
         workflowActionName: null
     workflowTransaction: null
     tags: []
-  uuid: "e29fc162-0427-49dc-8934-2fb199cb66d0"
-  pipe: false
-  target: []
-- id: 29
-  step: 200
-  jumpToStep: 0
-  failureStep: 0
-  timeout: 0
-  async: false
-  workflowAction:
-    id: 50
-    name: "File Check"
-    description: ""
-    provider:
-      id: 8
-      name: "Migrations"
-      description: ""
-      hostname: "172.16.156.30"
-      port: 9797
-      timeout: 3600000
-      username: null
-      password: null
-      reachable: true
-      secured: true
-      enabled: null
-      providerVersion: "replace_version"
-      tags: []
-    providerAction:
-      id: 50
-      name: "logicAction"
-      displayName: "Apply Logic"
-      description: "Gives you the ability to insert code dynamically."
-      pipes: []
-      outputs: []
-      transaction: null
-      inputs:
-      - id: 84
-        index: 0
-        name: "logicInputs"
-        displayName: "Logic"
-        description: ""
-        visible: true
-        inputs: []
-        inputFields:
-        - id: 290
-          index: 0
-          name: "logicLanguague"
-          displayName: "Language"
-          description: "Programming language the expression is written in."
-          required: true
-          visible: true
-          editable: true
-          dataType: "List"
-          value: "Groovy"
-        - id: 289
-          index: 2
-          name: "logicExpression"
-          displayName: "Expression"
-          description: "This field holds programmatic expressions that will be evaluated\
-            \ at runtime."
-          required: true
-          visible: true
-          editable: true
-          dataType: "TextArea"
-          value: "path = \"\\\\\\\\GRN-CONVERTER\\\\share\\\\${guestHostname}\"\r\r\
-            if (new File(path).exists()) {\r    throw new RuntimeException(path +\
-            \ \" already exists.  Please delete the directory/.ova and try again.\"\
-            )\r}"
-        - id: 291
-          index: 1
-          name: "logicOperation"
-          displayName: "Operation"
-          description: "Type of operation to perform on the incoming values."
-          required: true
-          visible: true
-          editable: true
-          dataType: "List"
-          value: "Advanced"
-        workflowActionName: null
-    workflowTransaction: null
-    tags: []
-  uuid: "2e104596-763d-4f49-9f40-376eeba63ac0"
+  uuid: "b576ab2c-af79-48e1-b54f-372b0a781391"
   pipe: false
   target: []
 tags: []
