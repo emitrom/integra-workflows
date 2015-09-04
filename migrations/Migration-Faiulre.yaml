@@ -1,0 +1,414 @@
+---
+id: 3
+name: "Migration-Faiulre"
+description: null
+visible: true
+onSuccessWorkflow: null
+onFailureWorkflow: null
+schedules: []
+workflowSteps:
+- id: 12
+  step: 100
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 37
+    name: "Set Global Values"
+    description: ""
+    provider:
+      id: 8
+      name: "Migrations"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9797
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "replace_version"
+      tags: []
+    providerAction:
+      id: 37
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      outputs: []
+      transaction: null
+      inputs:
+      - id: 61
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 213
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 214
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "// --------------------------------------------------------------------------------------------------\r\
+            // Path is local to the host where the provider is running (see Providers\
+            \ tab)\r// --------------------------------------------------------------------------------------------------\r\
+            file = 'C:/Integra/Migrations/Test1.txt'\r\r\r\r\r// --------------------------------------------------------------------------------------------------\r\
+            // Do not modify anything beyond this point\r// --------------------------------------------------------------------------------------------------\r\
+            props = new Properties()\rFile config = new File(file)\rconfig.withInputStream\
+            \ {\r    props.load(it)\r}\r\rreturn props"
+        - id: 215
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+    workflowTransaction: null
+    tags: []
+  uuid: "fdd47d1c-670b-4bc8-bc71-cba32290b9df"
+  pipe: true
+  target:
+  - 200
+  - 300
+- id: 13
+  step: 200
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 39
+    name: "Failure Email"
+    description: ""
+    provider:
+      id: 9
+      name: "Notifications"
+      description: ""
+      hostname: "172.16.156.29"
+      port: 9781
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1"
+      tags: []
+    providerAction:
+      id: 39
+      name: "email"
+      displayName: "Email"
+      description: "Sends an email to the specified parties"
+      pipes: []
+      outputs: []
+      transaction: null
+      inputs:
+      - id: 64
+        index: 0
+        name: "Settings"
+        displayName: "Settings"
+        description: "Mail host settings"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 221
+          index: 1
+          name: "Port"
+          displayName: "Port"
+          description: "Mail host email port"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "${smtpPort}"
+        - id: 222
+          index: 0
+          name: "Host"
+          displayName: "SMTP Server"
+          description: "SMTP Mail host"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${smtpServer}"
+        - id: 223
+          index: 4
+          name: "Enable SSL"
+          displayName: "Enable SSL"
+          description: "SSL"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "true"
+        - id: 224
+          index: 3
+          name: "Password"
+          displayName: "Password"
+          description: "Password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "${smtpPassword}"
+        - id: 225
+          index: 2
+          name: "User"
+          displayName: "Username"
+          description: "Username"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${smtpUsername}"
+        workflowActionName: null
+      - id: 65
+        index: 1
+        name: "Message Details"
+        displayName: "Message Details"
+        description: "Email message details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 226
+          index: 3
+          name: "Message"
+          displayName: "Message"
+          description: "Message body"
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "${guestHostname} conversion FAILED.  \r\rPlease see the logs in\
+            \ vCenter Converter Server for more details.\r\r\rEmitrom Support\rtel:\
+            \ (919) 741.4194\remail: support@emitrom.com"
+        - id: 227
+          index: 1
+          name: "Subject"
+          displayName: "Subject"
+          description: "Message subject"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "**** CONVERSION FAILED: ${guestHostname} ****"
+        - id: 229
+          index: 0
+          name: "To"
+          displayName: "To"
+          description: "Comma-separated recipient list"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${failureMessageTo}"
+        - id: 228
+          index: 2
+          name: "AutoPipeAttach"
+          displayName: "Attach Pipes"
+          description: "Attaches any input piped into this action as a .json attachment"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "false"
+        workflowActionName: null
+    workflowTransaction: null
+    tags: []
+  uuid: "278f29f4-c5e7-49cb-b835-78664a826cc3"
+  pipe: false
+  target: []
+- id: 11
+  step: 300
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 38
+    name: "Failure SMS"
+    description: ""
+    provider:
+      id: 9
+      name: "Notifications"
+      description: ""
+      hostname: "172.16.156.29"
+      port: 9781
+      timeout: 3600000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1"
+      tags: []
+    providerAction:
+      id: 38
+      name: "twilio_sms"
+      displayName: "Twilio Sms"
+      description: "Sends a message using the Twilio API"
+      pipes: []
+      outputs:
+      - id: 21
+        name: "Sms Response"
+        displayName: "Sms Response"
+        description: "Sms Response"
+        outputFields:
+        - id: 73
+          name: "date_created"
+          displayName: "Date Created"
+          description: "Date Created"
+          dataType: null
+          value: null
+        - id: 74
+          name: "from"
+          displayName: "From"
+          description: "A Twilio phone number enabled for the type of message you\
+            \ wish to send. Only phone numbers or short codes purchased from Twilio\
+            \ work here; you cannot (for example) spoof messages from your own cell\
+            \ phone number."
+          dataType: null
+          value: null
+        - id: 75
+          name: "price"
+          displayName: "Price"
+          description: "Price"
+          dataType: null
+          value: null
+        - id: 76
+          name: "date_sent"
+          displayName: "Date Sent"
+          description: "Date Sent"
+          dataType: null
+          value: null
+        - id: 77
+          name: "status"
+          displayName: "Status"
+          description: "Status"
+          dataType: null
+          value: null
+        - id: 79
+          name: "message"
+          displayName: "Message"
+          description: "The text of the message you want to send, limited to 1600\
+            \ characters."
+          dataType: null
+          value: null
+        - id: 78
+          name: "direction"
+          displayName: "Direction"
+          description: "Direction"
+          dataType: null
+          value: null
+        - id: 80
+          name: "to"
+          displayName: "To"
+          description: "Comma-separated recipient list. Include the country code.\
+            \ For a US number for example: 14158141829"
+          dataType: null
+          value: null
+        outputs: []
+      transaction: null
+      inputs:
+      - id: 62
+        index: 1
+        name: "sms"
+        displayName: "Twilio Sms"
+        description: "A twilio SMS"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 217
+          index: 1
+          name: "to"
+          displayName: "To"
+          description: "Comma-separated recipient list. Include the country code.\
+            \ For a US number for example: 14158141829"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "19194135600"
+        - id: 216
+          index: 0
+          name: "from"
+          displayName: "From"
+          description: "A Twilio phone number enabled for the type of message you\
+            \ wish to send. Only phone numbers or short codes purchased from Twilio\
+            \ work here; you cannot (for example) spoof messages from your own cell\
+            \ phone number."
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "19192898228"
+        - id: 218
+          index: 2
+          name: "message"
+          displayName: "Message"
+          description: "The text of the message you want to send, limited to 1600\
+            \ characters."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "**** CONVERSION FAILED: ${guestHostname} ****"
+        workflowActionName: null
+      - id: 63
+        index: 0
+        name: "sms_session"
+        displayName: "Sms Credentials"
+        description: "Twilio Sms Credentials"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 219
+          index: 1
+          name: "auth_token"
+          displayName: "Auth Token"
+          description: "Twilio Auth Token"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "59e8ea51c88fb62adcb14915a3945f74"
+        - id: 220
+          index: 0
+          name: "account_sid"
+          displayName: "Account SID"
+          description: "Twilio Account SID"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "AC6abd1912ba7087355fa2b9ee64a6ad77"
+        workflowActionName: null
+    workflowTransaction: null
+    tags: []
+  uuid: "742405dc-7eb9-4408-beef-bca1a886bd07"
+  pipe: false
+  target: []
+tags: []
