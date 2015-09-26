@@ -1,0 +1,2048 @@
+---
+id: 7
+name: "Migrate-Guest-1.1.1"
+description: null
+visible: true
+onSuccessWorkflow: null
+onFailureWorkflow:
+  id: 2
+  name: "Migration-Failure"
+  description: null
+  visible: true
+  onSuccessWorkflow: null
+  onFailureWorkflow: null
+  schedules: []
+  workflowSteps:
+  - id: 12
+    step: 200
+    jumpToStep: 0
+    failureStep: 0
+    timeout: 0
+    async: false
+    workflowAction:
+      id: 11
+      name: "Failure Email"
+      description: ""
+      provider:
+        id: 2
+        name: "Notifications"
+        description: ""
+        hostname: "172.16.156.30"
+        port: 9781
+        timeout: 86400000
+        username: null
+        password: null
+        reachable: true
+        secured: true
+        enabled: null
+        providerVersion: "1.1.0"
+        tags: []
+      providerAction:
+        id: 11
+        name: "email"
+        displayName: "Email"
+        description: "Sends an email to the specified parties"
+        pipes: []
+        transaction: null
+        inputs:
+        - id: 18
+          index: 0
+          name: "Settings"
+          displayName: "Settings"
+          description: "Mail host settings"
+          visible: true
+          inputs: []
+          inputFields:
+          - id: 65
+            index: 1
+            name: "Port"
+            displayName: "Port"
+            description: "Mail host email port"
+            required: false
+            visible: true
+            editable: true
+            dataType: "Integer"
+            value: "${smtpPort}"
+          - id: 66
+            index: 0
+            name: "Host"
+            displayName: "SMTP Server"
+            description: "SMTP Mail host"
+            required: true
+            visible: true
+            editable: true
+            dataType: "String"
+            value: "${smtpServer}"
+          - id: 67
+            index: 4
+            name: "Enable SSL"
+            displayName: "Enable SSL"
+            description: "SSL"
+            required: false
+            visible: true
+            editable: true
+            dataType: "Boolean"
+            value: "true"
+          - id: 68
+            index: 3
+            name: "Password"
+            displayName: "Password"
+            description: "Password"
+            required: true
+            visible: true
+            editable: true
+            dataType: "Password"
+            value: "${smtpPassword}"
+          - id: 69
+            index: 2
+            name: "User"
+            displayName: "Username"
+            description: "Username"
+            required: true
+            visible: true
+            editable: true
+            dataType: "String"
+            value: "${smtpUsername}"
+          workflowActionName: null
+        - id: 19
+          index: 1
+          name: "Message Details"
+          displayName: "Message Details"
+          description: "Email message details"
+          visible: true
+          inputs: []
+          inputFields:
+          - id: 70
+            index: 3
+            name: "Message"
+            displayName: "Message"
+            description: "Message body"
+            required: true
+            visible: true
+            editable: true
+            dataType: "TextArea"
+            value: "${guestHostname} conversion FAILED.  \r\rPlease see the logs in\
+              \ vCenter Converter Server for more details.\r\r\rEmitrom Support\r\
+              tel: (919) 741.4194\remail: support@emitrom.com"
+          - id: 71
+            index: 1
+            name: "Subject"
+            displayName: "Subject"
+            description: "Message subject"
+            required: true
+            visible: true
+            editable: true
+            dataType: "String"
+            value: "**** CONVERSION FAILED: ${guestHostname} ****"
+          - id: 73
+            index: 0
+            name: "To"
+            displayName: "To"
+            description: "Comma-separated recipient list"
+            required: true
+            visible: true
+            editable: true
+            dataType: "String"
+            value: "${failureMessageTo}"
+          - id: 72
+            index: 2
+            name: "AutoPipeAttach"
+            displayName: "Attach Pipes"
+            description: "Attaches any input piped into this action as a .json attachment"
+            required: false
+            visible: true
+            editable: true
+            dataType: "Boolean"
+            value: "false"
+          workflowActionName: null
+        outputs: []
+      workflowTransaction: null
+      tags: []
+    uuid: "29d487e0-2b49-459c-852d-67894b235053"
+    pipe: false
+    target: []
+  - id: 11
+    step: 100
+    jumpToStep: 0
+    failureStep: 0
+    timeout: 0
+    async: false
+    workflowAction:
+      id: 4
+      name: "Set Global Values"
+      description: ""
+      provider:
+        id: 1
+        name: "Migrations"
+        description: ""
+        hostname: "172.16.156.30"
+        port: 9797
+        timeout: 86400000
+        username: null
+        password: null
+        reachable: true
+        secured: true
+        enabled: null
+        providerVersion: "1.1.1"
+        tags: []
+      providerAction:
+        id: 4
+        name: "logicAction"
+        displayName: "Apply Logic"
+        description: "Gives you the ability to insert code dynamically."
+        pipes: []
+        transaction: null
+        inputs:
+        - id: 7
+          index: 0
+          name: "logicInputs"
+          displayName: "Logic"
+          description: ""
+          visible: true
+          inputs: []
+          inputFields:
+          - id: 24
+            index: 0
+            name: "logicLanguague"
+            displayName: "Language"
+            description: "Programming language the expression is written in."
+            required: true
+            visible: true
+            editable: true
+            dataType: "List"
+            value: "Groovy"
+          - id: 25
+            index: 2
+            name: "logicExpression"
+            displayName: "Expression"
+            description: "This field holds programmatic expressions that will be evaluated\
+              \ at runtime."
+            required: true
+            visible: true
+            editable: true
+            dataType: "TextArea"
+            value: "// --------------------------------------------------------------------------------------------------\r\
+              // Path is local to the host where the provider is running (see Providers\
+              \ tab)\r// --------------------------------------------------------------------------------------------------\r\
+              file = 'C:/Integra/Migrations/Test1.txt'\r\r\r\r\r// --------------------------------------------------------------------------------------------------\r\
+              // Do not modify anything beyond this point\r// --------------------------------------------------------------------------------------------------\r\
+              props = new Properties()\rFile config = new File(file)\rconfig.withInputStream\
+              \ {\r    props.load(it)\r}\r\rreturn props"
+          - id: 26
+            index: 1
+            name: "logicOperation"
+            displayName: "Operation"
+            description: "Type of operation to perform on the incoming values."
+            required: true
+            visible: true
+            editable: true
+            dataType: "List"
+            value: "Advanced"
+          workflowActionName: null
+        outputs: []
+      workflowTransaction: null
+      tags: []
+    uuid: "09c2ec77-d0ea-4826-b73b-8d19667a1e00"
+    pipe: true
+    target:
+    - 200
+    - 300
+  - id: 13
+    step: 300
+    jumpToStep: 0
+    failureStep: 0
+    timeout: 0
+    async: false
+    workflowAction:
+      id: 12
+      name: "Failure SMS"
+      description: ""
+      provider:
+        id: 2
+        name: "Notifications"
+        description: ""
+        hostname: "172.16.156.30"
+        port: 9781
+        timeout: 86400000
+        username: null
+        password: null
+        reachable: true
+        secured: true
+        enabled: null
+        providerVersion: "1.1.0"
+        tags: []
+      providerAction:
+        id: 12
+        name: "twilio_sms"
+        displayName: "Twilio Sms"
+        description: "Sends a message using the Twilio API"
+        pipes: []
+        transaction: null
+        inputs:
+        - id: 20
+          index: 1
+          name: "sms"
+          displayName: "Twilio Sms"
+          description: "A twilio SMS"
+          visible: true
+          inputs: []
+          inputFields:
+          - id: 74
+            index: 1
+            name: "to"
+            displayName: "To"
+            description: "Comma-separated recipient list. Include the country code.\
+              \ For a US number for example: 14158141829"
+            required: true
+            visible: true
+            editable: true
+            dataType: "String"
+            value: "19194135600"
+          - id: 75
+            index: 0
+            name: "from"
+            displayName: "From"
+            description: "A Twilio phone number enabled for the type of message you\
+              \ wish to send. Only phone numbers or short codes purchased from Twilio\
+              \ work here; you cannot (for example) spoof messages from your own cell\
+              \ phone number."
+            required: true
+            visible: true
+            editable: true
+            dataType: "String"
+            value: "19192898228"
+          - id: 76
+            index: 2
+            name: "message"
+            displayName: "Message"
+            description: "The text of the message you want to send, limited to 1600\
+              \ characters."
+            required: true
+            visible: true
+            editable: true
+            dataType: "TextArea"
+            value: "**** CONVERSION FAILED: ${guestHostname} ****"
+          workflowActionName: null
+        - id: 21
+          index: 0
+          name: "sms_session"
+          displayName: "Sms Credentials"
+          description: "Twilio Sms Credentials"
+          visible: true
+          inputs: []
+          inputFields:
+          - id: 77
+            index: 1
+            name: "auth_token"
+            displayName: "Auth Token"
+            description: "Twilio Auth Token"
+            required: true
+            visible: true
+            editable: true
+            dataType: "Password"
+            value: "59e8ea51c88fb62adcb14915a3945f74"
+          - id: 78
+            index: 0
+            name: "account_sid"
+            displayName: "Account SID"
+            description: "Twilio Account SID"
+            required: true
+            visible: true
+            editable: true
+            dataType: "Password"
+            value: "AC6abd1912ba7087355fa2b9ee64a6ad77"
+          workflowActionName: null
+        outputs:
+        - id: 5
+          name: "Sms Response"
+          displayName: "Sms Response"
+          description: "Sms Response"
+          outputFields:
+          - id: 13
+            name: "date_created"
+            displayName: "Date Created"
+            description: "Date Created"
+            dataType: null
+            value: null
+          - id: 14
+            name: "from"
+            displayName: "From"
+            description: "A Twilio phone number enabled for the type of message you\
+              \ wish to send. Only phone numbers or short codes purchased from Twilio\
+              \ work here; you cannot (for example) spoof messages from your own cell\
+              \ phone number."
+            dataType: null
+            value: null
+          - id: 15
+            name: "price"
+            displayName: "Price"
+            description: "Price"
+            dataType: null
+            value: null
+          - id: 16
+            name: "date_sent"
+            displayName: "Date Sent"
+            description: "Date Sent"
+            dataType: null
+            value: null
+          - id: 17
+            name: "status"
+            displayName: "Status"
+            description: "Status"
+            dataType: null
+            value: null
+          - id: 19
+            name: "message"
+            displayName: "Message"
+            description: "The text of the message you want to send, limited to 1600\
+              \ characters."
+            dataType: null
+            value: null
+          - id: 18
+            name: "direction"
+            displayName: "Direction"
+            description: "Direction"
+            dataType: null
+            value: null
+          - id: 20
+            name: "to"
+            displayName: "To"
+            description: "Comma-separated recipient list. Include the country code.\
+              \ For a US number for example: 14158141829"
+            dataType: null
+            value: null
+          outputs: []
+      workflowTransaction: null
+      tags: []
+    uuid: "92043333-e401-4b54-8362-b22fc61e55ba"
+    pipe: false
+    target: []
+  tags: []
+schedules: []
+workflowSteps:
+- id: 71
+  step: 570
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 9
+    name: "Wait For Job Completion"
+    description: ""
+    provider:
+      id: 1
+      name: "Migrations"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9797
+      timeout: 86400000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.1"
+      tags: []
+    providerAction:
+      id: 9
+      name: "conversionStatus"
+      displayName: "Conversion Status"
+      description: "Gets the conversion status, including state and time remaining"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 14
+        index: 1
+        name: "pollingInput"
+        displayName: "Polling Details"
+        description: "Polling input"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 50
+          index: 0
+          name: "waitForCompletion"
+          displayName: "Wait For Completion"
+          description: "Wait for the given job to finish"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "true"
+        - id: 51
+          index: 1
+          name: "pollingInterval"
+          displayName: "Polling Interval (sec.)"
+          description: "Polling Interval"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "30"
+        workflowActionName: null
+      - id: 15
+        index: 0
+        name: "converterServer"
+        displayName: "Converter Server Details"
+        description: "Converter Server Details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 52
+          index: 3
+          name: "jobId"
+          displayName: "Job ID"
+          description: "Job ID. For example, 15"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "${Job ID}"
+        - id: 53
+          index: 2
+          name: "password"
+          displayName: "Password"
+          description: "Administrator password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "${converterPassword}"
+        - id: 54
+          index: 0
+          name: "host"
+          displayName: "IP or hostname"
+          description: "IP or hostname of the converter server"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${converterHostname}"
+        - id: 55
+          index: 1
+          name: "username"
+          displayName: "Username"
+          description: "Administrator-level user"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${converterUsername}"
+        workflowActionName: null
+      outputs:
+      - id: 4
+        name: "Conversion Status"
+        displayName: ""
+        description: "Conversion status"
+        outputFields:
+        - id: 8
+          name: "Source"
+          displayName: ""
+          description: "Source machine"
+          dataType: null
+          value: null
+        - id: 7
+          name: "Destination"
+          displayName: ""
+          description: "Name of the destination .vmx"
+          dataType: null
+          value: null
+        - id: 9
+          name: "Estimated Completion"
+          displayName: ""
+          description: "Estimated time before completion"
+          dataType: null
+          value: null
+        - id: 10
+          name: "Job Status"
+          displayName: ""
+          description: "Job status"
+          dataType: null
+          value: null
+        - id: 11
+          name: "Start Time"
+          displayName: ""
+          description: "Conversion start time"
+          dataType: null
+          value: null
+        - id: 12
+          name: "Job ID"
+          displayName: ""
+          description: "Job ID"
+          dataType: null
+          value: null
+        outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "438cffde-a62d-4414-b6e1-c004111e73e6"
+  pipe: true
+  target:
+  - 600
+- id: 58
+  step: 1000
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 6
+    name: "OVA Upload Checkpoint Email"
+    description: ""
+    provider:
+      id: 2
+      name: "Notifications"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9781
+      timeout: 86400000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.0"
+      tags: []
+    providerAction:
+      id: 6
+      name: "email"
+      displayName: "Email"
+      description: "Sends an email to the specified parties"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 10
+        index: 0
+        name: "Settings"
+        displayName: "Settings"
+        description: "Mail host settings"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 33
+          index: 1
+          name: "Port"
+          displayName: "Port"
+          description: "Mail host email port"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "${smtpPort}"
+        - id: 34
+          index: 0
+          name: "Host"
+          displayName: "SMTP Server"
+          description: "SMTP Mail host"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${smtpServer}"
+        - id: 35
+          index: 4
+          name: "Enable SSL"
+          displayName: "Enable SSL"
+          description: "SSL"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "true"
+        - id: 36
+          index: 3
+          name: "Password"
+          displayName: "Password"
+          description: "Password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "${smtpPassword}"
+        - id: 37
+          index: 2
+          name: "User"
+          displayName: "Username"
+          description: "Username"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${smtpUsername}"
+        workflowActionName: null
+      - id: 9
+        index: 1
+        name: "Message Details"
+        displayName: "Message Details"
+        description: "Email message details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 30
+          index: 3
+          name: "Message"
+          displayName: "Message"
+          description: "Message body"
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "${vmName}.ova was uploaded successfully to vCloud Director.\r\r\
+            This concludes the migration workflow for ${guestHostname} to ${vmName}.ova\r\
+            \rThank you for using Integra for your migration needs!\r\r\rEmitrom Support\r\
+            tel: (919) 741.4194\remail: support@emitrom.com."
+        - id: 32
+          index: 0
+          name: "To"
+          displayName: "To"
+          description: "Comma-separated recipient list"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${successMessageTo}"
+        - id: 29
+          index: 1
+          name: "Subject"
+          displayName: "Subject"
+          description: "Message subject"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${vmName}.ova upload finished successfully - ${integra.tx}"
+        - id: 31
+          index: 2
+          name: "AutoPipeAttach"
+          displayName: "Attach Pipes"
+          description: "Attaches any input piped into this action as a .json attachment"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "false"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "eed13628-c932-41bd-8f7d-8358d50a3285"
+  pipe: false
+  target: []
+- id: 66
+  step: 100
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 4
+    name: "Set Global Values"
+    description: ""
+    provider:
+      id: 1
+      name: "Migrations"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9797
+      timeout: 86400000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.1"
+      tags: []
+    providerAction:
+      id: 4
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 7
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 24
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 25
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "// --------------------------------------------------------------------------------------------------\r\
+            // Path is local to the host where the provider is running (see Providers\
+            \ tab)\r// --------------------------------------------------------------------------------------------------\r\
+            file = 'C:/Integra/Migrations/Test1.txt'\r\r\r\r\r// --------------------------------------------------------------------------------------------------\r\
+            // Do not modify anything beyond this point\r// --------------------------------------------------------------------------------------------------\r\
+            props = new Properties()\rFile config = new File(file)\rconfig.withInputStream\
+            \ {\r    props.load(it)\r}\r\rreturn props"
+        - id: 26
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "d2102811-9df2-4cd3-9e75-9df5cfca9ab5"
+  pipe: true
+  target:
+  - 550
+  - 1000
+  - 700
+  - 800
+  - 200
+  - 500
+  - 600
+  - 400
+  - 900
+  - 300
+  - 570
+- id: 69
+  step: 560
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 18
+    name: "Sleep 15 Sec."
+    description: ""
+    provider:
+      id: 1
+      name: "Migrations"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9797
+      timeout: 86400000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.1"
+      tags: []
+    providerAction:
+      id: 18
+      name: "sleep"
+      displayName: "Sleep"
+      description: "Introduces a sleep (ms)"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 31
+        index: 0
+        name: "sleep"
+        displayName: "Sleep"
+        description: "Introduces a sleep (ms)"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 115
+          index: 0
+          name: "sleep"
+          displayName: "Time (ms)"
+          description: "Introduces a sleep (ms)"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "15000"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "7089f6cb-75d5-4f43-a314-5f968a7bebb6"
+  pipe: false
+  target: []
+- id: 63
+  step: 800
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 8
+    name: "OVA Checkpoint Email"
+    description: ""
+    provider:
+      id: 2
+      name: "Notifications"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9781
+      timeout: 86400000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.0"
+      tags: []
+    providerAction:
+      id: 8
+      name: "email"
+      displayName: "Email"
+      description: "Sends an email to the specified parties"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 12
+        index: 0
+        name: "Settings"
+        displayName: "Settings"
+        description: "Mail host settings"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 41
+          index: 1
+          name: "Port"
+          displayName: "Port"
+          description: "Mail host email port"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "${smtpPort}"
+        - id: 42
+          index: 0
+          name: "Host"
+          displayName: "SMTP Server"
+          description: "SMTP Mail host"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${smtpServer}"
+        - id: 43
+          index: 4
+          name: "Enable SSL"
+          displayName: "Enable SSL"
+          description: "SSL"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "true"
+        - id: 44
+          index: 3
+          name: "Password"
+          displayName: "Password"
+          description: "Password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "${smtpPassword}"
+        - id: 45
+          index: 2
+          name: "User"
+          displayName: "Username"
+          description: "Username"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${smtpUsername}"
+        workflowActionName: null
+      - id: 13
+        index: 1
+        name: "Message Details"
+        displayName: "Message Details"
+        description: "Email message details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 48
+          index: 0
+          name: "To"
+          displayName: "To"
+          description: "Comma-separated recipient list"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${successMessageTo}"
+        - id: 49
+          index: 3
+          name: "Message"
+          displayName: "Message"
+          description: "Message body"
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "${vmName}.ova creation was successful.  An upload to vCloud Director\
+            \ has started.\r\r\rEmitrom Support\rtel: (919) 741.4194\remail: support@emitrom.com."
+        - id: 46
+          index: 1
+          name: "Subject"
+          displayName: "Subject"
+          description: "Message subject"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${vmName}.ova creation finished uccessfully - ${integra.tx}"
+        - id: 47
+          index: 2
+          name: "AutoPipeAttach"
+          displayName: "Attach Pipes"
+          description: "Attaches any input piped into this action as a .json attachment"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "false"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "60e6d57f-b023-413f-a703-b94ba47df19f"
+  pipe: false
+  target: []
+- id: 62
+  step: 600
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 10
+    name: "VMX Checkpoint Email"
+    description: ""
+    provider:
+      id: 2
+      name: "Notifications"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9781
+      timeout: 86400000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.0"
+      tags: []
+    providerAction:
+      id: 10
+      name: "email"
+      displayName: "Email"
+      description: "Sends an email to the specified parties"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 16
+        index: 0
+        name: "Settings"
+        displayName: "Settings"
+        description: "Mail host settings"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 56
+          index: 1
+          name: "Port"
+          displayName: "Port"
+          description: "Mail host email port"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "${smtpPort}"
+        - id: 57
+          index: 0
+          name: "Host"
+          displayName: "SMTP Server"
+          description: "SMTP Mail host"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${smtpServer}"
+        - id: 58
+          index: 4
+          name: "Enable SSL"
+          displayName: "Enable SSL"
+          description: "SSL"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "true"
+        - id: 59
+          index: 3
+          name: "Password"
+          displayName: "Password"
+          description: "Password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "${smtpPassword}"
+        - id: 60
+          index: 2
+          name: "User"
+          displayName: "Username"
+          description: "Username"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${smtpUsername}"
+        workflowActionName: null
+      - id: 17
+        index: 1
+        name: "Message Details"
+        displayName: "Message Details"
+        description: "Email message details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 62
+          index: 1
+          name: "Subject"
+          displayName: "Subject"
+          description: "Message subject"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${guestHostname} to ${vmName}.vmx completed successfully - ${integra.tx}"
+        - id: 61
+          index: 3
+          name: "Message"
+          displayName: "Message"
+          description: "Message body"
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "${guestHostname} conversion was successful to ${vmName}.vmx.  Details\
+            \ are attached\r\r${vmName}.ova creation will begin shortly.\r\r\rEmitrom\
+            \ Support\rtel: (919) 741.4194\remail: support@emitrom.com."
+        - id: 64
+          index: 0
+          name: "To"
+          displayName: "To"
+          description: "Comma-separated recipient list"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${successMessageTo}"
+        - id: 63
+          index: 2
+          name: "AutoPipeAttach"
+          displayName: "Attach Pipes"
+          description: "Attaches any input piped into this action as a .json attachment"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "true"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "f02e9572-8877-42ef-80b0-3ec3ada5f8a0"
+  pipe: false
+  target: []
+- id: 70
+  step: 550
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 17
+    name: "Sync Conversion"
+    description: ""
+    provider:
+      id: 1
+      name: "Migrations"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9797
+      timeout: 86400000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.1"
+      tags: []
+    providerAction:
+      id: 17
+      name: "Synchronize"
+      displayName: "Synchronize Conversion"
+      description: "Synchronizes changes that took place during the conversion"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 30
+        index: 0
+        name: "converter"
+        displayName: "Converter Details"
+        description: "Converter machine details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 112
+          index: 0
+          name: "host"
+          displayName: "IP or hostname"
+          description: "IP or hostname of the converter"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${converterHostname}"
+        - id: 113
+          index: 2
+          name: "password"
+          displayName: "Password"
+          description: "Password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "${converterPassword}"
+        - id: 111
+          index: 1
+          name: "username"
+          displayName: "Username"
+          description: "Converter user"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${converterUsername}"
+        - id: 114
+          index: 3
+          name: "jobId"
+          displayName: "Job ID"
+          description: "The conversion job ID"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "${Job ID}"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "aee65a89-0473-45a1-a9f3-95d7d1d1d62c"
+  pipe: false
+  target: []
+- id: 64
+  step: 500
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 9
+    name: "Wait For Job Completion"
+    description: ""
+    provider:
+      id: 1
+      name: "Migrations"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9797
+      timeout: 86400000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.1"
+      tags: []
+    providerAction:
+      id: 9
+      name: "conversionStatus"
+      displayName: "Conversion Status"
+      description: "Gets the conversion status, including state and time remaining"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 14
+        index: 1
+        name: "pollingInput"
+        displayName: "Polling Details"
+        description: "Polling input"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 50
+          index: 0
+          name: "waitForCompletion"
+          displayName: "Wait For Completion"
+          description: "Wait for the given job to finish"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "true"
+        - id: 51
+          index: 1
+          name: "pollingInterval"
+          displayName: "Polling Interval (sec.)"
+          description: "Polling Interval"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "30"
+        workflowActionName: null
+      - id: 15
+        index: 0
+        name: "converterServer"
+        displayName: "Converter Server Details"
+        description: "Converter Server Details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 52
+          index: 3
+          name: "jobId"
+          displayName: "Job ID"
+          description: "Job ID. For example, 15"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "${Job ID}"
+        - id: 53
+          index: 2
+          name: "password"
+          displayName: "Password"
+          description: "Administrator password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "${converterPassword}"
+        - id: 54
+          index: 0
+          name: "host"
+          displayName: "IP or hostname"
+          description: "IP or hostname of the converter server"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${converterHostname}"
+        - id: 55
+          index: 1
+          name: "username"
+          displayName: "Username"
+          description: "Administrator-level user"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${converterUsername}"
+        workflowActionName: null
+      outputs:
+      - id: 4
+        name: "Conversion Status"
+        displayName: ""
+        description: "Conversion status"
+        outputFields:
+        - id: 8
+          name: "Source"
+          displayName: ""
+          description: "Source machine"
+          dataType: null
+          value: null
+        - id: 7
+          name: "Destination"
+          displayName: ""
+          description: "Name of the destination .vmx"
+          dataType: null
+          value: null
+        - id: 9
+          name: "Estimated Completion"
+          displayName: ""
+          description: "Estimated time before completion"
+          dataType: null
+          value: null
+        - id: 10
+          name: "Job Status"
+          displayName: ""
+          description: "Job status"
+          dataType: null
+          value: null
+        - id: 11
+          name: "Start Time"
+          displayName: ""
+          description: "Conversion start time"
+          dataType: null
+          value: null
+        - id: 12
+          name: "Job ID"
+          displayName: ""
+          description: "Job ID"
+          dataType: null
+          value: null
+        outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "52d75a31-6d5a-41c1-b981-fb6b242b61f5"
+  pipe: false
+  target: []
+- id: 67
+  step: 300
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 3
+    name: "Kickoff Email"
+    description: ""
+    provider:
+      id: 2
+      name: "Notifications"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9781
+      timeout: 86400000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.0"
+      tags: []
+    providerAction:
+      id: 3
+      name: "email"
+      displayName: "Email"
+      description: "Sends an email to the specified parties"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 6
+        index: 0
+        name: "Settings"
+        displayName: "Settings"
+        description: "Mail host settings"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 19
+          index: 1
+          name: "Port"
+          displayName: "Port"
+          description: "Mail host email port"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: "${smtpPort}"
+        - id: 20
+          index: 0
+          name: "Host"
+          displayName: "SMTP Server"
+          description: "SMTP Mail host"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${smtpServer}"
+        - id: 21
+          index: 4
+          name: "Enable SSL"
+          displayName: "Enable SSL"
+          description: "SSL"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "true"
+        - id: 22
+          index: 3
+          name: "Password"
+          displayName: "Password"
+          description: "Password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "${smtpPassword}"
+        - id: 23
+          index: 2
+          name: "User"
+          displayName: "Username"
+          description: "Username"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${smtpUsername}"
+        workflowActionName: null
+      - id: 5
+        index: 1
+        name: "Message Details"
+        displayName: "Message Details"
+        description: "Email message details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 15
+          index: 3
+          name: "Message"
+          displayName: "Message"
+          description: "Message body"
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "The migration job on ${guestHostname} has started.  You may monitor\
+            \ its progress in the vCenter Converter Client.\r\rA virtual machine conversion\
+            \ can be a lengthy operation depending on the size of the machine and\
+            \ bandwidth.  You will receive several emails as different stages of the\
+            \ migration finish. If an error occurs, you will be notified by email\
+            \ and SMS.\r\r\rEmitrom Support\rtel: (919) 741.4194\remail: support@emitrom.com"
+        - id: 17
+          index: 1
+          name: "Subject"
+          displayName: "Subject"
+          description: "Message subject"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${guestHostname} migration started - ${integra.tx}"
+        - id: 16
+          index: 0
+          name: "To"
+          displayName: "To"
+          description: "Comma-separated recipient list"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${kickoffMessageTo}"
+        - id: 18
+          index: 2
+          name: "AutoPipeAttach"
+          displayName: "Attach Pipes"
+          description: "Attaches any input piped into this action as a .json attachment"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "false"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "3fb0e2eb-d76e-45d0-bebb-fa2ba2c86d48"
+  pipe: false
+  target: []
+- id: 61
+  step: 900
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 5
+    name: "Upload OVA"
+    description: ""
+    provider:
+      id: 1
+      name: "Migrations"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9797
+      timeout: 86400000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.1"
+      tags: []
+    providerAction:
+      id: 5
+      name: "executeCommand"
+      displayName: "Execute Command"
+      description: "Executes an OS Command"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 8
+        index: 0
+        name: "commandInputs"
+        displayName: "Command Inputs"
+        description: "Command Inputs"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 27
+          index: 0
+          name: "CMD"
+          displayName: "OS Command"
+          description: "OS Command can contain Integra variables @{field} ${field}.\
+            \ Example: myscript --o1 @{id} --o2 ${name} --o3 @{uuid}. When executing\
+            \ OS commands use cmd.exe /c command. For example: cmd.exe /c echo hello.\
+            \ To treat strings with spaces as one unit enclose them in \""
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "ovftool --allowExtraConfig --acceptAllEulas \\\\GRN-CONVERTER\\\
+            share\\${vmName}.ova \"vcloud://${vcdUsername}:${vcdPassword}@${vcdServer}:443?org=${vcdOrg}&vappTemplate=${vmName}&catalog=${vcdCatalog}&vdc=${vcdVdc}\""
+        - id: 28
+          index: 1
+          name: "ROLLBACK_CMD"
+          displayName: "Rollback Command"
+          description: "Rollback command executes upon command failure"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        workflowActionName: null
+      outputs:
+      - id: 3
+        name: "cmdOutput"
+        displayName: "Command output"
+        description: "Command output"
+        outputFields:
+        - id: 5
+          name: "stdoutMessage"
+          displayName: "Standard Output"
+          description: "The stdout returned by command"
+          dataType: null
+          value: null
+        - id: 6
+          name: "stderrMessage"
+          displayName: "Standard Error"
+          description: "The stderr returned by command"
+          dataType: null
+          value: null
+        outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "2bd4de5a-0c40-4afc-984a-c1e7efeac357"
+  pipe: false
+  target: []
+- id: 59
+  step: 200
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 7
+    name: "File Check"
+    description: ""
+    provider:
+      id: 1
+      name: "Migrations"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9797
+      timeout: 86400000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.1"
+      tags: []
+    providerAction:
+      id: 7
+      name: "logicAction"
+      displayName: "Apply Logic"
+      description: "Gives you the ability to insert code dynamically."
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 11
+        index: 0
+        name: "logicInputs"
+        displayName: "Logic"
+        description: ""
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 38
+          index: 0
+          name: "logicLanguague"
+          displayName: "Language"
+          description: "Programming language the expression is written in."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Groovy"
+        - id: 39
+          index: 2
+          name: "logicExpression"
+          displayName: "Expression"
+          description: "This field holds programmatic expressions that will be evaluated\
+            \ at runtime."
+          required: true
+          visible: true
+          editable: true
+          dataType: "TextArea"
+          value: "path = \"\\\\\\\\GRN-CONVERTER\\\\share\\\\${vmName}\"\r\rif (new\
+            \ File(path).exists()) {\r    throw new RuntimeException(path + \" already\
+            \ exists.  Please delete the directory/.ova and try again.\")\r}"
+        - id: 40
+          index: 1
+          name: "logicOperation"
+          displayName: "Operation"
+          description: "Type of operation to perform on the incoming values."
+          required: true
+          visible: true
+          editable: true
+          dataType: "List"
+          value: "Advanced"
+        workflowActionName: null
+      outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "bcdf4d44-3792-49b1-9bf9-a776716fc8dd"
+  pipe: false
+  target: []
+- id: 68
+  step: 400
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 16
+    name: "Convert Guest"
+    description: ""
+    provider:
+      id: 1
+      name: "Migrations"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9797
+      timeout: 86400000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.1"
+      tags: []
+    providerAction:
+      id: 16
+      name: "ConvertWindowsSource"
+      displayName: "Convert Windows Machine"
+      description: "Converts a Windows machine to a VMX-based virtual machine"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 29
+        index: 1
+        name: "sourceMachine"
+        displayName: "Source Details"
+        description: "Source machine details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 110
+          index: 3
+          name: "synchronize"
+          displayName: "Synchronize"
+          description: "Immediately synchronize after conversion"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Boolean"
+          value: "false"
+        - id: 109
+          index: 1
+          name: "username"
+          displayName: "Username"
+          description: "Administrator-level user"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${guestUsername}"
+        - id: 108
+          index: 2
+          name: "password"
+          displayName: "Password"
+          description: "Administrator password"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "${guestPassword}"
+        - id: 107
+          index: 0
+          name: "host"
+          displayName: "IP or hostname"
+          description: "IP or hostname of the source machine"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${guestHostname}"
+        workflowActionName: null
+      - id: 28
+        index: 0
+        name: "converter"
+        displayName: "Converter Details"
+        description: "Converter machine details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 105
+          index: 2
+          name: "password"
+          displayName: "Password"
+          description: "Password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "${converterPassword}"
+        - id: 104
+          index: 1
+          name: "username"
+          displayName: "Username"
+          description: "Converter user"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${converterUsername}"
+        - id: 106
+          index: 0
+          name: "host"
+          displayName: "IP or hostname"
+          description: "IP or hostname of the converter. Leaving blank assumes 'localhost'"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${converterHostname}"
+        workflowActionName: null
+      - id: 27
+        index: 2
+        name: "destinationDetails"
+        displayName: "Destination Details"
+        description: "Destination details"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 98
+          index: 5
+          name: "memory"
+          displayName: "Memory (GB)"
+          description: "Virtual machine memory (GB)"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: ""
+        - id: 99
+          index: 4
+          name: "vCPU"
+          displayName: "vCPU"
+          description: "Number of virtual CPUs"
+          required: false
+          visible: true
+          editable: true
+          dataType: "Integer"
+          value: ""
+        - id: 100
+          index: 0
+          name: "networkShare"
+          displayName: "Network Share"
+          description: "Network share (UNC path) to store the converted virtual machine"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "\\\\172.16.156.30\\share"
+        - id: 103
+          index: 3
+          name: "name"
+          displayName: "Name"
+          description: "Virtual machine name"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "${vmName}"
+        - id: 101
+          index: 1
+          name: "networkShareUsername"
+          displayName: "Network Username"
+          description: "Network share username"
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "GRN-CONVERTER\\emitrom"
+        - id: 102
+          index: 2
+          name: "networkSharePassword"
+          displayName: "Network Password"
+          description: "Network share password"
+          required: true
+          visible: true
+          editable: true
+          dataType: "Password"
+          value: "${sharePassword}"
+        workflowActionName: null
+      outputs:
+      - id: 58
+        name: "Conversion Info"
+        displayName: ""
+        description: "Conversion job information"
+        outputFields:
+        - id: 1435
+          name: "Job ID"
+          displayName: ""
+          description: "Conversion job ID"
+          dataType: null
+          value: null
+        - id: 1434
+          name: "Task ID"
+          displayName: ""
+          description: "Conversion task ID"
+          dataType: null
+          value: null
+        outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "b070b78c-1ec5-40e9-bc2c-d417cc90ba3b"
+  pipe: true
+  target:
+  - 550
+  - 500
+  - 570
+- id: 60
+  step: 700
+  jumpToStep: 0
+  failureStep: 0
+  timeout: 0
+  async: false
+  workflowAction:
+    id: 1
+    name: "Create OVA"
+    description: ""
+    provider:
+      id: 1
+      name: "Migrations"
+      description: ""
+      hostname: "172.16.156.30"
+      port: 9797
+      timeout: 86400000
+      username: null
+      password: null
+      reachable: true
+      secured: true
+      enabled: null
+      providerVersion: "1.1.1"
+      tags: []
+    providerAction:
+      id: 1
+      name: "executeCommand"
+      displayName: "Execute Command"
+      description: "Executes an OS Command"
+      pipes: []
+      transaction: null
+      inputs:
+      - id: 1
+        index: 0
+        name: "commandInputs"
+        displayName: "Command Inputs"
+        description: "Command Inputs"
+        visible: true
+        inputs: []
+        inputFields:
+        - id: 1
+          index: 0
+          name: "CMD"
+          displayName: "OS Command"
+          description: "OS Command can contain Integra variables @{field} ${field}.\
+            \ Example: myscript --o1 @{id} --o2 ${name} --o3 @{uuid}. When executing\
+            \ OS commands use cmd.exe /c command. For example: cmd.exe /c echo hello.\
+            \ To treat strings with spaces as one unit enclose them in \""
+          required: true
+          visible: true
+          editable: true
+          dataType: "String"
+          value: "ovftool.exe -tt=ova -o \\\\GRN-CONVERTER\\share\\${vmName}\\${vmName}.vmx\
+            \ \\\\GRN-CONVERTER\\share\\${vmName}.ova"
+        - id: 2
+          index: 1
+          name: "ROLLBACK_CMD"
+          displayName: "Rollback Command"
+          description: "Rollback command executes upon command failure"
+          required: false
+          visible: true
+          editable: true
+          dataType: "String"
+          value: ""
+        workflowActionName: null
+      outputs:
+      - id: 1
+        name: "cmdOutput"
+        displayName: "Command output"
+        description: "Command output"
+        outputFields:
+        - id: 1
+          name: "stdoutMessage"
+          displayName: "Standard Output"
+          description: "The stdout returned by command"
+          dataType: null
+          value: null
+        - id: 2
+          name: "stderrMessage"
+          displayName: "Standard Error"
+          description: "The stderr returned by command"
+          dataType: null
+          value: null
+        outputs: []
+    workflowTransaction: null
+    tags: []
+  uuid: "534189e3-7456-4207-ab55-b8c7323f33fa"
+  pipe: false
+  target: []
+tags: []
