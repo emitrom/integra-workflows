@@ -13,176 +13,6 @@ onFailureWorkflow:
   onFailureWorkflow: null
   schedules: []
   workflowSteps:
-  - id: 13
-    step: 300
-    jumpToStep: 0
-    failureStep: 0
-    timeout: 0
-    async: false
-    workflowAction:
-      id: 12
-      name: "Failure SMS"
-      description: ""
-      provider:
-        id: 2
-        name: "Notifications"
-        description: ""
-        hostname: "172.16.156.30"
-        port: 9781
-        timeout: 86400000
-        username: null
-        password: null
-        reachable: true
-        secured: true
-        enabled: null
-        providerVersion: "1.1.0"
-        tags: []
-      providerAction:
-        id: 12
-        name: "twilio_sms"
-        displayName: "Twilio Sms"
-        description: "Sends a message using the Twilio API"
-        pipes: []
-        inputs:
-        - id: 20
-          index: 1
-          name: "sms"
-          displayName: "Twilio Sms"
-          description: "A twilio SMS"
-          visible: true
-          inputs: []
-          inputFields:
-          - id: 74
-            index: 1
-            name: "to"
-            displayName: "To"
-            description: "Comma-separated recipient list. Include the country code.\
-              \ For a US number for example: 14158141829"
-            required: true
-            visible: true
-            editable: true
-            dataType: "String"
-            value: "19194135600"
-          - id: 75
-            index: 0
-            name: "from"
-            displayName: "From"
-            description: "A Twilio phone number enabled for the type of message you\
-              \ wish to send. Only phone numbers or short codes purchased from Twilio\
-              \ work here; you cannot (for example) spoof messages from your own cell\
-              \ phone number."
-            required: true
-            visible: true
-            editable: true
-            dataType: "String"
-            value: "19192898228"
-          - id: 76
-            index: 2
-            name: "message"
-            displayName: "Message"
-            description: "The text of the message you want to send, limited to 1600\
-              \ characters."
-            required: true
-            visible: true
-            editable: true
-            dataType: "TextArea"
-            value: "**** CONVERSION FAILED: ${guestHostname} ****"
-          workflowActionName: null
-        - id: 21
-          index: 0
-          name: "sms_session"
-          displayName: "Sms Credentials"
-          description: "Twilio Sms Credentials"
-          visible: true
-          inputs: []
-          inputFields:
-          - id: 77
-            index: 1
-            name: "auth_token"
-            displayName: "Auth Token"
-            description: "Twilio Auth Token"
-            required: true
-            visible: true
-            editable: true
-            dataType: "Password"
-            value: "59e8ea51c88fb62adcb14915a3945f74"
-          - id: 78
-            index: 0
-            name: "account_sid"
-            displayName: "Account SID"
-            description: "Twilio Account SID"
-            required: true
-            visible: true
-            editable: true
-            dataType: "Password"
-            value: "AC6abd1912ba7087355fa2b9ee64a6ad77"
-          workflowActionName: null
-        outputs:
-        - id: 5
-          name: "Sms Response"
-          displayName: "Sms Response"
-          description: "Sms Response"
-          outputFields:
-          - id: 13
-            name: "date_created"
-            displayName: "Date Created"
-            description: "Date Created"
-            dataType: null
-            value: null
-          - id: 14
-            name: "from"
-            displayName: "From"
-            description: "A Twilio phone number enabled for the type of message you\
-              \ wish to send. Only phone numbers or short codes purchased from Twilio\
-              \ work here; you cannot (for example) spoof messages from your own cell\
-              \ phone number."
-            dataType: null
-            value: null
-          - id: 15
-            name: "price"
-            displayName: "Price"
-            description: "Price"
-            dataType: null
-            value: null
-          - id: 16
-            name: "date_sent"
-            displayName: "Date Sent"
-            description: "Date Sent"
-            dataType: null
-            value: null
-          - id: 17
-            name: "status"
-            displayName: "Status"
-            description: "Status"
-            dataType: null
-            value: null
-          - id: 19
-            name: "message"
-            displayName: "Message"
-            description: "The text of the message you want to send, limited to 1600\
-              \ characters."
-            dataType: null
-            value: null
-          - id: 18
-            name: "direction"
-            displayName: "Direction"
-            description: "Direction"
-            dataType: null
-            value: null
-          - id: 20
-            name: "to"
-            displayName: "To"
-            description: "Comma-separated recipient list. Include the country code.\
-              \ For a US number for example: 14158141829"
-            dataType: null
-            value: null
-          outputs: []
-        transaction: null
-      workflowTransaction: null
-      tags: []
-    uuid: "ad59b935-0ebc-440d-bb3a-ce1363300946"
-    pipe: false
-    target: []
   - id: 12
     step: 200
     jumpToStep: 0
@@ -213,6 +43,7 @@ onFailureWorkflow:
         displayName: "Email"
         description: "Sends an email to the specified parties"
         pipes: []
+        outputs: []
         inputs:
         - id: 18
           index: 0
@@ -324,11 +155,180 @@ onFailureWorkflow:
             dataType: "Boolean"
             value: "false"
           workflowActionName: null
-        outputs: []
         transaction: null
       workflowTransaction: null
       tags: []
-    uuid: "edd2a1cf-4733-40b6-a089-de4787c25e43"
+    uuid: "65c965c6-d954-4892-b952-ede9083b968f"
+    pipe: false
+    target: []
+  - id: 13
+    step: 300
+    jumpToStep: 0
+    failureStep: 0
+    timeout: 0
+    async: false
+    workflowAction:
+      id: 12
+      name: "Failure SMS"
+      description: ""
+      provider:
+        id: 2
+        name: "Notifications"
+        description: ""
+        hostname: "172.16.156.30"
+        port: 9781
+        timeout: 86400000
+        username: null
+        password: null
+        reachable: true
+        secured: true
+        enabled: null
+        providerVersion: "1.1.0"
+        tags: []
+      providerAction:
+        id: 12
+        name: "twilio_sms"
+        displayName: "Twilio Sms"
+        description: "Sends a message using the Twilio API"
+        pipes: []
+        outputs:
+        - id: 5
+          name: "Sms Response"
+          displayName: "Sms Response"
+          description: "Sms Response"
+          outputFields:
+          - id: 13
+            name: "date_created"
+            displayName: "Date Created"
+            description: "Date Created"
+            dataType: null
+            value: null
+          - id: 14
+            name: "from"
+            displayName: "From"
+            description: "A Twilio phone number enabled for the type of message you\
+              \ wish to send. Only phone numbers or short codes purchased from Twilio\
+              \ work here; you cannot (for example) spoof messages from your own cell\
+              \ phone number."
+            dataType: null
+            value: null
+          - id: 15
+            name: "price"
+            displayName: "Price"
+            description: "Price"
+            dataType: null
+            value: null
+          - id: 16
+            name: "date_sent"
+            displayName: "Date Sent"
+            description: "Date Sent"
+            dataType: null
+            value: null
+          - id: 17
+            name: "status"
+            displayName: "Status"
+            description: "Status"
+            dataType: null
+            value: null
+          - id: 19
+            name: "message"
+            displayName: "Message"
+            description: "The text of the message you want to send, limited to 1600\
+              \ characters."
+            dataType: null
+            value: null
+          - id: 18
+            name: "direction"
+            displayName: "Direction"
+            description: "Direction"
+            dataType: null
+            value: null
+          - id: 20
+            name: "to"
+            displayName: "To"
+            description: "Comma-separated recipient list. Include the country code.\
+              \ For a US number for example: 14158141829"
+            dataType: null
+            value: null
+          outputs: []
+        inputs:
+        - id: 20
+          index: 1
+          name: "sms"
+          displayName: "Twilio Sms"
+          description: "A twilio SMS"
+          visible: true
+          inputs: []
+          inputFields:
+          - id: 74
+            index: 1
+            name: "to"
+            displayName: "To"
+            description: "Comma-separated recipient list. Include the country code.\
+              \ For a US number for example: 14158141829"
+            required: true
+            visible: true
+            editable: true
+            dataType: "String"
+            value: "19194135600"
+          - id: 75
+            index: 0
+            name: "from"
+            displayName: "From"
+            description: "A Twilio phone number enabled for the type of message you\
+              \ wish to send. Only phone numbers or short codes purchased from Twilio\
+              \ work here; you cannot (for example) spoof messages from your own cell\
+              \ phone number."
+            required: true
+            visible: true
+            editable: true
+            dataType: "String"
+            value: "19192898228"
+          - id: 76
+            index: 2
+            name: "message"
+            displayName: "Message"
+            description: "The text of the message you want to send, limited to 1600\
+              \ characters."
+            required: true
+            visible: true
+            editable: true
+            dataType: "TextArea"
+            value: "**** CONVERSION FAILED: ${guestHostname} ****"
+          workflowActionName: null
+        - id: 21
+          index: 0
+          name: "sms_session"
+          displayName: "Sms Credentials"
+          description: "Twilio Sms Credentials"
+          visible: true
+          inputs: []
+          inputFields:
+          - id: 77
+            index: 1
+            name: "auth_token"
+            displayName: "Auth Token"
+            description: "Twilio Auth Token"
+            required: true
+            visible: true
+            editable: true
+            dataType: "Password"
+            value: "59e8ea51c88fb62adcb14915a3945f74"
+          - id: 78
+            index: 0
+            name: "account_sid"
+            displayName: "Account SID"
+            description: "Twilio Account SID"
+            required: true
+            visible: true
+            editable: true
+            dataType: "Password"
+            value: "AC6abd1912ba7087355fa2b9ee64a6ad77"
+          workflowActionName: null
+        transaction: null
+      workflowTransaction: null
+      tags: []
+    uuid: "fda1a1ce-47b3-492f-a5c1-7dacd0ca3810"
     pipe: false
     target: []
   - id: 11
@@ -361,6 +361,7 @@ onFailureWorkflow:
         displayName: "Apply Logic"
         description: "Gives you the ability to insert code dynamically."
         pipes: []
+        outputs: []
         inputs:
         - id: 7
           index: 0
@@ -393,7 +394,7 @@ onFailureWorkflow:
             value: "// --------------------------------------------------------------------------------------------------\r\
               // Path is local to the host where the provider is running (see Providers\
               \ tab)\r// --------------------------------------------------------------------------------------------------\r\
-              file = 'C:/Integra/Migrations/Test1.txt'\r\r\r\r\r// --------------------------------------------------------------------------------------------------\r\
+              file = 'C:/Integra/Migrations/meitec-test.txt'\r\r\r\r\r// --------------------------------------------------------------------------------------------------\r\
               // Do not modify anything beyond this point\r// --------------------------------------------------------------------------------------------------\r\
               props = new Properties()\rFile config = new File(file)\rconfig.withInputStream\
               \ {\r    props.load(it)\r}\r\rreturn props"
@@ -408,11 +409,10 @@ onFailureWorkflow:
             dataType: "List"
             value: "Advanced"
           workflowActionName: null
-        outputs: []
         transaction: null
       workflowTransaction: null
       tags: []
-    uuid: "25904519-6413-45b1-a706-df2919fe7fc0"
+    uuid: "67006a3b-55f0-4ef2-9b49-2a65325d1706"
     pipe: true
     target:
     - 200
@@ -450,6 +450,25 @@ workflowSteps:
       displayName: "Execute Command"
       description: "Executes an OS Command"
       pipes: []
+      outputs:
+      - id: 1
+        name: "cmdOutput"
+        displayName: "Command output"
+        description: "Command output"
+        outputFields:
+        - id: 1
+          name: "stdoutMessage"
+          displayName: "Standard Output"
+          description: "The stdout returned by command"
+          dataType: null
+          value: null
+        - id: 2
+          name: "stderrMessage"
+          displayName: "Standard Error"
+          description: "The stderr returned by command"
+          dataType: null
+          value: null
+        outputs: []
       inputs:
       - id: 1
         index: 0
@@ -484,25 +503,6 @@ workflowSteps:
           dataType: "String"
           value: ""
         workflowActionName: null
-      outputs:
-      - id: 1
-        name: "cmdOutput"
-        displayName: "Command output"
-        description: "Command output"
-        outputFields:
-        - id: 1
-          name: "stdoutMessage"
-          displayName: "Standard Output"
-          description: "The stdout returned by command"
-          dataType: null
-          value: null
-        - id: 2
-          name: "stderrMessage"
-          displayName: "Standard Error"
-          description: "The stderr returned by command"
-          dataType: null
-          value: null
-        outputs: []
       transaction: null
     workflowTransaction: null
     tags: []
@@ -539,6 +539,7 @@ workflowSteps:
       displayName: "Email"
       description: "Sends an email to the specified parties"
       pipes: []
+      outputs: []
       inputs:
       - id: 10
         index: 0
@@ -651,7 +652,6 @@ workflowSteps:
           dataType: "Boolean"
           value: "false"
         workflowActionName: null
-      outputs: []
       transaction: null
     workflowTransaction: null
     tags: []
@@ -688,6 +688,7 @@ workflowSteps:
       displayName: "Apply Logic"
       description: "Gives you the ability to insert code dynamically."
       pipes: []
+      outputs: []
       inputs:
       - id: 7
         index: 0
@@ -720,7 +721,7 @@ workflowSteps:
           value: "// --------------------------------------------------------------------------------------------------\r\
             // Path is local to the host where the provider is running (see Providers\
             \ tab)\r// --------------------------------------------------------------------------------------------------\r\
-            file = 'C:/Integra/Migrations/Test1.txt'\r\r\r\r\r// --------------------------------------------------------------------------------------------------\r\
+            file = 'C:/Integra/Migrations/meitec-test.txt'\r\r\r\r\r// --------------------------------------------------------------------------------------------------\r\
             // Do not modify anything beyond this point\r// --------------------------------------------------------------------------------------------------\r\
             props = new Properties()\rFile config = new File(file)\rconfig.withInputStream\
             \ {\r    props.load(it)\r}\r\rreturn props"
@@ -735,7 +736,6 @@ workflowSteps:
           dataType: "List"
           value: "Advanced"
         workflowActionName: null
-      outputs: []
       transaction: null
     workflowTransaction: null
     tags: []
@@ -781,6 +781,25 @@ workflowSteps:
       displayName: "Convert Windows Machine"
       description: "Converts a Windows machine to a VMX-based virtual machine"
       pipes: []
+      outputs:
+      - id: 58
+        name: "Conversion Info"
+        displayName: ""
+        description: "Conversion job information"
+        outputFields:
+        - id: 1435
+          name: "Job ID"
+          displayName: ""
+          description: "Conversion job ID"
+          dataType: null
+          value: null
+        - id: 1434
+          name: "Task ID"
+          displayName: ""
+          description: "Conversion task ID"
+          dataType: null
+          value: null
+        outputs: []
       inputs:
       - id: 28
         index: 0
@@ -939,25 +958,6 @@ workflowSteps:
           dataType: "Password"
           value: "${sharePassword}"
         workflowActionName: null
-      outputs:
-      - id: 58
-        name: "Conversion Info"
-        displayName: ""
-        description: "Conversion job information"
-        outputFields:
-        - id: 1435
-          name: "Job ID"
-          displayName: ""
-          description: "Conversion job ID"
-          dataType: null
-          value: null
-        - id: 1434
-          name: "Task ID"
-          displayName: ""
-          description: "Conversion task ID"
-          dataType: null
-          value: null
-        outputs: []
       transaction: null
     workflowTransaction: null
     tags: []
@@ -995,6 +995,7 @@ workflowSteps:
       displayName: "Email"
       description: "Sends an email to the specified parties"
       pipes: []
+      outputs: []
       inputs:
       - id: 6
         index: 0
@@ -1109,7 +1110,6 @@ workflowSteps:
           dataType: "Boolean"
           value: "false"
         workflowActionName: null
-      outputs: []
       transaction: null
     workflowTransaction: null
     tags: []
@@ -1146,6 +1146,49 @@ workflowSteps:
       displayName: "Conversion Status"
       description: "Gets the conversion status, including state and time remaining"
       pipes: []
+      outputs:
+      - id: 4
+        name: "Conversion Status"
+        displayName: ""
+        description: "Conversion status"
+        outputFields:
+        - id: 8
+          name: "Source"
+          displayName: ""
+          description: "Source machine"
+          dataType: null
+          value: null
+        - id: 7
+          name: "Destination"
+          displayName: ""
+          description: "Name of the destination .vmx"
+          dataType: null
+          value: null
+        - id: 9
+          name: "Estimated Completion"
+          displayName: ""
+          description: "Estimated time before completion"
+          dataType: null
+          value: null
+        - id: 10
+          name: "Job Status"
+          displayName: ""
+          description: "Job status"
+          dataType: null
+          value: null
+        - id: 11
+          name: "Start Time"
+          displayName: ""
+          description: "Conversion start time"
+          dataType: null
+          value: null
+        - id: 12
+          name: "Job ID"
+          displayName: ""
+          description: "Job ID"
+          dataType: null
+          value: null
+        outputs: []
       inputs:
       - id: 14
         index: 1
@@ -1225,49 +1268,6 @@ workflowSteps:
           dataType: "String"
           value: "${converterUsername}"
         workflowActionName: null
-      outputs:
-      - id: 4
-        name: "Conversion Status"
-        displayName: ""
-        description: "Conversion status"
-        outputFields:
-        - id: 8
-          name: "Source"
-          displayName: ""
-          description: "Source machine"
-          dataType: null
-          value: null
-        - id: 7
-          name: "Destination"
-          displayName: ""
-          description: "Name of the destination .vmx"
-          dataType: null
-          value: null
-        - id: 9
-          name: "Estimated Completion"
-          displayName: ""
-          description: "Estimated time before completion"
-          dataType: null
-          value: null
-        - id: 10
-          name: "Job Status"
-          displayName: ""
-          description: "Job status"
-          dataType: null
-          value: null
-        - id: 11
-          name: "Start Time"
-          displayName: ""
-          description: "Conversion start time"
-          dataType: null
-          value: null
-        - id: 12
-          name: "Job ID"
-          displayName: ""
-          description: "Job ID"
-          dataType: null
-          value: null
-        outputs: []
       transaction: null
     workflowTransaction: null
     tags: []
@@ -1304,6 +1304,25 @@ workflowSteps:
       displayName: "Execute Command"
       description: "Executes an OS Command"
       pipes: []
+      outputs:
+      - id: 3
+        name: "cmdOutput"
+        displayName: "Command output"
+        description: "Command output"
+        outputFields:
+        - id: 5
+          name: "stdoutMessage"
+          displayName: "Standard Output"
+          description: "The stdout returned by command"
+          dataType: null
+          value: null
+        - id: 6
+          name: "stderrMessage"
+          displayName: "Standard Error"
+          description: "The stderr returned by command"
+          dataType: null
+          value: null
+        outputs: []
       inputs:
       - id: 8
         index: 0
@@ -1338,25 +1357,6 @@ workflowSteps:
           dataType: "String"
           value: ""
         workflowActionName: null
-      outputs:
-      - id: 3
-        name: "cmdOutput"
-        displayName: "Command output"
-        description: "Command output"
-        outputFields:
-        - id: 5
-          name: "stdoutMessage"
-          displayName: "Standard Output"
-          description: "The stdout returned by command"
-          dataType: null
-          value: null
-        - id: 6
-          name: "stderrMessage"
-          displayName: "Standard Error"
-          description: "The stderr returned by command"
-          dataType: null
-          value: null
-        outputs: []
       transaction: null
     workflowTransaction: null
     tags: []
@@ -1393,6 +1393,7 @@ workflowSteps:
       displayName: "Email"
       description: "Sends an email to the specified parties"
       pipes: []
+      outputs: []
       inputs:
       - id: 16
         index: 0
@@ -1504,7 +1505,6 @@ workflowSteps:
           dataType: "Boolean"
           value: "true"
         workflowActionName: null
-      outputs: []
       transaction: null
     workflowTransaction: null
     tags: []
@@ -1541,6 +1541,7 @@ workflowSteps:
       displayName: "Email"
       description: "Sends an email to the specified parties"
       pipes: []
+      outputs: []
       inputs:
       - id: 12
         index: 0
@@ -1651,7 +1652,6 @@ workflowSteps:
           dataType: "Boolean"
           value: "false"
         workflowActionName: null
-      outputs: []
       transaction: null
     workflowTransaction: null
     tags: []
@@ -1688,6 +1688,7 @@ workflowSteps:
       displayName: "Apply Logic"
       description: "Gives you the ability to insert code dynamically."
       pipes: []
+      outputs: []
       inputs:
       - id: 11
         index: 0
@@ -1731,7 +1732,6 @@ workflowSteps:
           dataType: "List"
           value: "Advanced"
         workflowActionName: null
-      outputs: []
       transaction: null
     workflowTransaction: null
     tags: []
